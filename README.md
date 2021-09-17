@@ -6,18 +6,23 @@
 
 ## インストール手順
 
-dockerfileをビルド
+dockerfile をビルド
 
 ```bash
 docker-compose build
 docker-compose up -d
 ```
 
-appコンテナでの作業
+app コンテナでの作業
 
 ```bash
 docker-compose exec app bash
 chown www-data storage/ -R
+(macの場合)
+cp .env.example .env
+(windowsの場合)
+copy .env.example .env
+composer install
 php artisan key:generate
 ```
 

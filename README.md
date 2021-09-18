@@ -4,33 +4,46 @@
 
 ![ER図](https://github.com/schnell3526/tech_match/blob/figure/%20db.png?raw=true)
 
-## インストール手順
+## 環境構築手順
 
-dockerfile をビルド
+環境のセットアップ
 
 ```bash
-docker-compose build
-docker-compose up -d
+make init
 ```
 
-app コンテナでの作業
+コンテナの削除
 
 ```bash
-docker-compose exec app bash
-chown www-data storage/ -R
-(macの場合)
-cp .env.example .env
-(windowsの場合)
-copy .env.example .env
-composer install
-php artisan key:generate
+make down
 ```
 
-[ここ](http://127.0.0.1:8080/)にアクセスしページが表示されているかの確認
-データベースの作成
+コンテナの作成
 
 ```bash
-docker-compose exec db bash
-mysql -u root -p
-create database tech_match
+make up
+```
+
+コンテナの再起動
+
+```bash
+make restart
+```
+
+環境の全削除
+
+```bash
+make destoroy
+```
+
+データベース操作
+
+```bash
+make sql
+```
+
+その他コマンド
+
+```bash
+make help
 ```

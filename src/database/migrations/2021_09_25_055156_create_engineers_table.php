@@ -21,6 +21,7 @@ class CreateEngineersTable extends Migration
             $table->string('facebook_url');
             $table->string('qita_url');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

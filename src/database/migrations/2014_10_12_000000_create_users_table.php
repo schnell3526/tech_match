@@ -20,11 +20,11 @@ class CreateUsersTable extends Migration
             $table->string('nickname');
             $table->string('iconimage');
             $table->integer('age');
-            $table->integer('status');
             $table->integer('gender');
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -17,9 +17,9 @@ class CreateUsersJobsTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('job_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->integer('status');
             $table->timestamps();
-            
+            $table->softDeletes();
+
         });
     }
 

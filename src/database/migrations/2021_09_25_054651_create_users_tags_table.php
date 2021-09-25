@@ -17,8 +17,8 @@ class CreateUsersTagsTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('tag_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->integer('status');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

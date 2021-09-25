@@ -19,6 +19,7 @@ class CreateUsersJobsTable extends Migration
             $table->foreignId('job_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->integer('status');
             $table->timestamps();
+            
         });
     }
 

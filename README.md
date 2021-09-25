@@ -2,7 +2,13 @@
 
 ## データベース設計
 
+### 概念設計
+
 ![ER図](https://github.com/schnell3526/tech_match/blob/figure/%20db.png?raw=true)
+
+### 物理設計
+
+![物理設計](https://github.com/schnell3526/tech_match/blob/figure/db2.png?raw=true)
 
 ## 環境構築手順
 

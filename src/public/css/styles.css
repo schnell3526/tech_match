@@ -1,0 +1,107 @@
+@import url('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/bootflat/2.0.4/css/bootflat.min.css');
+
+body {
+    background-color: #f4f7f8;
+}
+
+.navbar {
+    margin: 2rem 0 2.5rem 0;
+}
+
+.my-navbar {
+    align-items: center;
+    background: #333;
+    display: flex;
+    height: 6rem;
+    justify-content: space-between;
+    padding: 0 2%;
+    margin-bottom: 3rem;
+}
+
+.my-navbar {
+    font-size: 18px;
+}
+
+.my-navbar-brand {
+    color: #8c8c8c;
+}
+
+.my-navbar-item {
+    color: #ffffff;
+}
+.my-navbar-item:hover {
+    color: #67a8dd;
+}
+
+
+.my-navbar-brand:hover,
+a.my-navbar-item:hover {
+    color: #ffffff;
+}
+
+.my-navbar-signin-signup {
+    display: inline-block;
+}
+.my-navbar-signin {
+    display: inline-block;
+}
+.my-navbar-signin:hover {
+    color: #67a8dd;
+}
+.my-navbar-signup {
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+}
+.my-navbar-signup:hover .balloon {
+    display: inline-block;
+    top: 30px;
+    left: -80px; /*吹き出しの位置の調整*/
+}
+.my-navbar-signup:hover {
+    color: #67a8dd;
+}
+
+.balloon {
+    position: absolute;
+    display: none;
+    padding: 10px;
+    background-color: #8c8c8c;
+    width: 160px;
+    left: -50%;
+    height: 70px;
+    top: 100%;
+    margin-top: -5px;
+    font-size: 18px;
+    line-height: 0 em;
+    text-align: center;
+}
+
+.balloon:before {
+    content: "";
+    position: absolute;
+    top: -24px; /*吹き出しの上下の調整*/
+    right: 17%; /*吹き出し口の左右の調整*/
+    border: 15px solid transparent;
+    border-top: 20px solid #8c8c8c;
+    margin-left: 10px;
+    transform: rotateZ(180deg);
+}
+
+.balloon:hover .balloon{
+    
+}
+.my-navbar-signin {
+    color: #ffffff;
+}
+.my-navbar-signup {
+    color: #ffffff;
+}
+
+.signin-menu {
+    color:#ffffff;
+}
+.signin-menu:hover {
+    color: #67a8dd;
+}

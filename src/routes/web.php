@@ -1,7 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\UsersController;
+
+use App\Http\Controllers\IndexController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -14,14 +18,22 @@ use App\Http\Controllers\UsersController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/index', [IndexController::class, 'index'])->name('index');
 
-Route::get('/index', [UsersController::class, 'index'])->name('users.index');
+Route::get('/wordsearch', [IndexController::class, 'wordsearch'])->name('wordsearch');
+
+Route::get('/jobsearch', [IndexController::class, 'jobsearch'])->name('jobsearch');
+
+Route::get('/tagsearch', [IndexController::class, 'tagsearch'])->name('tagsearch');
+
+Route::get('/logout', [Indexcontroller::class, 'logout']);
+
+
+Route::get('/nav', [UsersController::class, 'index'])->name('users.index');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+
 
 require __DIR__.'/auth.php';

@@ -54,32 +54,23 @@ class IndexController extends Controller
         }
         $auth = Auth::user();
 
-        $jobs = Job::all();
-
-        $tags = Tag::all();
-
         return view('index', [
             'usersdata' => $usersdata,
             'loginuser' => $auth,
-            'jobs' => $jobs,
-            'tags' => $tags,
+            
         ]);
 
     }
-    public function wordsearch()
+    public function search(Request $request)
     {
-        //
+        $searchword = $request->searchword;
+        $andor = $request->andor;
+        $words = explode("　", $searchword);
+        $jobs = Job::all();
+        $tags = Tag::all();
+        $results = array();
     }
 
-    public function jobsearch()
-    {
-        //
-    }
-
-    public function tagsearch()
-    {
-        //
-    }
 
     public function logout()
     {

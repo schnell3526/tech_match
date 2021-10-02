@@ -3,51 +3,28 @@
 @section('content')
     <div class="container">
         <div class="search" style="display:inline-flex;">
-            <form id="wordsearch" action="{{ route('wordsearch') }}" method="get">
+            @if($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach($errors->all() as $message)
+                            <li>{{ $message }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            <form id="search" action="{{ route('search') }}" method="get">
+                
                 <div>キーワードで検索: </div>
-                <input id="searchbox" name="searchword" type="text" placeholder="キーワードを入力" />
-                <input id="searchbutton1" type="submit" value="検索" />
-            </form>
-            &nbsp;&nbsp;&nbsp;
-        
-            <form id="jobsearch" action="{{ route('jobsearch') }}" method="get">
-                <div>職種で検索: </div>
-                <select name="job1">
-                    @foreach($jobs as $job)
-                        <option value="{{ $job->id }}">{{ $job->job_name }}</option>
-                    @endforeach
-                </select>
+                <input id="searchbox" name="searchword" type="text" style="width:800px; height:40px;" 
+                placeholder="キーワードを入力(複数語の場合は全角スペースで区切ってください．)" />
                 <select name="andor">
-                    <option>and</option>
-                    <option>or</option>
+                    <option name="one">1つで検索</option>
+                    <option name="and">and</option>
+                    <option name="or">or</option>
                 </select>
-                <select name="job2">
-                    @foreach($jobs as $job)
-                        <option value="{{ $job->id }}">{{ $job->job_name }}</option>
-                    @endforeach
-                </select>
-                <input id="searchbutton2" type="submit" value="検索"　/>
+                <input id="searchbutton" type="submit" value="検索" />
             </form>
-            &nbsp;&nbsp;&nbsp;
             
-            <form id="tagsearch" action="{{ route('tagsearch') }}" method="get">
-                <div>スキルで検索: </div>
-                <select name="tag1">
-                    @foreach($tags as $tag)
-                        <option value="{{ $tag->id }}">{{ $tag->tag_name }}</option>
-                    @endforeach
-                </select>
-                <select name="andor">
-                    <option>and</option>
-                    <option>or</option>
-                </select>
-                <select name="tag2">
-                    @foreach($tags as $tag)
-                        <option value="{{ $tag->id }}">{{ $tag->tag_name }}</option>
-                    @endforeach
-                </select>
-                <input id="searchbutton3" type="submit" value="検索"　/>
-            </form> 
                 
         </div>
 

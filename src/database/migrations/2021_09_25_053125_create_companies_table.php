@@ -16,12 +16,13 @@ class CreateCompaniesTable extends Migration
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()
-            ->onUpdate('cascade')->onDelete('cascade');;
+            ->onUpdate('cascade')->onDelete('cascade');
             $table->string('company_name');
             $table->string('location');
             $table->string('company_url');
             $table->string('company_description');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

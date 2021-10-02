@@ -18,8 +18,8 @@ class CreateTagsTable extends Migration
             $table->string('tag_name');
             $table->string('color');
             $table->string('tag_icon');
-            $table->integer('status');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

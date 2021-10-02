@@ -20,8 +20,8 @@ class CreateProductsTable extends Migration
             $table->text('description');
             $table->string('product_url');
             $table->string('src_url');
-            $table->integer('status');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

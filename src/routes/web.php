@@ -20,11 +20,9 @@ use App\Http\Controllers\UsersController;
 
 Route::get('/index', [IndexController::class, 'index'])->name('index');
 
-Route::get('/wordsearch', [IndexController::class, 'wordsearch'])->name('wordsearch');
+Route::get('/wordsearch', [IndexController::class, 'search'])->name('search');
 
-Route::get('/jobsearch', [IndexController::class, 'jobsearch'])->name('jobsearch');
 
-Route::get('/tagsearch', [IndexController::class, 'tagsearch'])->name('tagsearch');
 
 Route::get('/logout', [Indexcontroller::class, 'logout']);
 

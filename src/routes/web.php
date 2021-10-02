@@ -5,6 +5,9 @@ use App\Http\Controllers\IndexController;
 
 use App\Http\Controllers\UsersController;
 
+//プル陸
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes

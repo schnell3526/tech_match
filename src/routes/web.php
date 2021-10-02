@@ -5,9 +5,6 @@ use App\Http\Controllers\IndexController;
 
 use App\Http\Controllers\UsersController;
 
-use App\Http\Controllers\IndexController;
-
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes

@@ -19,7 +19,8 @@ init: ## 初期設定
 	docker compose exec app chown www-data storage/ -R
 	docker compose exec app cp .env.example .env
 	docker compose exec app php artisan key:generate
-	@fresh
+	@make migrate
+	@make fresh
 remake: ## 環境の再設定
 	@make destroy
 	@make init

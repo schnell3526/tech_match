@@ -4,10 +4,11 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+// ユーザーテーブルを作成
 class CreateUsersTable extends Migration
 {
     /**
-     * Run the migrations.
+     * テーブルの作成処理
      *
      * @return void
      */
@@ -17,10 +18,8 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('nickname');
-            $table->string('icon_image');
-            $table->integer('age');
-            $table->integer('gender');
+            $table->string('nickname')->default('名前が登録されていません');
+            $table->string('icon_image')->default('/icon/users/sample.jpg');
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
@@ -29,7 +28,7 @@ class CreateUsersTable extends Migration
     }
 
     /**
-     * Reverse the migrations.
+     * テーブルの削除処理
      *
      * @return void
      */

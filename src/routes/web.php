@@ -18,6 +18,8 @@ use App\Http\Controllers\UsersController;
 |
 */
 
+Route::redirect('/', '/index');
+
 Route::get('/index', [IndexController::class, 'index'])->name('index');
 
 Route::get('/wordsearch', [IndexController::class, 'wordsearch'])->name('wordsearch');

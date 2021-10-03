@@ -20,7 +20,7 @@ use App\Http\Controllers\UsersController;
 
 Route::get('/index', [IndexController::class, 'index'])->name('index');
 
-Route::get('/wordsearch', [IndexController::class, 'search'])->name('search');
+Route::get('/search', [IndexController::class, 'search'])->name('search');
 
 
 

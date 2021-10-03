@@ -2,16 +2,23 @@
 
 @section('content')
     <div class="container">
+
+        @if($errors->any())
+            <script>
+                var error = "";
+                @foreach($errors->all() as $message)
+                    error += "・" + "{{ $message }}" + "\n";
+                @endforeach
+                @if(error2)
+                    error += "・" + "{{ $error2 }}";
+                alert(error);
+
+
+            </script>
+                
+                
+        @endif
         <div class="search" style="display:inline-flex;">
-            @if($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach($errors->all() as $message)
-                            <li>{{ $message }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
             <form id="search" action="{{ route('search') }}" method="get">
                 
                 <div>キーワードで検索: </div>

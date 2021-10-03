@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Job;
 use App\Models\Tag;
 use App\Models\Engineer;
+use App\Http\Requests\Search;
 use Auth;
 
 
@@ -61,7 +62,7 @@ class IndexController extends Controller
         ]);
 
     }
-    public function search(Request $request)
+    public function search(Search $request)
     {
         $searchword = $request->searchword;
         $andor = $request->andor;
@@ -69,6 +70,21 @@ class IndexController extends Controller
         $jobs = Job::all();
         $tags = Tag::all();
         $results = array();
+        if($andor == '1つで検索')
+        {
+            if(count($words) != 1)
+            {
+                return view('index', [
+                    'error2' => '複数キーワードはandかorを指定してください．'
+                ]);
+            }
+        }
+        else
+        {
+            return view('searchresult', [
+                'word' => 'い',
+            ]);
+        }
     }
 
 

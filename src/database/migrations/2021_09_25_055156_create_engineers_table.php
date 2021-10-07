@@ -17,9 +17,11 @@ class CreateEngineersTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->text('introduction');
+            $table->integer('age');
+            $table->integer('gender');
             $table->string('github_url');
             $table->string('facebook_url');
-            $table->string('qita_url');
+            $table->string('qiita_url');
             $table->timestamps();
             $table->softDeletes();
         });

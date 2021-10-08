@@ -24,5 +24,16 @@ class EngineerTableSeeder extends Seeder
             'qiita_url' => 'qiita.com',
             
         ]);
+
+        DB::table('engineers')->insert([
+            'user_id' => 2,
+            'introduction' => "よろしくお願いします．",
+            'age' => 30,
+            'gender' => 1,
+            'github_url' => 'github.com',
+            'facebook_url' => 'facebook.com',
+            'qiita_url' => 'qiita.com',
+            
+        ]);
     }
 }

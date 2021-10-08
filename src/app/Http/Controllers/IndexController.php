@@ -51,15 +51,15 @@ class IndexController extends Controller
             
             $age = $engineer->age;
             $gender = $engineer->gender;
-            $usersdata = $usersdata + array('user_id' => $user_id, 'nickname' => $nickname, 'icon_img' => $icon_img,
-                                            'jobs' => $jobs, 'tags' => $tags, 'age' => $age, 'gender' => $gender);
+            array_push($usersdata, array('user_id' => $user_id, 'nickname' => $nickname, 'icon_img' => $icon_img,
+                                            'jobs' => $jobs, 'tags' => $tags, 'age' => $age, 'gender' => $gender));
 
         }
         $auth = Auth::user();
 
         return view('index', [
             'error2' => "",
-            'usersdata' => compact('usersdata'),
+            'usersdata' => $usersdata,
             'loginuser' => $auth,
             
         ]);
@@ -94,36 +94,40 @@ class IndexController extends Controller
                 $user_tags = $user->users_tags()->get();
                 foreach($user_tags as $user_tag)
                 {
-                    $identity .= $user_tag->tag_name;
+                    $tag_id = $user_tag->tag_id;
+                    $tag = Tag::find($tag_id);
+                    $identity .= $tag->tag_name;
                 }
                 $user_jobs = $user->users_jobs()->get();
                 foreach($user_jobs as $user_job)
                 {
-                    $identity .= $user_job->job_name;
+                    $job_id = $user_job->job_id;
+                    $job = Job::find($job_id);
+                    $identity .= $job->job_name;
                 }
-                if(strpos($identity, $word) !== false)
+                if(strpos($identity, $words[0]) !== false)
                 {
                     $user_id = $user->id;
                     $nickname = $user->nickname;
                     $icon_img = $user->icon_image;
                     $jobs = array();
-                    foreach($jobs_id as $job_id)
+                    foreach($user_jobs as $user_job)
                     {
-                        $job = Job::find($job_id);
+                        $job = Job::find($user_job->job_id);
                         array_push($jobs, $job->job_name);
+
                     }
-                    $tags_id = $user->users_tags()->get();
                     $tags = array();
-                    foreach($tags_id as $tag_id)
+                    foreach($user_tags as $user_tag)
                     {
-                        $tag = Tag::find($tag_id);
-                        array_push($tags, array('tag_name' => $tag->tag_name, 'color' => $tag->color));
+                        $tag = Tag::find($user_tag->tag_id);
+                        array_push($tags, array('color' => $tag->color, 'tag_name' => $tag->tag_name));
                     }
                     $age = $engineer->age;
                     $gender = $engineer->gender;
                     
-                    $results = $results + array('user_id' => $user_id, 'nickname' => $nickname, 'icon_img' => $icon_img,
-                                            'jobs' => $jobs, 'tags' => $tags, 'age' => $age, 'gender' => $gender);
+                    array_push($results, array('user_id' => $user_id, 'nickname' => $nickname, 'icon_img' => $icon_img,
+                                            'jobs' => $jobs, 'tags' => $tags, 'age' => $age, 'gender' => $gender));
                     
                 }
             }
@@ -172,23 +176,22 @@ class IndexController extends Controller
                         $nickname = $user->nickname;
                         $icon_img = $user->icon_image;
                         $jobs = array();
-                        foreach($jobs_id as $job_id)
+                        foreach($user_jobs as $user_job)
                         {
-                            $job = Job::find($job_id);
+                            $job = Job::find($user_job->job_id);
                             array_push($jobs, $job->job_name);
                         }
-                        $tags_id = $user->users_tags()->get();
                         $tags = array();
-                        foreach($tags_id as $tag_id)
+                        foreach($user_tags as $user_tag)
                         {
-                            $tag = Tag::find($tag_id);
-                            array_push($tags, array('tag_name' => $tag->tag_name, 'color' => $tag->color));
+                            $tag = Tag::find($user_tag->tag_id);
+                            array_push($tags, array('color' => $tag->color, 'tag_name' => $tag->tag_name));
                         }
                         $age = $engineer->age;
                         $gender = $engineer->gender;
                         
-                        $results = $results + array('user_id' => $user_id, 'nickname' => $nickname, 'icon_img' => $icon_img,
-                                                'jobs' => $jobs, 'tags' => $tags, 'age' => $age, 'gender' => $gender);
+                        array_push($results, array('user_id' => $user_id, 'nickname' => $nickname, 'icon_img' => $icon_img,
+                                                'jobs' => $jobs, 'tags' => $tags, 'age' => $age, 'gender' => $gender));
                     }
                 }
             }
@@ -233,23 +236,23 @@ class IndexController extends Controller
                         $nickname = $user->nickname;
                         $icon_img = $user->icon_image;
                         $jobs = array();
-                        foreach($jobs_id as $job_id)
+                        foreach($user_jobs as $user_job)
                         {
-                            $job = Job::find($job_id);
+                            $job = Job::find($user_job->job_id);
                             array_push($jobs, $job->job_name);
+
                         }
-                        $tags_id = $user->users_tags()->get();
                         $tags = array();
-                        foreach($tags_id as $tag_id)
+                        foreach($user_tags as $user_tag)
                         {
-                            $tag = Tag::find($tag_id);
-                            array_push($tags, array('tag_name' => $tag->tag_name, 'color' => $tag->color));
+                            $tag = Tag::find($user_tag->tag_id);
+                            array_push($tags, array('color' => $tag->color, 'tag_name' => $tag->tag_name));
                         }
                         $age = $engineer->age;
                         $gender = $engineer->gender;
                         
-                        $results = $results + array('user_id' => $user_id, 'nickname' => $nickname, 'icon_img' => $icon_img,
-                                                'jobs' => $jobs, 'tags' => $tags, 'age' => $age, 'gender' => $gender);
+                        array_push($results, array('user_id' => $user_id, 'nickname' => $nickname, 'icon_img' => $icon_img,
+                                                'jobs' => $jobs, 'tags' => $tags, 'age' => $age, 'gender' => $gender));
                         break;
                     }
                     
@@ -257,7 +260,7 @@ class IndexController extends Controller
             }
 
             return view('searchresult', [
-                'results' => $results,
+                'results' => compact($results),
                 'words' => $words,
                 'andor' => $andor,
             ]);

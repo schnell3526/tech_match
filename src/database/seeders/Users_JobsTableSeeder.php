@@ -27,5 +27,9 @@ class Users_JobsTableSeeder extends Seeder
             'user_id' => 1,
             'job_id' => 3,
         ]);
+        DB::table('users_jobs')->insert([
+            'user_id' => 2,
+            'job_id' => 1,
+        ]);
     }
 }

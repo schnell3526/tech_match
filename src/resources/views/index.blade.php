@@ -1,4 +1,6 @@
-<x-app-layout>
+@extends('layout')
+@section('content')
+    <div class="container">
 
 
             <div class="error_messages">
@@ -35,20 +37,25 @@
                 
                     
             </div>
-        
     
-    
-        
-
             <div class="users">
                 @if($usersdata)
                     @foreach($usersdata as $userdata)
-                        <table>
+                    <table width="400px">
+                        <tbody>
                             <tr>
-                                <a href="#">
-                                    <td><img src="{{ asset('image/' . $userdata['icon_img']) }}"></td>
-                                    <td>{{ $userdata['nickname'] }}</td>
-                                    <td>{{ $userdata['age'] }}</td>
+                            
+                                    <td><a href="{{ $userdata['user_id'] }}/view">
+                                        <img src="{{ asset('image/' . $userdata['icon_img']) }}" width="20px" height="20px">
+                                    </a></td>
+                                    <td><a href="{{ $userdata['user_id'] }}/view">{{ $userdata['nickname'] }}</a></td>
+                                    <td>{{ $userdata['age'] }}歳</td>
+                                    <td>@if($userdata['gender'] == 0)
+                                        男性
+                                        @endif
+                                        @if($userdata['gender'] == 1)
+                                        女性
+                                        @endif
                                     <td>
                                         @foreach($userdata['jobs'] as $job)
                                             <div style="font-size:10px">{{ $job }}</div><br>
@@ -56,17 +63,21 @@
                                     </td>
                                     <td>
                                         @foreach($userdata['tags'] as $tag)
-                                            <img src="{{ $tag['color'] }}"><div style="font-size: 10px">{{ $tag['tag_name'] }}</div><br>
+                                            <div style="background-color: {{ $tag['color'] }};color:white;font-size:10px">{{ $tag['tag_name'] }}</div><br>
                                         @endforeach
                                     </td>
-                                </a>
+            
                             </tr>
-                        </table>
+                        </tbody>
+
+                    </table><br>
+                    
                     @endforeach
                 @endif
                     
                 </div>
             </div>
+    </div>
+@endsection
         
         
-</x-app-layout>

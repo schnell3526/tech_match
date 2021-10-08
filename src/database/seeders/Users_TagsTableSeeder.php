@@ -26,6 +26,9 @@ class Users_TagsTableSeeder extends Seeder
             'user_id' => 1,
             'tag_id' => 3,
         ]);
-        
+        DB::table('users_tags')->insert([
+            'user_id' => 2,
+            'tag_id' => 1,
+        ]);
     }
 }

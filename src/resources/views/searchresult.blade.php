@@ -39,25 +39,37 @@
 
             
                 @foreach($results as $result)
-                    <table>
-                        <tr>
-                            <a href = "/{{ $result['user_id'] }}/view">
-                                <td><img src="{{ $result['icon_img'] }}"></td>
-                                <td>{{ $result['nickname'] }}</td>
-                                <td>{{ $result['age'] }}<td>
-                                <td>
-                                    @foreach($result['jobs'] as $job)
-                                        <div style="font-size:10px">{{ $job }}</div><br>
-                                    @endforeach
-                                </td>
-                                <td>
-                                    @foreach($result['tags'] as $tag)
-                                        <img src="{{ $tag['color'] }}"><div style="font-size: 10px">{{ $tag['tag_name'] }}</div><br>
-                                    @endforeach
-                                </td>
-                            </a>
-                        </tr>
-                    </table>
+                    <table width="400px">
+                        <tbody>
+                            <tr>
+                            
+                                    <td><a href="{{ $result['user_id'] }}/view">
+                                        <img src="{{ asset('image/' . $result['icon_img']) }}" width="20px" height="20px">
+                                    </a></td>
+                                    <td><a href="{{ $result['user_id'] }}/view">{{ $result['nickname'] }}</a></td>
+                                    <td>{{ $result['age'] }}歳</td>
+                                    <td>@if($result['gender'] == 0)
+                                        男性
+                                        @endif
+                                        @if($result['gender'] == 1)
+                                        女性
+                                        @endif
+                                    <td>
+                                        @foreach($result['jobs'] as $job)
+                                            <div style="font-size:10px">{{ $job }}</div><br>
+                                        @endforeach
+                                    </td>
+                                    <td>
+                                        @foreach($result['tags'] as $tag)
+                                            <div style="background-color: {{ $tag['color'] }};color:white;font-size:10px">{{ $tag['tag_name'] }}</div><br>
+                                        @endforeach
+                                    </td>
+            
+                            </tr>
+                        </tbody>
+
+                    </table><br>
+                    
                 @endforeach
             </div>          
                 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class MypageController extends Controller
 {
@@ -19,6 +20,7 @@ class MypageController extends Controller
 
     public function create()
     {
-        return view('users.create');
+        $me = User::get();
+        return view('users.create', compact('me'));
     }
 }

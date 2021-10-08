@@ -4,6 +4,9 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
+
 
 class UsersTableSeeder extends Seeder
 {
@@ -14,23 +17,38 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
-            'name' => "aaa",
-            'password' => "aaa",
-            'nickname' => "aaa",
-            'icon_image' => "icon_image/default.png",
-            'email' => "aaa@gmail.com",
 
-        ]);
+        $array[] = 
+        array(
+            'name'=>'codegym',
+            'email'=>'codegym@gmail.com',
+            'nickname'=>'codegym'
+        );
+        $array[] = 
+        array(
+            'name'=>'ichiro',
+            'email'=>'ichiro@gmail.com',
+            'nickname'=>'イチロー'
+        );
 
-        DB::table('users')->insert([
-            'name' => "bbb",
-            'password' => "bbb",
-            'nickname' => "bbb",
-            'icon_image' => "icon_image/default.png",
-            'email' => "bbb@gmail.com",
-
-        ]);
+        foreach ($array as $value) {
+            DB::table('users')->insert([
+                'name' => $value['name'],
+                'email' => $value['email'],
+                'password' => Hash::make('password'),
+                'nickname' => $value['nickname'],
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ]);
+        }
+        // DB::table('users')->insert([
+        //     'name' => 'codegym',
+        //     'email' => 'codegym@gmail.com',
+        //     'nickname' => 'codegym',
+        //     'password' => Hash::make('password'),
+        //     'created_at' => Carbon::now(),
+        //     'updated_at' => Carbon::now(),
+        // ]);
 
     }
 }

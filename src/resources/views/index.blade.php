@@ -26,7 +26,7 @@
                 <form id="search" action="{{ route('search') }}" method="get">
                     <div>キーワードで検索: </div>
                     <input id="searchbox" name="searchword" type="text" style="width:800px; height:40px;" 
-                    placeholder="キーワードを入力(複数語の場合は全角スペースで区切ってください．)" />
+                    placeholder="キーワードを入力(複数語の場合はスペースで区切ってください．)" />
                     <select name="andor">
                         <option name="one">1つで検索</option>
                         <option name="and">and</option>
@@ -46,7 +46,7 @@
                             <tr>
                             
                                     <td><a href="{{ $userdata['user_id'] }}/view">
-                                        <img src="{{ asset('image/' . $userdata['icon_img']) }}" width="20px" height="20px">
+                                        <img src="{{ asset('image' . $userdata['icon_img']) }}" width="20px" height="20px">
                                     </a></td>
                                     <td><a href="{{ $userdata['user_id'] }}/view">{{ $userdata['nickname'] }}</a></td>
                                     <td>{{ $userdata['age'] }}歳</td>

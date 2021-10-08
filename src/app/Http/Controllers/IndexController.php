@@ -12,6 +12,19 @@ use App\Models\Users_job;
 use App\Http\Requests\Search;
 use Auth;
 
+function double_explode($word1, $word2, $str) {
+    $return = array();
+
+    //分割文字その1で文字列を分割
+    $array = explode($word1, $str);
+
+    //各配列を分割文字その2で分割して結合していく
+    foreach ($array as $value) {
+        $return = array_merge($return, explode($word2, $value));
+    }
+    return $return;
+}
+
 
 
 class IndexController extends Controller
@@ -70,7 +83,7 @@ class IndexController extends Controller
     {
         $searchword = $request->searchword;
         $andor = $request->andor;
-        $words = explode("　", $searchword);
+        $words = double_explode("　", " ", $searchword);
         #検索にヒットしたユーザ情報をlistで返す
         $results = array();
         $engineers = Engineer::all();
@@ -157,12 +170,16 @@ class IndexController extends Controller
                 $user_tags = $user->users_tags()->get();
                 foreach($user_tags as $user_tag)
                 {
-                    $identity .= $user_tag->tag_name;
+                    $tag_id = $user_tag->tag_id;
+                    $tag = Tag::find($tag_id);
+                    $identity .= $tag->tag_name;
                 }
                 $user_jobs = $user->users_jobs()->get();
                 foreach($user_jobs as $user_job)
                 {
-                    $identity .= $user_job->job_name;
+                    $job_id = $user_job->job_id;
+                    $job = Job::find($job_id);
+                    $identity .= $job->job_name;
                 }
                 foreach($words as $word)
                 {
@@ -221,12 +238,16 @@ class IndexController extends Controller
                 $user_tags = $user->users_tags()->get();
                 foreach($user_tags as $user_tag)
                 {
-                    $identity .= $user_tag->tag_name;
+                    $tag_id = $user_tag->tag_id;
+                    $tag = Tag::find($tag_id);
+                    $identity .= $tag->tag_name;
                 }
                 $user_jobs = $user->users_jobs()->get();
                 foreach($user_jobs as $user_job)
                 {
-                    $identity .= $user_job->job_name;
+                    $job_id = $user_job->job_id;
+                    $job = Job::find($job_id);
+                    $identity .= $job->job_name;
                 }
                 foreach($words as $word)
                 {
@@ -260,7 +281,7 @@ class IndexController extends Controller
             }
 
             return view('searchresult', [
-                'results' => compact($results),
+                'results' => $results,
                 'words' => $words,
                 'andor' => $andor,
             ]);

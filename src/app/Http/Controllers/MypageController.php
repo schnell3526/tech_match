@@ -57,4 +57,5 @@ class MypageController extends Controller
         return redirect()->route('users.index');
         
     }
+    
 }

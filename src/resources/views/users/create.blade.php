@@ -22,64 +22,71 @@
                       </div>
                       <div class="p-2 w-1/2 mx-auto">
                         <div class="relative">
-                          <label for="name" class="leading-7 text-sm text-gray-600">ニックネーム　<span class="text-red-600">※必須</span></label>
-                          <input type="text" id="name" name="name" value="{{ old('name') }}" required class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                          <label for="nickname" class="leading-7 text-sm text-gray-600">ニックネーム　<span class="text-red-600">※必須</span></label>
+                          <input type="text" id="nickname" name="nickname" value="{{ old('nickname') }}" required class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                         </div>
                       </div>
                       <div class="p-2 w-1/2 mx-auto">
                         <div class="relative">
-                          <label for="name" class="leading-7 text-sm text-gray-600">メールアドレス　<span class="text-red-600">※必須</span></label>
-                          <input type="text" id="name" name="name" value="{{ old('name') }}" required class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                          <label for="email" class="leading-7 text-sm text-gray-600">メールアドレス　<span class="text-red-600">※必須</span></label>
+                          <input type="email" id="email" name="email" value="{{ old('email') }}" required class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                         </div>
                       </div>
                       <div class="p-2 w-1/2 mx-auto">
                         <div class="relative">
-                          <label for="name" class="leading-7 text-sm text-gray-600">パスワード　<span class="text-red-600">※必須</span></label>
-                          <input type="text" id="name" name="name" value="{{ old('name') }}" required class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                          <label for="icon_image" class="leading-7 text-sm text-gray-600">アイコン画像<span class="text-red-600">※必須</span></label>
+                          <input type="file" id="icon_image" name="icon_image" value="{{ old('icon_image') }}" required class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                         </div>
                       </div>
                       <div class="p-2 w-1/2 mx-auto">
                         <div class="relative">
-                          <label for="quantity" class="leading-7 text-sm text-gray-600">年齢　<span class="text-red-600">※必須</span></label>
-                          <input type="number" id="quantity" name="quantity" value="{{ old('quantity') }}" required class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                          <label for="password" class="leading-7 text-sm text-gray-600">パスワード　<span class="text-red-600">※必須</span></label>
+                          <input type="password" id="password" name="password" value="{{ old('password') }}" required class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                        </div>
+                      </div>
+                      <div class="p-2 w-1/2 mx-auto">
+                        <div class="relative">
+                          <label for="age" class="leading-7 text-sm text-gray-600">年齢　<span class="text-red-600">※必須</span></label>
+                          <input type="number" id="age" name="age" value="{{ old('age') }}" required class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                           <span class="text-sm">0〜99の範囲で入力してください</span>
                         </div>
                       </div>
                       <div class="p-2 w-1/2 mx-auto">
-                        <label for="category" class="leading-7 text-sm text-gray-600">性別</label>
+                        <label for="gender" class="leading-7 text-sm text-gray-600">性別</label>
                         <div class="relative flex justify-around">
-                          <div><input type="radio" name="is_selling" value="1" class="mr-2" checked>男性</div>
-                          <div><input type="radio" name="is_selling" value="0" class="mr-2" >女性</div>
+                          <div><input type="radio" name="gender" value="1" class="mr-2" checked>男性</div>
+                          <div><input type="radio" name="gender" value="2" class="mr-2" >女性</div>
                         </div>
                       </div>  
                       <div class="p-2 w-1/2 mx-auto">
                         <div class="relative">
-                          <label for="information" class="leading-7 text-sm text-gray-600">自己紹介　<span class="text-red-600">※必須</span></label>
-                          <textarea id="information" name="information" rows="10" required class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">{{ old('information') }}</textarea>
+                          <label for="introduction" class="leading-7 text-sm text-gray-600">自己紹介　<span class="text-red-600">※必須</span></label>
+                          <textarea id="introduction" name="introduction" rows="10" required class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">{{ old('introduction') }}</textarea>
                         </div>
                       </div>
                       <div class="p-2 w-1/2 mx-auto">
                         <div class="relative">
-                          <label for="price" class="leading-7 text-sm text-gray-600">Github_URL 　<span class="text-red-600">※必須</span></label>
-                          <input type="number" id="price" name="price" value="{{ old('price') }}" required class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                          <label for="github_url" class="leading-7 text-sm text-gray-600">Github_URL 　<span class="text-red-600">※必須</span></label>
+                          <input type="text" id="github_url" name="github_url" value="{{ old('git_url') }}" required class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                         </div>
                       </div>
                       <div class="p-2 w-1/2 mx-auto">
                         <div class="relative">
-                          <label for="price" class="leading-7 text-sm text-gray-600">Facebook_URL 　<span class="text-red-600">※必須</span></label>
-                          <input type="number" id="price" name="price" value="{{ old('price') }}" required class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                          <label for="facebook_url" class="leading-7 text-sm text-gray-600">Facebook_URL 　<span class="text-red-600">※必須</span></label>
+                          <input type="text" id="facebook_url" name="facebook_url" value="{{ old('facebook_url') }}" required class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                         </div>
                       </div>
                       <div class="p-2 w-1/2 mx-auto">
                         <div class="relative">
-                          <label for="price" class="leading-7 text-sm text-gray-600">Qita_URL 　<span class="text-red-600">※必須</span></label>
-                          <input type="number" id="price" name="price" value="{{ old('price') }}" required class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                          <label for="qita_url" class="leading-7 text-sm text-gray-600">Qita_URL 　<span class="text-red-600">※必須</span></label>
+                          <input type="text" id="qita_url" name="qita_url" value="{{ old('qita_url') }}" required class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                         </div>
                       </div>
                       <div class="p-2 w-1/2 mx-auto">
                         <div class="relative">
-                          <label for="shop_id" class="leading-7 text-sm text-gray-600">職業　<span class="text-red-600">※必須</span></label>
-                          <select name="shop_id" id="shop_id" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                          <label for="job" class="leading-7 text-sm text-gray-600">職業　<span class="text-red-600">※必須</span></label>
+                          <select name="job" id="job" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                            <option value="enginer">エンジニア</option>
                             {{-- @foreach ($shops as $shop )
                               <option value="{{ $shop->id}}" >
                                 {{ $shop->name }}
@@ -91,8 +98,9 @@
 
                       <div class="p-2 w-1/2 mx-auto">
                         <div class="relative">
-                          <label for="shop_id" class="leading-7 text-sm text-gray-600">スキル　<span class="text-red-600">※必須</span></label>
-                          <select name="shop_id" id="shop_id" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                          <label for="skill" class="leading-7 text-sm text-gray-600">スキル　<span class="text-red-600">※必須</span></label>
+                          <select name="skill" id="skill" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                            <option value="php">PHP</option>
                             {{-- @foreach ($shops as $shop )
                               <option value="{{ $shop->id}}" >
                                 {{ $shop->name }}

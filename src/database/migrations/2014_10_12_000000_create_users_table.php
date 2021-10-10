@@ -17,10 +17,10 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('email')->unique();
-            $table->string('nickname')->default('名前が登録されていません');
-            $table->string('icon_image')->default('/icon/user_icon/default.png');
             $table->string('password');
+            $table->string('nickname')->default('名前が登録されていません');
+            $table->string('email')->unique();
+            $table->string('icon_image')->default('/icon/user_icon/default.png');
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

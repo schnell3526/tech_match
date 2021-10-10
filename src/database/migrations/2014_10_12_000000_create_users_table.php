@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('nickname')->default('名前が登録されていません');
-            $table->string('icon_image')->default('/icon/users/sample.jpg');
+            $table->string('icon_image')->default('/icon/user_icon/default.png');
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

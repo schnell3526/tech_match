@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
 
+
 class TagsTableSeeder extends Seeder
 {
     /**
@@ -16,6 +17,7 @@ class TagsTableSeeder extends Seeder
      */
     public function run()
     {
+
         $array[] = 
         array(
             'tag_name'=>'ruby',
@@ -39,4 +41,5 @@ class TagsTableSeeder extends Seeder
             ]);
         }
     }
+
 }

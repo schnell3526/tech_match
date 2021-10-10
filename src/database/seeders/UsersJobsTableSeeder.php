@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
 
-class Users_JobsTableSeeder extends Seeder
+class UsersJobsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.

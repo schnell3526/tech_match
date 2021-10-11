@@ -28,7 +28,7 @@ Route::get('/nav', [UsersController::class, 'index'])->name('user.index');
 
 
 
-Route::get('/logout', [IndexController::class, 'logout']);
+Route::post('/logout', [IndexController::class, 'logout']);
 
 
 

@@ -1,6 +1,3 @@
-@import url('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css');
-@import url('https://cdnjs.cloudflare.com/ajax/libs/bootflat/2.0.4/css/bootflat.min.css');
-
 body {
     background-color: #f4f7f8;
 }
@@ -41,6 +38,7 @@ a.my-navbar-item:hover {
 }
 .my-navbar-signin {
     display: inline-block;
+    color: black;
 }
 .my-navbar-signin:hover {
     color: #67a8dd;
@@ -49,6 +47,7 @@ a.my-navbar-item:hover {
     position: relative;
     cursor: pointer;
     display: inline-block;
+    color: black;
 }
 .my-navbar-signup:hover .balloon {
     display: inline-block;

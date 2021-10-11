@@ -36,7 +36,9 @@
                                     <option name="or">or</option>
                                 </select>
 
-                                <button id="searchbutton" type="submit" style="background-color:grey;">検索</button>
+                                <x-button class="ml-3">
+                                    {{ __('検索') }}
+                                </x-button>
                             </form>            
                         </div>
                     </div>

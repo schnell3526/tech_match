@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
-<!-- ログインユーザ用レイアウト -->
+<!-- 非ログインユーザ・ログインユーザ共通レイアウト -->
 
 <head>
     <meta charset="utf-8">

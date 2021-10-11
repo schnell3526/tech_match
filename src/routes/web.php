@@ -24,11 +24,11 @@ Route::get('/index', [IndexController::class, 'index'])->name('index');
 
 Route::get('/search', [IndexController::class, 'search'])->name('search');
 
-Route::get('/nav', [UsersController::class, 'index'])->name('user.index');
 
 
 
-Route::post('/logout', [IndexController::class, 'logout']);
+Route::get('/logout', [IndexController::class, 'logout']);
+
 
 
 

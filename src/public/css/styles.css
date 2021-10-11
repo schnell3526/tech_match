@@ -113,15 +113,18 @@ a.my-navbar-item:hover {
     
 }
 
+.login-user {
+    display: inline-block;
+}
 .login-user-data {
     position: relative;
     cursor: pointer;
     display: inline-block;
 }
-.login-user-data:hover .balloon {
+.login-user-data:hover .balloon2 {
     display: inline-block;
     top: 30px;
-    left: -80px; /*吹き出しの位置の調整*/
+    left: 50px; /*吹き出しの位置の調整*/
 }
 .login-user-data:hover {
     color: #67a8dd;
@@ -131,7 +134,7 @@ a.my-navbar-item:hover {
     position: absolute;
     display: none;
     padding: 10px;
-    background-color: #8c8c8c;
+    background-color: black;
     width: 160px;
     left: -50%;
     height: 70px;
@@ -146,9 +149,9 @@ a.my-navbar-item:hover {
     content: "";
     position: absolute;
     top: -24px; /*吹き出しの上下の調整*/
-    right: 17%; /*吹き出し口の左右の調整*/
+    right: 40%; /*吹き出し口の左右の調整*/
     border: 15px solid transparent;
-    border-top: 20px solid #8c8c8c;
+    border-top: 20px solid black;
     margin-left: 10px;
     transform: rotateZ(180deg);
 }

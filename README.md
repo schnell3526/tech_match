@@ -4,7 +4,7 @@
 
 ### 概念設計
 
-![ER図](https://github.com/schnell3526/tech_match/blob/figure/%20db.png?raw=true)
+![ER図](https://github.com/schnell3526/tech_match/blob/figure/db.png?raw=true)
 
 ### 物理設計
 

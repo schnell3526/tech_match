@@ -1,5 +1,3 @@
-@extends('layouts.user-navigation')
-
 <x-app-layout>
     <div class="container">
         <div class="py-12">
@@ -17,7 +15,7 @@
                                     <option name="and">and</option>
                                     <option name="or">or</option>
                                 </select>
-                                <button id="searchbutton" type="submit">検索</button>
+                                <button id="searchbutton" type="submit" style="background-color:grey;">検索</button>
                             </form>
                             
                                 
@@ -38,7 +36,7 @@
             <div class="result_main">検索結果：
                 @if(count($results) == 0)
                     <div class="no_result">
-                        検索結果が0件です．検索キーワードにスペースなどが入っていないか確かめてください．
+                        検索結果が0件です．検索キーワードに余分なスペースなどが入っていないか確かめてください．
                     </div>
                             
                 @else

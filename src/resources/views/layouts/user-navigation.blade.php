@@ -6,23 +6,39 @@
       </svg>
       <span class="ml-3 text-xl">Tech Match</span>
     </a>
+    
+    @if(!Auth::check())
     <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
+    </nav>
+      <nav class="my-navbar-signin-signup">
+        <a class="my-navbar-signin" href="/login">Log in</a>
+          <span>/</span>
+            <span class="my-navbar-signup">Sign up
+              <div class="balloon">
+                <a class="signin-menu" href="/user/register">エンジニアの方</a><br>
+                <a class="signin-menu" href="/company/register">企業の方</a>
+              </div>
+            </span>
+      </nav>
+    @endif
+
+    @if( Auth::check())
+                <nav class="login-user">
+                    <span class="login-user-data"><img src="{{ asset('image' . $loginuser->icon_img) }}">: {{ $loginuser->nickname }}
+                        <div class="balloon2">
+                            <a class="mypage" href="/{{ $loginuser->id }}/view">マイページ</a>
+                            <a class="logout" href="/logout">ログアウト</a>
+                        </div>
+                    </span>
+                </nav>
+
+                <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
       <a class="mr-5 hover:text-gray-900">お気に入り</a>
       <a class="mr-5 hover:text-gray-900">Second Link</a>
       <a class="mr-5 hover:text-gray-900">Third Link</a>
       <a class="mr-5 hover:text-gray-900">Fourth Link</a>
     </nav>
-    @if( !Auth::check())
-                <nav class="my-navbar-signin-signup">
-                    <a class="my-navbar-signin" href="/login">Log in</a>
-                    <span>/</span>
-                    <span class="my-navbar-signup">Sign up
-                        <div class="balloon">
-                            <a class="signin-menu" href="/user/register">エンジニアの方</a><br>
-                            <a class="signin-menu" href="/company/register">企業の方</a>
-                        </div>
-                    </span>
-                </nav>
+          
     @endif
   </div>
 </header>

@@ -10,129 +10,6 @@ Document
 /**
 Use a better box model (opinionated).
 */
-.my-navbar-signin-signup {
-  display: inline-block;
-}
-.my-navbar-signin {
-  display: inline-block;
-}
-.my-navbar-signin:hover {
-  color: #67a8dd;
-}
-.my-navbar-signup {
-  position: relative;
-  cursor: pointer;
-  display: inline-block;
-}
-.my-navbar-signup:hover .balloon {
-  display: inline-block;
-  top: 30px;
-  left: -80px; /*吹き出しの位置の調整*/
-}
-.my-navbar-signup:hover {
-  color: #67a8dd;
-}
-
-.balloon {
-  position: absolute;
-  display: none;
-  padding: 10px;
-  background-color: #8c8c8c;
-  width: 160px;
-  left: -50%;
-  height: 70px;
-  top: 100%;
-  margin-top: -5px;
-  font-size: 18px;
-  line-height: 0 em;
-  text-align: center;
-}
-
-.balloon:before {
-  content: "";
-  position: absolute;
-  top: -24px; /*吹き出しの上下の調整*/
-  right: 17%; /*吹き出し口の左右の調整*/
-  border: 15px solid transparent;
-  border-top: 20px solid #8c8c8c;
-  margin-left: 10px;
-  transform: rotateZ(180deg);
-}
-
-.balloon:hover .balloon{
-  
-}
-.my-navbar-signin {
-  color: #ffffff;
-}
-.my-navbar-signup {
-  color: #ffffff;
-}
-
-.signin-menu {
-  color:#ffffff;
-}
-.signin-menu:hover {
-  color: #67a8dd;
-}
-
-.menu-bar {
-  align-items: center;
-  background: #67a8dd;
-  display: flex;
-  height: 6rem;
-  justify-content: space-between;
-  padding: 0 2%;
-  margin-bottom: 3rem;
-  font-size: 18px;
-  
-}
-
-.login-user-data {
-  position: relative;
-  cursor: pointer;
-  display: inline-block;
-}
-.login-user-data:hover .balloon {
-  display: inline-block;
-  top: 30px;
-  left: -80px; /*吹き出しの位置の調整*/
-}
-.login-user-data:hover {
-  color: #67a8dd;
-}
-
-.balloon2 {
-  position: absolute;
-  display: none;
-  padding: 10px;
-  background-color: #8c8c8c;
-  width: 160px;
-  left: -50%;
-  height: 70px;
-  top: 100%;
-  margin-top: -5px;
-  font-size: 18px;
-  line-height: 0 em;
-  text-align: center;
-}
-
-.balloon2:before {
-  content: "";
-  position: absolute;
-  top: -24px; /*吹き出しの上下の調整*/
-  right: 17%; /*吹き出し口の左右の調整*/
-  border: 15px solid transparent;
-  border-top: 20px solid #8c8c8c;
-  margin-left: 10px;
-  transform: rotateZ(180deg);
-}
-
-.balloon:hover .balloon{
-  
-}
-
-
 
 *,
 ::before,
@@ -331,7 +208,6 @@ button,
 [type='submit'] {
   -webkit-appearance: button;
 }
-
 
 /**
 Remove the inner border and padding in Firefox.
@@ -188694,5 +188570,4 @@ select {
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
-
 

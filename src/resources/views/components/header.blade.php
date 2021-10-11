@@ -18,10 +18,10 @@
         </nav>
 
         @guest
-        <nav class="my-navbar-signin-signup">
-            <a class="my-navbar-signin" href="/login">Log in</a>
+        <nav class="my-navbar-signin-signup ">
+            <a class="my-navbar-signin text-gray-600 hover:text-gray-900" href="/login">ログイン</a>
             <span>/</span>
-            <span class="my-navbar-signup">Sign up
+            <span class="my-navbar-signup text-gray-600 hover:text-gray-900">新規登録
                 <div class="balloon">
                     <a class="signin-menu" href="/user/register">エンジニアの方</a><br>
                     <a class="signin-menu" href="/company/register">企業の方</a>
@@ -30,6 +30,7 @@
         </nav>
         @endguest
 
+        <!-- ログインしている場合(ログアウトボタン) -->
         @auth
         <form method="POST" action="{{ route('logout') }}">
             @csrf

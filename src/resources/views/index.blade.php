@@ -1,5 +1,5 @@
 <x-app-layout>
-    
+
     <div class="container">
 
         <div class="py-12">
@@ -9,32 +9,33 @@
                         <div class="error_messages">
 
                             @if($errors->any())
-                                @foreach($errors->all() as $message)
-                                <script>
-                                    alert('{{ $message }}')
-                                </script>
-                                @endforeach
+                            @foreach($errors->all() as $message)
+                            <script>
+                            alert('{{ $message }}')
+                            </script>
+                            @endforeach
 
                             @endif
                             @if($error2)
-                                {{ $error2 }}
+                            {{ $error2 }}
                             @endif
 
-                        
+
 
                         </div>
-    
-            
+
+
                         <div class="search" style="display:inline-flex;">
                             <form id="search" action="{{ route('search') }}" method="get">
                                 <div>キーワードで検索: </div>
-                                <input id="searchbox" name="searchword" type="text" style="width:800px; height:40px;" 
-                                placeholder="キーワードを入力(複数語の場合はスペースで区切ってください．)" />
+                                <input id="searchbox" name="searchword" type="text" style="width:800px; height:40px;"
+                                    placeholder="キーワードを入力(複数語の場合はスペースで区切ってください．)" />
                                 <select name="andor">
                                     <option name="one">1つで検索</option>
                                     <option name="and">and</option>
                                     <option name="or">or</option>
                                 </select>
+
                                 <button id="searchbutton" type="submit" style="background-color:grey;">検索</button>
                             </form>            
                         </div>
@@ -79,12 +80,7 @@
                     @endsection
                                            
                 @endforeach
-
         @endif
-                    
+
     </div>
 </x-app-layout>
-
-
-        
-        

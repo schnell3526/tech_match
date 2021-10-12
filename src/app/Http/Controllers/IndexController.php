@@ -99,6 +99,7 @@ class IndexController extends Controller
                     'loginuser' => $auth,
                 ]);
             }
+            $words[0] = mb_strtolower($words[0]);
 
             foreach($engineers as $engineer)
             {
@@ -118,6 +119,7 @@ class IndexController extends Controller
                     $job = Job::find($job_id);
                     $identity .= $job->job_name;
                 }
+                $identity = mb_strtolower($identity);
                 if(strpos($identity, $words[0]) !== false)
                 {
                     $user_id = $user->id;
@@ -181,8 +183,10 @@ class IndexController extends Controller
                     $job = Job::find($job_id);
                     $identity .= $job->job_name;
                 }
+                $identity = mb_strtolower($identity);
                 foreach($words as $word)
                 {
+                    $word = mb_strtolower($word);
                     if(strpos($identity, $word) === false)
                     {
                         break;
@@ -249,8 +253,10 @@ class IndexController extends Controller
                     $job = Job::find($job_id);
                     $identity .= $job->job_name;
                 }
+                $identity = mb_strtolower($identity);
                 foreach($words as $word)
                 {
+                    $word = mb_strtolower($word);
                     if(strpos($identity, $word) !== false)
                     {
                         $user_id = $user->id;
@@ -292,7 +298,8 @@ class IndexController extends Controller
 
     public function logout()
     {
-        return Auth::logout();
+        Auth::logout();
+        return redirect('/');
     }
 
 }

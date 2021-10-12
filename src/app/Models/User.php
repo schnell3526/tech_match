@@ -52,7 +52,7 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Users_job');
     }
 
-    public function user_tags()
+    public function users_tags()
     {
         return $this->hasMany('App\Models\Users_tag');
     }

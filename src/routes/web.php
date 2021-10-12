@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IndexController;
 
 use App\Http\Controllers\UsersController;
-
+use App\Http\Controllers\MypageController;
 
 
 /*
@@ -30,6 +30,11 @@ Route::get('/nav', [UsersController::class, 'index'])->name('user.index');
 
 Route::get('/logout', [IndexController::class, 'logout']);
 
+
+
+Route::get('/mypage', [MypageController::class, 'index'])->name('mypage.index');
+Route::get('/mypage/create', [MypageController::class, 'create'])->name('mypage.create');
+Route::post('/mypage/store', [MypageController::class, 'store'])->name('mypage.store');
 
 
 require __DIR__.'/auth.php';

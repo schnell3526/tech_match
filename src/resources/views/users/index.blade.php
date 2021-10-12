@@ -1,4 +1,4 @@
-@extends('layouts.user-navigation')
+{{-- @extends('layouts.user-navigation') --}}
 
 <x-app-layout>
 <div class="py-12">

@@ -1,10 +1,10 @@
 @php
     if($type ==="portfolio") {
-      $path = 'storage/portfolio'/;
+      $path = 'storage/portfolio/';
     }
 
     if($type === "icon") {
-      $path = "storage/icon/"
+      $path = "storage/icon/";
     }
 @endphp
 

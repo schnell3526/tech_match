@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Engineer;
+use App\Models\Product;
 
 
 class User extends Authenticatable
@@ -61,6 +62,11 @@ class User extends Authenticatable
     public function engineer()
     {
         return $this->hasOne(Engineer::class);
+    }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
     }
 
 }

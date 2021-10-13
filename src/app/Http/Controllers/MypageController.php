@@ -45,7 +45,7 @@ class MypageController extends Controller
                     'introduction' => $request->introduction,
                     'github_url' => $request->github_url,
                     'facebook_url' => $request->facebook_url,
-                    'qita_url' => $request->qita_url,
+                    'qiita_url' => $request->qita_url,
                 ]);
             }, 2);
         

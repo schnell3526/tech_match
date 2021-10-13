@@ -18,8 +18,8 @@ class DatabaseSeeder extends Seeder
             UsersTableSeeder::class,
             JobsTableSeeder::class,
             TagsTableSeeder::class,
-            UsersTagsTableSeeder::class,
-            UsersJobsTableSeeder::class,
+            TagUserTableSeeder::class,
+            JobUserTableSeeder::class,
             EngineersTableSeeder::class,
         ]);
     }

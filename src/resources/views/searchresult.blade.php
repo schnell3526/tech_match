@@ -9,7 +9,7 @@
                                 
                                 <div>キーワードで検索: </div>
                                 <input id="searchbox" name="searchword" type="text" style="width:800px; height:40px;" 
-                                placeholder="キーワードを入力(複数語の場合は全角スペースで区切ってください．)" />
+                                placeholder="キーワードを入力(複数語の場合はスペースで区切ってください．)" />
                                 <select name="andor">
                                     <option name="one">1つで検索</option>
                                     <option name="and">and</option>

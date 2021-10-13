@@ -7,8 +7,6 @@ use App\Models\User;
 use App\Models\Job;
 use App\Models\Tag;
 use App\Models\Engineer;
-use App\Models\Users_tag;
-use App\Models\Users_job;
 use App\Http\Requests\Search;
 use Auth;
 
@@ -44,23 +42,8 @@ class IndexController extends Controller
             $nickname = $user->nickname;
             $icon_img = $user->icon_image;
             
-            $users_jobs = $user->users_jobs()->get();
-            $jobs = array();
-            foreach($users_jobs as $user_job)
-            {
-                $job_id = $user_job->job_id;
-                $job = Job::find($job_id);
-                array_push($jobs, $job->job_name);
-            }
-            $users_tags = $user->users_tags()->get();
-            $tags = array();
-            foreach($users_tags as $user_tag)
-            {
-                $tag_id = $user_tag->tag_id;
-                $tag = Tag::find($tag_id);
-                array_push($tags, array('tag_name' => $tag->tag_name, 'color' => $tag->color));
-            }
-            
+            $jobs = $user->jobs()->get();
+            $tags = $user->tags()->get();
             
             $age = $engineer->age;
             $gender = $engineer->gender;
@@ -73,7 +56,9 @@ class IndexController extends Controller
         return view('index', [
             'error2' => "",
             'usersdata' => $usersdata,
-            'loginuser' => $auth,
+            'words' => "",
+            'andor' => "",
+            
             
         ]);
 
@@ -84,6 +69,7 @@ class IndexController extends Controller
         $searchword = $request->searchword;
         $andor = $request->andor;
         $words = double_explode("　", " ", $searchword);
+        $tmp = $words;
         #検索にヒットしたユーザ情報をlistで返す
         $results = array();
         $engineers = Engineer::all();
@@ -96,7 +82,8 @@ class IndexController extends Controller
                 return view('index', [
                     'error2' => '複数キーワードはandかorを指定してください．',
                     'usersdata' => '',
-                    'loginuser' => $auth,
+                    'words' => $words,
+                    'andor' => $andor,
                 ]);
             }
             $words[0] = mb_strtolower($words[0]);
@@ -105,19 +92,15 @@ class IndexController extends Controller
             {
                 $user = User::find($engineer->user_id);
                 $identity = $engineer->introduction;
-                $user_tags = $user->users_tags()->get();
-                foreach($user_tags as $user_tag)
+                $tags = $user->tags()->get();
+                foreach($tags as $tag)
                 {
-                    $tag_id = $user_tag->tag_id;
-                    $tag = Tag::find($tag_id);
-                    $identity .= $tag->tag_name;
+                    $identity .= $tag->name;
                 }
-                $user_jobs = $user->users_jobs()->get();
-                foreach($user_jobs as $user_job)
+                $jobs = $user->jobs()->get();
+                foreach($jobs as $job)
                 {
-                    $job_id = $user_job->job_id;
-                    $job = Job::find($job_id);
-                    $identity .= $job->job_name;
+                    $identity .= $job->name;
                 }
                 $identity = mb_strtolower($identity);
                 if(strpos($identity, $words[0]) !== false)
@@ -125,30 +108,18 @@ class IndexController extends Controller
                     $user_id = $user->id;
                     $nickname = $user->nickname;
                     $icon_img = $user->icon_image;
-                    $jobs = array();
-                    foreach($user_jobs as $user_job)
-                    {
-                        $job = Job::find($user_job->job_id);
-                        array_push($jobs, $job->job_name);
-
-                    }
-                    $tags = array();
-                    foreach($user_tags as $user_tag)
-                    {
-                        $tag = Tag::find($user_tag->tag_id);
-                        array_push($tags, array('color' => $tag->color, 'tag_name' => $tag->tag_name));
-                    }
                     $age = $engineer->age;
                     $gender = $engineer->gender;
                     
                     array_push($results, array('user_id' => $user_id, 'nickname' => $nickname, 'icon_img' => $icon_img,
                                             'jobs' => $jobs, 'tags' => $tags, 'age' => $age, 'gender' => $gender));
-                    
                 }
             }
+            $words = $tmp;
 
-            return view('searchresult', [
-                'results' => $results,
+            return view('index', [
+                'error2' => "",
+                'usersdata' => $results,
                 'words' => $words,
                 'andor' => $andor,
             ]);
@@ -160,8 +131,9 @@ class IndexController extends Controller
             {
                 return view('index', [
                     'usersdata' => '',
-                    'loginuser' => $auth,
                     'error2' => '1つのキーワードで検索するには「1つで検索」を選択してください．',
+                    'words' => $words,
+                    'andor' => $andor,
                 ]);
             }
             
@@ -169,21 +141,18 @@ class IndexController extends Controller
             {
                 $user = User::find($engineer->user_id);
                 $identity = $engineer->introduction;
-                $user_tags = $user->users_tags()->get();
-                foreach($user_tags as $user_tag)
+                $tags = $user->tags()->get();
+                foreach($tags as $tag)
                 {
-                    $tag_id = $user_tag->tag_id;
-                    $tag = Tag::find($tag_id);
-                    $identity .= $tag->tag_name;
+                    $identity .= $tag->name;
                 }
-                $user_jobs = $user->users_jobs()->get();
-                foreach($user_jobs as $user_job)
+                $jobs = $user->jobs()->get();
+                foreach($jobs as $job)
                 {
-                    $job_id = $user_job->job_id;
-                    $job = Job::find($job_id);
-                    $identity .= $job->job_name;
+                    $identity .= $job->name;
                 }
                 $identity = mb_strtolower($identity);
+                $i = 0;
                 foreach($words as $word)
                 {
                     $word = mb_strtolower($word);
@@ -191,23 +160,12 @@ class IndexController extends Controller
                     {
                         break;
                     }
-                    if($word == $words[count($words) - 1])
+                    $i += 1;
+                    if($i == count($words))
                     {
                         $user_id = $user->id;
                         $nickname = $user->nickname;
                         $icon_img = $user->icon_image;
-                        $jobs = array();
-                        foreach($user_jobs as $user_job)
-                        {
-                            $job = Job::find($user_job->job_id);
-                            array_push($jobs, $job->job_name);
-                        }
-                        $tags = array();
-                        foreach($user_tags as $user_tag)
-                        {
-                            $tag = Tag::find($user_tag->tag_id);
-                            array_push($tags, array('color' => $tag->color, 'tag_name' => $tag->tag_name));
-                        }
                         $age = $engineer->age;
                         $gender = $engineer->gender;
                         
@@ -217,8 +175,11 @@ class IndexController extends Controller
                 }
             }
 
-            return view('searchresult', [
-                'results' => $results,
+            $words = $tmp;
+
+            return view('index', [
+                'error2' => "",
+                'usersdata' => $results,
                 'words' => $words,
                 'andor' => $andor,
             ]);
@@ -230,8 +191,9 @@ class IndexController extends Controller
             {
                 return view('index', [
                     'usersdata' => '',
-                    'loginuser' => $auth,
                     'error2' => '1つのキーワードで検索するには「1つで検索」を選択してください．',
+                    'words' => $words,
+                    'andor' => $andor,
                 ]);
             }
             
@@ -239,19 +201,15 @@ class IndexController extends Controller
             {
                 $user = User::find($engineer->user_id);
                 $identity = $engineer->introduction;
-                $user_tags = $user->users_tags()->get();
-                foreach($user_tags as $user_tag)
+                $tags = $user->tags()->get();
+                foreach($tags as $tag)
                 {
-                    $tag_id = $user_tag->tag_id;
-                    $tag = Tag::find($tag_id);
-                    $identity .= $tag->tag_name;
+                    $identity .= $tag->name;
                 }
-                $user_jobs = $user->users_jobs()->get();
-                foreach($user_jobs as $user_job)
+                $jobs = $user->jobs()->get();
+                foreach($jobs as $job)
                 {
-                    $job_id = $user_job->job_id;
-                    $job = Job::find($job_id);
-                    $identity .= $job->job_name;
+                    $identity .= $job->name;
                 }
                 $identity = mb_strtolower($identity);
                 foreach($words as $word)
@@ -262,19 +220,6 @@ class IndexController extends Controller
                         $user_id = $user->id;
                         $nickname = $user->nickname;
                         $icon_img = $user->icon_image;
-                        $jobs = array();
-                        foreach($user_jobs as $user_job)
-                        {
-                            $job = Job::find($user_job->job_id);
-                            array_push($jobs, $job->job_name);
-
-                        }
-                        $tags = array();
-                        foreach($user_tags as $user_tag)
-                        {
-                            $tag = Tag::find($user_tag->tag_id);
-                            array_push($tags, array('color' => $tag->color, 'tag_name' => $tag->tag_name));
-                        }
                         $age = $engineer->age;
                         $gender = $engineer->gender;
                         
@@ -285,9 +230,11 @@ class IndexController extends Controller
                     
                 }
             }
+            $words = $tmp;
 
-            return view('searchresult', [
-                'results' => $results,
+            return view('index', [
+                'error2' => "",
+                'usersdata' => $results,
                 'words' => $words,
                 'andor' => $andor,
             ]);

@@ -8,16 +8,16 @@
                     <div class="p-6 bg-white border-b border-gray-200">
                         <div class="error_messages">
 
-                            @if($errors->any())
-                            @foreach($errors->all() as $message)
-                            <script>
-                            alert('{{ $message }}')
-                            </script>
-                            @endforeach
+                           
 
-                            @endif
+                            
                             @if($error2)
-                            {{ $error2 }}
+                                {{ $error2 }}<br>
+                                検索内容：
+                                    @foreach($words as $word)
+                                        "{{ $word }}"
+                                    @endforeach
+                                    ({{ $andor }})
                             @endif
 
 
@@ -46,43 +46,70 @@
             </div> 
         </div>      
         
-        @if($usersdata)
-            @extends('users-layout')
-                @foreach($usersdata as $userdata)
-                    @section('users')
-
-                    @section('link') {{ $userdata['user_id'] }}/view @endsection
-                    
-                    @section('icon') <img src="{{ asset('image' . $userdata['icon_img']) }}" width="40px" height="40px"> @endsection
-                    
-                    @section('nickname') {{ $userdata['nickname'] }} @endsection
-                    
-                    @section('age') {{ $userdata['age'] }}歳 @endsection
-                    
-                    @section('gender')
-                        @if($userdata['gender'] == 0)
-                            男性
-                        @endif
-                        @if($userdata['gender'] == 1)
-                            女性
-                        @endif
-                    @endsection
-                    
-                    @section('jobs')
-                        @foreach($userdata['jobs'] as $job)
-                            {{ $job }}
-                        @endforeach 
-                    @endsection
-                    
-                    @section('tags')
-                        @foreach($userdata['tags'] as $tag)
-                            <div style="background-color: {{ $tag['color'] }};color:white;font-size:px">{{ $tag['tag_name'] }}</div><br>
-                        @endforeach
-                    @endsection
-                    @endsection
-                                           
-                @endforeach
-        @endif
+        <div class="users">
+            <!--検索機能が使われた時 -->
+            @if($words)
+                <div class="searchwords">
+                    検索内容：
+                    @foreach($words as $word)
+                        "{{ $word }}"
+                    @endforeach
+                    ({{ $andor }})
+                </div>
+                <div class="result_main">検索結果：</div>
+                @if(!$usersdata and !$error2)
+                    <div class="no_result">
+                        検索結果が0件です．検索キーワードに余分なスペースなどが入っていないか確かめてください．
+                    </div>            
+                @endif
+            @endif
+            <!--検索機能，index共通 -->
+            @if($usersdata)
+                <section class="text-gray-600 body-font">
+                    <div class="container px-5 py-24 mx-auto">
+                        <div class="flex flex-wrap -m-2">
+                            @foreach($usersdata as $userdata)
+                                <div class="p-2 lg:w-1/2 md:w-1/2 w-full" style="background-color:white;">
+                                    <a href="{{ route('userpage.index', ['id' => $userdata['user_id']]) }}">
+                                        <div class="h-full flex items-center border-gray-200 border p-4 rounded-lg">
+                                            <img src="{{ asset('image' . $userdata['icon_img']) }}" width="40px" height="40px">
+                                            <div class="flex">
+                                                <h2 class="text-gray-900 title-font font-medium" style="font-size:20px">{{ $userdata['nickname'] }}</h2>   
+                                            </div>
+                                            <span>&nbsp;&nbsp;&nbsp;</span>
+                                            <div class="attributes1" style="font-size:20px">
+                                                {{ $userdata['age'] }}歳<br>
+                                                @if($userdata['gender'] == 0)
+                                                    男性<br>
+                                                @endif
+                                                @if($userdata['gender'] == 1)
+                                                    女性<br>
+                                                @endif
+                                            </div>
+                                            <span>&nbsp;&nbsp;&nbsp;</span>
+                                            <div class="jobs">
+                                                @foreach($userdata['jobs'] as $job)
+                                                <div class="flex">
+                                                    <p class="text-gray-500" style="font-size:20px">{{ $job->name }}</p><br>
+                                                </div>
+                                                @endforeach 
+                                            </div>
+                                            <span>&nbsp;&nbsp;&nbsp;</span>
+                                            <div class="tags">
+                                                @foreach($userdata['tags'] as $tag)
+                                                    <div style="background-color: {{ $tag->color }};color:white;font-size:15px;">{{ $tag->name }}</div><br>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </section>
+            @endif
+            
+        </div>
 
     </div>
 </x-app-layout>

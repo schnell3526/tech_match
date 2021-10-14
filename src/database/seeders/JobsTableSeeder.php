@@ -18,7 +18,7 @@ class JobsTableSeeder extends Seeder
         foreach($jobs_name as $job_name)
         {
             DB::table('jobs')->insert([
-            'job_name' => $job_name,
+            'name' => $job_name,
             ]);
         }
     }

@@ -48,14 +48,14 @@ class User extends Authenticatable
     ];
 
 
-    public function users_jobs()
+    public function tags()
     {
-        return $this->hasMany('App\Models\Users_job');
+        return $this->belongsToMany('App\Models\Tag');
     }
 
-    public function users_tags()
+    public function jobs()
     {
-        return $this->hasMany('App\Models\Users_tag');
+        return $this->belongsToMany('App\Models\Job');
     }
 
 
@@ -66,7 +66,7 @@ class User extends Authenticatable
 
     public function products()
     {
-        return $this->hasMany(Product::class);
+        return $this->hasMany('App\Models\Product');
     }
 
 }

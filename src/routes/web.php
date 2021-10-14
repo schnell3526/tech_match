@@ -5,7 +5,11 @@ use App\Http\Controllers\IndexController;
 
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\MypageController;
+
 use App\Http\Controllers\PortfolioController;
+
+use App\Http\Controllers\UserpageController;
+
 
 
 /*
@@ -25,7 +29,7 @@ Route::get('/index', [IndexController::class, 'index'])->name('index');
 
 Route::get('/search', [IndexController::class, 'search'])->name('search');
 
-
+Route::get('/{id}/view', [UserpageController::class, 'index'])->name('userpage.index');
 
 
 Route::get('/logout', [IndexController::class, 'logout']);

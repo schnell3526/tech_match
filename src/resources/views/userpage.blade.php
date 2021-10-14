@@ -13,9 +13,9 @@
                 <div class="w-12 h-1 bg-indigo-500 rounded mt-2 mb-4"></div>
                 <div style="text-align:center">{{ $engineer->age }}歳</div>
                 @if($engineer->gender == 0)
-                <div style="text-align:center">男</div>
+                <div style="text-align:center">男性</div>
                 @else
-                <div style="text-align:center">女</div>
+                <div style="text-align:center">女性</div>
                 @endif
                 @foreach($jobs as $job)
                 <div style="text-align:center">{{$job->name}}</div>
@@ -35,13 +35,52 @@
             </div>
             </div>
             <div class="sm:w-2/3 sm:pl-8 sm:py-8 sm:border-l border-gray-200 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0 text-center sm:text-left">
-            <p class="leading-relaxed text-lg mb-4">Meggings portland fingerstache lyft, post-ironic fixie man bun banh mi umami everyday carry hexagon locavore direct trade art party. Locavore small batch listicle gastropub farm-to-table lumbersexual salvia messenger bag. Coloring book flannel truffaut craft beer drinking vinegar sartorial, disrupt fashion axe normcore meh butcher. Portland 90's scenester vexillologist forage post-ironic asymmetrical, chartreuse disrupt butcher paleo intelligentsia pabst before they sold out four loko. 3 wolf moon brooklyn.</p>
-            <a class="text-indigo-500 inline-flex items-center">Learn More
-                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
-                <path d="M5 12h14M12 5l7 7-7 7"></path>
-                </svg>
-            </a>
+                <div class="tab-wrap">
+                    <input id="TAB-01" type="radio" name="TAB" class="tab-switch" checked="checked" /><label class="tab-label" for="TAB-01">基本情報</label>
+                    <div class="tab-content">
+                        <div class="skills" style="font-size:20px">
+                            スキルセット
+                                @foreach($tags as $tag)
+                                <div class="skill" style="font-size:15px">
+                                    <li><img src="{{ asset('image' . $tag->icon_path) }}" width="30px" height="30px" style="display:inline;"> {{ $tag->name }}</li>
+                                </div>
+                                @endforeach
+                        </div>
+                        <span><br></span>
+                        @if($engineer->introduction)
+                        <div class="introduction" style="font-size:20px">
+                            自己紹介
+                            <p style="font-size:15px">{{ $engineer->introduction }}</p>
+                        </div>
+                        @endif
+                    </div>
+                    <input id="TAB-02" type="radio" name="TAB" class="tab-switch" /><label class="tab-label" for="TAB-02">製作物</label>
+                    <div class="tab-content">
+                        @if($products)
+                            @foreach($products as $product)
+                                <li>{{ $product->title }}<br>
+                                    製作物のurl: {{ $product->product_url }}
+                                    ソースコード: {{ $product->src_url }}
+                                    @foreach($products_images[$product->title] as $images)
+                                        @foreach($images as $image)
+                                            <img src="{{ asset('image' . $image) }}" style="display:inline;">
+                                        @endforeach
+                                    @endforeach
+                                    <span><br></span>
+                                    description:
+                                    <p>{{ $product->description }}</p>
+                                </li>
+                            @endforeach
+                        @endif
+                    </div>
+                    <input id="TAB-03" type="radio" name="TAB" class="tab-switch" /><label class="tab-label" for="TAB-03">ボタン 3</label>
+                    <div class="tab-content">
+                        コンテンツ 3
+                    </div>
+                </div>
             </div>
+  
+            
         </div>
         </div>
     </div>

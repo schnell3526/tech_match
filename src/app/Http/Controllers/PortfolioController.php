@@ -20,7 +20,7 @@ class PortfolioController extends Controller
         return view('portfolio.create');
     }
 
-    public function store(Request $request)
+    public function store(PortfolioRequest $request)
     {
         $id = Auth::id();
         try{

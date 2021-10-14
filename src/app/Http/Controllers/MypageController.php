@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Engineer;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\MypageRequest;
 
 class MypageController extends Controller
 {
@@ -26,9 +27,13 @@ class MypageController extends Controller
         return view('users.create', compact('me'));
     }
 
-    public function store(Request $request)
+    public function store(MypageRequest $request)
     {
         try{
+            $fileName = uniqid(rand().'_');
+            $extention = $request->file('icon_image')->extension();
+            $fileNameToStore = $fileName.'.'.$extention;
+            $request->file('icon_image')->storeAs('/icon', $fileNameToStore);
             DB::transaction(function () use($request) {
                 $user = User::create([
                     'name' => $request->name,

@@ -24,7 +24,6 @@
 
                         </div>
 
-
                         <div class="search" style="display:inline-flex;">
                             <form id="search" action="{{ route('search') }}" method="get">
                                 <div>キーワードで検索: </div>
@@ -110,6 +109,7 @@
             @endif
             
         </div>
+
 
     </div>
 </x-app-layout>

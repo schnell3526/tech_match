@@ -5,7 +5,11 @@ use App\Http\Controllers\IndexController;
 
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\MypageController;
+
+use App\Http\Controllers\PortfolioController;
+
 use App\Http\Controllers\UserpageController;
+
 
 
 /*
@@ -35,5 +39,9 @@ Route::get('/logout', [IndexController::class, 'logout']);
 Route::get('/mypage', [MypageController::class, 'index'])->name('mypage.index');
 Route::get('/mypage/create', [MypageController::class, 'create'])->name('mypage.create');
 Route::post('/mypage/store', [MypageController::class, 'store'])->name('mypage.store');
+
+Route::get('/portfolio', [PortfolioController::class, 'index'])->name('portfolio.index');
+Route::get('/portfolio/create', [PortfolioController::class, 'create'])->name('portfolio.index');
+Route::post('/portfolio/store', [PortfolioController::class, 'store'])->name('portfolio.store');
 
 require __DIR__.'/auth.php';

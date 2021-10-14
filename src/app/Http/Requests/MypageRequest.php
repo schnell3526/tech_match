@@ -34,7 +34,7 @@ class MypageRequest extends FormRequest
             'github_url' => 'nullable',
             'facebook_url' => 'nullable',
             'qita_url'=> 'nullable', 
-
+            'icon_image' => 'image|mimes:jpg,jpeg,png|max:2048'
         ];
     }
 }

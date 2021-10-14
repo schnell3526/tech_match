@@ -55,3 +55,7 @@ make sql
 ```bash
 make help
 ```
+
+DB の確認
+docker-compose exec db bash
+mysql -u $MYSQL_USER -p$MYSQL_PASSWORD $MYSQL_DATABASE

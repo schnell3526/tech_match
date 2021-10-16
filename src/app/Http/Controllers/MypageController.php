@@ -7,7 +7,9 @@ use App\Models\User;
 use App\Models\Engineer;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\MypageRequest;
-use Illuminate\Support\Facades\Auth;
+use Auth;
+
+
 
 class MypageController extends Controller
 {
@@ -19,11 +21,55 @@ class MypageController extends Controller
 
     public function index()
     {
-        return view('users.index');
+        if(!Auth::check())
+        {
+            return redirect("/login");
+        }
+        $id = Auth::id();
+        $user = User::find($id);
+        $engineer = $user->engineer()->first();
+        if(!$engineer)
+        {
+            return redirect("/mypage/create");
+        }
+        $products = $user->products()->get();
+        $tags = $user->tags()->get();
+        $jobs = $user->jobs()->get();
+        $products_image = array();
+         foreach($products as $product)
+         {
+             $image = $product->product_images()->first();
+             
+             $products_image = array_merge($products_image, array($product->title => $image->image_path));
+             
+            
+         }
+
+         return view('userpage', [
+             'user' => $user,
+             'engineer' => $engineer,
+             'products' => $products,
+             'tags' => $tags,
+             'jobs' => $jobs,
+             'products_image' => $products_image,
+
+         ]);
+        
     }
 
     public function create()
     {
+        if(!Auth::check())
+        {
+            return redirect("/login");
+        }
+        $id = Auth::id();
+        $user = User::find($id);
+        
+        if($user->engineer()->first())
+        {
+            return redirect("/mypage/edit");
+        }
         $me = User::get();
         return view('users.create', compact('me'));
     }

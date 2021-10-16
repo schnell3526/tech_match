@@ -13,13 +13,15 @@
                 <div class="w-12 h-1 bg-indigo-500 rounded mt-2 mb-4"></div>
                 <div style="text-align:center">{{ $engineer->age }}歳</div>
                 @if($engineer->gender == 0)
-                <div style="text-align:center">男</div>
+                <div style="text-align:center">男性</div>
                 @else
-                <div style="text-align:center">女</div>
+                <div style="text-align:center">女性</div>
                 @endif
                 @foreach($jobs as $job)
                 <div style="text-align:center">{{$job->name}}</div>
                 @endforeach
+                
+                <div style="text-align:center">{{ $user->email }}</div>
                 
                 @if($engineer->github_url)
                 <a href="{{ $engineer->github_url }}" style="display:inline"><img src="{{ asset('image/icon/github.png') }}" width="60px" height="60px"></a>
@@ -34,14 +36,61 @@
 
             </div>
             </div>
+            
+            
             <div class="sm:w-2/3 sm:pl-8 sm:py-8 sm:border-l border-gray-200 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0 text-center sm:text-left">
-            <p class="leading-relaxed text-lg mb-4">Meggings portland fingerstache lyft, post-ironic fixie man bun banh mi umami everyday carry hexagon locavore direct trade art party. Locavore small batch listicle gastropub farm-to-table lumbersexual salvia messenger bag. Coloring book flannel truffaut craft beer drinking vinegar sartorial, disrupt fashion axe normcore meh butcher. Portland 90's scenester vexillologist forage post-ironic asymmetrical, chartreuse disrupt butcher paleo intelligentsia pabst before they sold out four loko. 3 wolf moon brooklyn.</p>
-            <a class="text-indigo-500 inline-flex items-center">Learn More
-                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
-                <path d="M5 12h14M12 5l7 7-7 7"></path>
-                </svg>
-            </a>
+                @if(Auth::id() == $user->id)
+                    <div>
+                        <span class="beforeballoon-left">
+                            マイページを編集
+                            <div class="balloon-left">
+                                <a href="/mypage/edit">基本情報を編集</a>
+                                <a href="portfolio/edit">製作物を編集</a>
+                            </div>
+                        </span>
+                    </div>
+                @endif
+                <div class="tab-wrap">
+                    <input id="TAB-01" type="radio" name="TAB" class="tab-switch" checked="checked" /><label class="tab-label" for="TAB-01">基本情報</label>
+                    <div class="tab-content">
+                        <div class="skills" style="font-size:20px">
+                            スキルセット
+                                @foreach($tags as $tag)
+                                <div class="skill" style="font-size:15px">
+                                    <li><img src="{{ asset('image' . $tag->icon_path) }}" width="30px" height="30px" style="display:inline;"> {{ $tag->name }}</li>
+                                </div>
+                                @endforeach
+                        </div>
+                        <span><br></span>
+                        @if($engineer->introduction)
+                        <div class="introduction" style="font-size:20px">
+                            自己紹介
+                            <p style="font-size:15px">{{ $engineer->introduction }}</p>
+                        </div>
+                        @endif
+                    </div>
+                    <input id="TAB-02" type="radio" name="TAB" class="tab-switch" /><label class="tab-label" for="TAB-02">製作物</label>
+                    <div class="tab-content">
+                        @if($products)
+                            @foreach($products as $product)
+                            <a href="{{ route('portfolioview', ['id' => $product->id]) }}">
+                                <li>{{ $product->title }}<br>
+                                    <img src="{{ asset('image' . $products_image[$product->title]) }}" width="400px" height="225px">
+                                    <span><br></span>
+                                </li>
+                            </a>
+                            <span><br></span>
+                            @endforeach
+                        @endif
+                    </div>
+                    <input id="TAB-03" type="radio" name="TAB" class="tab-switch" /><label class="tab-label" for="TAB-03">ボタン 3</label>
+                    <div class="tab-content">
+                        コンテンツ 3
+                    </div>
+                </div>
             </div>
+  
+            
         </div>
         </div>
     </div>

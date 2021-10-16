@@ -47,8 +47,16 @@ class IndexController extends Controller
             
             $age = $engineer->age;
             $gender = $engineer->gender;
+
+            $products = $user->products()->get();
+            $images = array();
+            foreach($products as $product)
+            {
+                array_push($images, $product->product_images()->first()->image_path);
+            }
             array_push($usersdata, array('user_id' => $user_id, 'nickname' => $nickname, 'icon_img' => $icon_img,
-                                            'jobs' => $jobs, 'tags' => $tags, 'age' => $age, 'gender' => $gender));
+                                            'jobs' => $jobs, 'tags' => $tags, 'age' => $age, 'gender' => $gender,
+                                         'images' => $images));
 
         }
         $auth = Auth::user();
@@ -110,9 +118,16 @@ class IndexController extends Controller
                     $icon_img = $user->icon_image;
                     $age = $engineer->age;
                     $gender = $engineer->gender;
+                    $products = $user->products()->get();
+                    $images = array();
+                    foreach($products as $product)
+                    {
+                        $images = $images + $product->product_images()->first()->image_path;
+                    }
                     
                     array_push($results, array('user_id' => $user_id, 'nickname' => $nickname, 'icon_img' => $icon_img,
-                                            'jobs' => $jobs, 'tags' => $tags, 'age' => $age, 'gender' => $gender));
+                                            'jobs' => $jobs, 'tags' => $tags, 'age' => $age, 'gender' => $gender,
+                                            'images' => $images));
                 }
             }
             $words = $tmp;
@@ -168,9 +183,16 @@ class IndexController extends Controller
                         $icon_img = $user->icon_image;
                         $age = $engineer->age;
                         $gender = $engineer->gender;
+                        $products = $user->products()->get();
+                        $images = array();
+                        foreach($products as $product)
+                        {
+                            $images = $images + $product->product_images()->first()->image_path;
+                        }
                         
                         array_push($results, array('user_id' => $user_id, 'nickname' => $nickname, 'icon_img' => $icon_img,
-                                                'jobs' => $jobs, 'tags' => $tags, 'age' => $age, 'gender' => $gender));
+                                                'jobs' => $jobs, 'tags' => $tags, 'age' => $age, 'gender' => $gender,
+                                                'images' => $images));
                     }
                 }
             }
@@ -222,9 +244,16 @@ class IndexController extends Controller
                         $icon_img = $user->icon_image;
                         $age = $engineer->age;
                         $gender = $engineer->gender;
+                        $products = $user->products()->get();
+                        $images = array();
+                        foreach($products as $product)
+                        {
+                            $images = $images + $product->product_images()->first()->image_path;
+                        }
                         
                         array_push($results, array('user_id' => $user_id, 'nickname' => $nickname, 'icon_img' => $icon_img,
-                                                'jobs' => $jobs, 'tags' => $tags, 'age' => $age, 'gender' => $gender));
+                                                'jobs' => $jobs, 'tags' => $tags, 'age' => $age, 'gender' => $gender,
+                                                'images' => $images));
                         break;
                     }
                     

@@ -13,10 +13,18 @@ class PortfolioController extends Controller
 {
     public function index()
     {
+        if(!Auth::check())
+        {
+            return redirect("/login");
+        }
         return view('portfolio.index');
     }
     public function create()
     {
+        if(!Auth::check())
+        {
+            return redirect("/login");
+        }
         return view('portfolio.create');
     }
 

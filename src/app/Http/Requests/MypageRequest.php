@@ -24,16 +24,13 @@ class MypageRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:25',
             'nickname' => 'required|string|max:50',
-            'email' => 'nique:users|required|email|max:50',
-            'password' => 'required|min:6|',
             'age' => 'required|integer|between:0,99',
             'gender' => 'required',
             'introduction' => 'required|string|max:1000',
             'github_url' => 'nullable',
             'facebook_url' => 'nullable',
-            'qita_url'=> 'nullable', 
+            'qiita_url'=> 'nullable', 
             'icon_image' => 'image|mimes:jpg,jpeg,png|max:2048'
         ];
     }

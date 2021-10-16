@@ -97,13 +97,16 @@
                                                     <div style="background-color: {{ $tag->color }};color:white;font-size:15px;">{{ $tag->name }}</div><br>
                                                 @endforeach
                                             </div>
+                                            <span>&nbsp;&nbsp;&nbsp;</span>
+                                            
+                                            @if($userdata['images'])
+                                            @foreach($userdata['images'] as $image)
                                             <div class="portfolio">
-                                                @if($userdata['images'])
-                                                @foreach($userdata['images'] as $image)
-                                                    <img src="{{ asset('image' . $image) }}" style="display:inline" width="400px" height="225px">
-                                                @endforeach
-                                                @endif
+                                                <img src="{{ asset('image' . $image) }}" style="display:inline" width="256px" height="144px">
                                             </div>
+                                            @endforeach
+                                            @endif
+                                            
                                         </div>
                                     </a>
                                 </div>

@@ -68,7 +68,7 @@ class MypageController extends Controller
         
         if($user->engineer()->first())
         {
-            return redirect("/mypage/edit");
+            return redirect(route('mypage.edit', ['id' => $id]));
         }
         $me = User::get();
         return view('users.create', compact('me'));

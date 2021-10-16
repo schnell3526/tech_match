@@ -44,7 +44,7 @@
                         <span class="beforeballoon-left">
                             マイページを編集
                             <div class="balloon-left">
-                                <a href="/mypage/edit">基本情報を編集</a>
+                                <a href="{{ route('mypage.edit', ['id' => Auth::id()]) }}">基本情報を編集</a>
                                 <a href="portfolio/edit">製作物を編集</a>
                             </div>
                         </span>

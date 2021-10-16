@@ -122,7 +122,7 @@ class IndexController extends Controller
                     $images = array();
                     foreach($products as $product)
                     {
-                        $images = $images + $product->product_images()->first()->image_path;
+                        array_push($images, $product->product_images()->first()->image_path);
                     }
                     
                     array_push($results, array('user_id' => $user_id, 'nickname' => $nickname, 'icon_img' => $icon_img,
@@ -187,7 +187,7 @@ class IndexController extends Controller
                         $images = array();
                         foreach($products as $product)
                         {
-                            $images = $images + $product->product_images()->first()->image_path;
+                            array_push($images, $product->product_images()->first()->image_path);
                         }
                         
                         array_push($results, array('user_id' => $user_id, 'nickname' => $nickname, 'icon_img' => $icon_img,
@@ -248,7 +248,7 @@ class IndexController extends Controller
                         $images = array();
                         foreach($products as $product)
                         {
-                            $images = $images + $product->product_images()->first()->image_path;
+                            array_push($images, $product->product_images()->first()->image_path);
                         }
                         
                         array_push($results, array('user_id' => $user_id, 'nickname' => $nickname, 'icon_img' => $icon_img,

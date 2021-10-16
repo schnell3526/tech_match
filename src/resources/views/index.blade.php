@@ -66,7 +66,7 @@
                     <div class="container px-5 py-24 mx-auto">
                         <div class="flex flex-wrap -m-2">
                             @foreach($usersdata as $userdata)
-                                <div class="p-2 lg:w-1/2 md:w-1/2 w-full" style="background-color:white;">
+                                <div class="p-2 lg:w-1/1 md:w-1/1 w-full" style="background-color:white;">
                                     <a href="{{ route('userpage.index', ['id' => $userdata['user_id']]) }}">
                                         <div class="h-full flex items-center border-gray-200 border p-4 rounded-lg">
                                             <img src="{{ asset('image' . $userdata['icon_img']) }}" width="40px" height="40px">
@@ -96,6 +96,13 @@
                                                 @foreach($userdata['tags'] as $tag)
                                                     <div style="background-color: {{ $tag->color }};color:white;font-size:15px;">{{ $tag->name }}</div><br>
                                                 @endforeach
+                                            </div>
+                                            <div class="portfolio">
+                                                @if($userdata['images'])
+                                                @foreach($userdata['images'] as $image)
+                                                    <img src="{{ asset('image' . $image) }}" style="display:inline" width="400px" height="225px">
+                                                @endforeach
+                                                @endif
                                             </div>
                                         </div>
                                     </a>

@@ -21,6 +21,8 @@ class DatabaseSeeder extends Seeder
             TagUserTableSeeder::class,
             JobUserTableSeeder::class,
             EngineersTableSeeder::class,
+            ProductsTableSeeder::class,
+            Product_imagesTableSeeder::class,
         ]);
     }
 }

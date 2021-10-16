@@ -113,17 +113,17 @@ a.my-navbar-item:hover {
 .login-user {
     display: inline-block;
 }
-.login-user-data {
+.beforeballoon {
     position: relative;
     cursor: pointer;
     display: inline-block;
 }
-.login-user-data:hover .balloon2 {
+.beforeballoon:hover .balloon2 {
     display: inline-block;
     top: 30px;
-    left: 50px; /*吹き出しの位置の調整*/
+    left: 0px; /*吹き出しの位置の調整*/
 }
-.login-user-data:hover {
+.beforeballoon:hover {
     color: #67a8dd;
 }
 
@@ -146,7 +146,7 @@ a.my-navbar-item:hover {
     content: "";
     position: absolute;
     top: -24px; /*吹き出しの上下の調整*/
-    right: 40%; /*吹き出し口の左右の調整*/
+    right: 60%; /*吹き出し口の左右の調整*/
     border: 15px solid transparent;
     border-top: 20px solid black;
     margin-left: 10px;
@@ -161,4 +161,98 @@ a.my-navbar-item:hover {
     width: 200px;
     height: 200px;
     object-fit: cover;
+}
+
+.tab-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px 0;
+}
+.tab-wrap:after {
+    content: "";
+    width: 100%;
+    height: 3px;
+    background: DeepSkyBlue;
+    display: block;
+    order: -1;
+}
+.tab-label {
+    color: White;
+    background: LightGray;
+    font-weight: bold;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
+    white-space: nowrap;
+    text-align: center;
+    padding: 10px 0.5em;
+    order: -1;
+    position: relative;
+    z-index: 1;
+    cursor: pointer;
+    border-radius: 5px 5px 0 0;
+    flex: 1;
+}
+.tab-label:not(:last-of-type) {
+    margin-right: 5px;
+}
+.tab-content {
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+    opacity: 0;
+}
+/* アクティブなタブ */
+.tab-switch:checked + .tab-label {
+    background: DeepSkyBlue;
+}
+.tab-switch:checked + .tab-label + .tab-content {
+    height: auto;
+    overflow: auto;
+    padding: 15px;
+    opacity: 1;
+    transition: 0.5s opacity;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+}
+/* ラジオボタン非表示 */
+.tab-switch {
+    display: none;
+}
+
+.beforeballoon-left {
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+}
+.beforeballoon-left:hover .balloon-left {
+    display: inline-block;
+    top: -25px;
+    left: 150px; /*吹き出しの位置の調整*/
+}
+.beforeballoon-left:hover {
+    color: #67a8dd;
+}
+
+.balloon-left {
+    position: absolute;
+    display: none;
+    padding: 10px;
+    background-color: black;
+    width: 160px;
+    left: -50%;
+    height: 70px;
+    top: 100%;
+    margin-top: -5px;
+    font-size: 18px;
+    line-height: 0 em;
+    text-align: center;
+}
+
+.balloon-left:before {
+    content: "";
+    position: absolute;
+    top: 20px; /*吹き出し口の上下の調整*/
+    right: 100%; /*吹き出し口の左右の調整*/
+    border: 15px solid transparent;
+    border-top: 20px solid black;
+    margin-left: 10px;
+    transform: rotateZ(90deg);
 }

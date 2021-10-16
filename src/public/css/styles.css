@@ -27,7 +27,6 @@ body {
     color: #67a8dd;
 }
 
-
 .my-navbar-brand:hover,
 a.my-navbar-item:hover {
     color: #ffffff;
@@ -84,8 +83,7 @@ a.my-navbar-item:hover {
     transform: rotateZ(180deg);
 }
 
-.balloon:hover .balloon{
-    
+.balloon:hover .balloon {
 }
 .my-navbar-signin {
     color: #ffffff;
@@ -95,7 +93,7 @@ a.my-navbar-item:hover {
 }
 
 .signin-menu {
-    color:#ffffff;
+    color: #ffffff;
 }
 .signin-menu:hover {
     color: #67a8dd;
@@ -110,7 +108,6 @@ a.my-navbar-item:hover {
     padding: 0 2%;
     margin-bottom: 3rem;
     font-size: 18px;
-    
 }
 
 .login-user {
@@ -156,8 +153,12 @@ a.my-navbar-item:hover {
     transform: rotateZ(180deg);
 }
 
-.balloon:hover .balloon{
-    
+.balloon:hover .balloon {
 }
 
-
+.img_round {
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}

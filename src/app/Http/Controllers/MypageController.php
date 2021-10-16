@@ -61,6 +61,13 @@ class MypageController extends Controller
         {
             return redirect("/login");
         }
+        $id = Auth::id();
+        $user = User::find($id);
+        
+        if($user->engineer()->get())
+        {
+            return redirect("/mypage/edit");
+        }
         $me = User::get();
         return view('users.create', compact('me'));
     }

@@ -79,7 +79,7 @@
                                     <span><br></span>
                                 </li>
                             </a>
-                            <div></div>
+                            <span><br></span>
                             @endforeach
                         @endif
                     </div>

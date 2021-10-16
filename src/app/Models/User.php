@@ -61,7 +61,7 @@ class User extends Authenticatable
 
     public function engineer()
     {
-        return $this->hasOne(Engineer::class);
+        return $this->hasOne('App\Models\Engineer');
     }
 
     public function products()

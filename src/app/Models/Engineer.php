@@ -16,9 +16,12 @@ class Engineer extends Model
         'introduction',
         'github_url',
         'facebook_url',
-        'qita_url'
+        'qiita_url'
     ]; 
-    
 
+    public function user()
+    {
+        return $this->hasOne('App\Models\User');
+    }
     
 }

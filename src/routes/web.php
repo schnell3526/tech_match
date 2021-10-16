@@ -39,9 +39,13 @@ Route::get('/logout', [IndexController::class, 'logout']);
 Route::get('/mypage', [MypageController::class, 'index'])->name('mypage.index');
 Route::get('/mypage/create', [MypageController::class, 'create'])->name('mypage.create');
 Route::post('/mypage/store', [MypageController::class, 'store'])->name('mypage.store');
+Route::get('/mypage/edit/{id}', [MypageController::class, 'edit'])->name('mypage.edit');
+Route::post('/mypage/update/{id}', [MypageController::class, 'update'])->name('mypage.update');
 
 Route::get('/portfolio', [PortfolioController::class, 'index'])->name('portfolio.index');
 Route::get('/portfolio/create', [PortfolioController::class, 'create'])->name('portfolio.index');
 Route::post('/portfolio/store', [PortfolioController::class, 'store'])->name('portfolio.store');
+Route::get('/portfolio/edit/{id}', [PortfolioController::class, 'edit'])->name('portfolio.edit');
+Route::post('/portfolio/update/{id}', [PortfolioController::class, 'update'])->name('portfolio.update');
 
 require __DIR__.'/auth.php';

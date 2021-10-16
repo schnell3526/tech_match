@@ -37,7 +37,7 @@ class IndexController extends Controller
         #userごとに[nickname, icon_img, job_name(複数あるので配列), [tag_name, tag_color](複数あるので配列)]という配列を定義
         foreach($engineers as $engineer)
         {
-            $user = User::find($engineer->id);
+            $user = User::find($engineer->user_id);
             $user_id = $user->id;
             $nickname = $user->nickname;
             $icon_img = $user->icon_image;

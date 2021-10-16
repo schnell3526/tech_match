@@ -35,13 +35,12 @@ class PortfolioController extends Controller
             
             DB::transaction(function () use($request, $id) {
                 $product = Product::create([
-                    'user_id' => 6,
+                    'user_id' => $id,
                     'title' => $request->title,
                     'description' => $request->description,
                     'product_url' => $request->url,
                     'src_url' => $request->src_url,
                 ]);
-
                     foreach ($request->file('image') as $file) {
                         $fileName = uniqid(rand().'_');
                         $extension = $file->extension();
@@ -59,7 +58,23 @@ class PortfolioController extends Controller
             Log::error($e);
             throw $e;
         }
-
         return redirect()->route('portfolio.index');
+    }
+
+    
+    public function edit($id)
+    {
+        $mypage = User::findOrFail($id)->enginner;
+        dd($mypage);
+        return view('mypage.edit', compact('mypage'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $mypage = User::find($request->id);
+        $mypage->title = $request->title;
+
+        $mypage->save();
+        return redirect('mypage.index');
     }
 }

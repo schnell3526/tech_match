@@ -8,8 +8,6 @@
                     <div class="p-6 bg-white border-b border-gray-200">
                         <div class="error_messages">
 
-                           
-
                             
                             @if($error2)
                                 {{ $error2 }}<br>

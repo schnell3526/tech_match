@@ -35,10 +35,10 @@
       
     </nav>
       <nav class="login-user">
-        <span class="login-user-data">
+        <span class="beforeballoon">
           <img src="{{ asset('image'. Auth::user()->icon_image) }}" width="30px" height="30px" style="display:inline">: {{ Auth::user()->nickname }}
             <div class="balloon2">
-              <a class="mypage" href="/{{ Auth::id() }}/view">マイページ</a><br>
+              <a class="mypage" href="/mypage">マイページ</a><br>
               <a class="logout" href="/logout">ログアウト</a>
             </div>
         </span>

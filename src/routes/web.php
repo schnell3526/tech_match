@@ -30,6 +30,7 @@ Route::get('/index', [IndexController::class, 'index'])->name('index');
 Route::get('/search', [IndexController::class, 'search'])->name('search');
 
 Route::get('/{id}/view', [UserpageController::class, 'index'])->name('userpage.index');
+Route::get('/{id}/portfolio', [PortfolioviewController::class, 'index'])->name('portfolioview');
 
 
 Route::get('/logout', [IndexController::class, 'logout']);

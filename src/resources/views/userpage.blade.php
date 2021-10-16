@@ -21,6 +21,8 @@
                 <div style="text-align:center">{{$job->name}}</div>
                 @endforeach
                 
+                <div style="text-align:center">{{ $user->email }}</div>
+                
                 @if($engineer->github_url)
                 <a href="{{ $engineer->github_url }}" style="display:inline"><img src="{{ asset('image/icon/github.png') }}" width="60px" height="60px"></a>
                 @endif
@@ -34,7 +36,20 @@
 
             </div>
             </div>
+            
+            
             <div class="sm:w-2/3 sm:pl-8 sm:py-8 sm:border-l border-gray-200 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0 text-center sm:text-left">
+                @if(Auth::id() == $user->id)
+                    <div>
+                        <span class="beforeballoon-left">
+                            マイページを編集
+                            <div class="balloon-left">
+                                <a href="/mypage/edit">基本情報を編集</a>
+                                <a href="portfolio/edit">製作物を編集</a>
+                            </div>
+                        </span>
+                    </div>
+                @endif
                 <div class="tab-wrap">
                     <input id="TAB-01" type="radio" name="TAB" class="tab-switch" checked="checked" /><label class="tab-label" for="TAB-01">基本情報</label>
                     <div class="tab-content">
@@ -58,18 +73,13 @@
                     <div class="tab-content">
                         @if($products)
                             @foreach($products as $product)
+                            <a href="{{ route('portfolioview', ['id' => $product->id]) }}">
                                 <li>{{ $product->title }}<br>
-                                    製作物のurl: {{ $product->product_url }}
-                                    ソースコード: {{ $product->src_url }}
-                                    @foreach($products_images[$product->title] as $images)
-                                        @foreach($images as $image)
-                                            <img src="{{ asset('image' . $image) }}" style="display:inline;">
-                                        @endforeach
-                                    @endforeach
+                                    <img src="{{ asset('image' . $products_image[$product->title]) }}" width="400px" height="225px">
                                     <span><br></span>
-                                    description:
-                                    <p>{{ $product->description }}</p>
                                 </li>
+                            </a>
+                            <div></div>
                             @endforeach
                         @endif
                     </div>

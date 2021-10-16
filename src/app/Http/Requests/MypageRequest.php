@@ -26,7 +26,7 @@ class MypageRequest extends FormRequest
         return [
             'name' => 'required|string|max:25',
             'nickname' => 'required|string|max:50',
-            'email' => 'nique:users|required|email|max:50',
+            'email' => 'unique:users|required|email|max:50',
             'password' => 'required|min:6|',
             'age' => 'required|integer|between:0,99',
             'gender' => 'required',

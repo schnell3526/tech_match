@@ -66,7 +66,7 @@ class MypageController extends Controller
         $id = Auth::id();
         $user = User::find($id);
         
-        if($user->engineer()->get())
+        if($user->engineer()->first())
         {
             return redirect("/mypage/edit");
         }

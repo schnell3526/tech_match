@@ -8,6 +8,7 @@ use App\Models\Engineer;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\MypageRequest;
 use App\Models\Job;
+use App\Models\Tag;
 use Illuminate\Support\Facades\Auth;
 use Exception;
 use Illuminate\Support\Facades\Log;
@@ -121,22 +122,30 @@ class MypageController extends Controller
         return redirect()->route('mypage.index');
     }
 
+    // 編集画面の表示
     public function edit($id)
     {
         // ユーザー情報の取得
-        $mypage = User::with(['engineer', 'jobs'])->find($id);
-
+        $mypage = User::with(['engineer', 'jobs', 'tags'])->find($id);
         // 全職種を取得
-        $regestered_jobs = Job::all();
+        $all_jobs = Job::all();
+        // 全タグを取得
+        $all_tags = Tag::all();
 
-        // 設定済職業を配列に格納
+        // 自身の設定済み職業を配列に格納
         $my_jobs = array();
         foreach ($mypage->jobs as $job){
             $my_jobs[] = $job->name;
         }
-        Log::debug(print_r($my_jobs, true));
+
+        // 自身の設定済みタグを配列に格納
+        $my_tags = array();
+        foreach ($mypage->tags as $tag){
+            $my_tags[] = $tag->name;
+        }
+
         // compact()でviewに変数を渡せる。
-        return view('users.edit', compact('mypage', 'regestered_jobs', 'my_jobs'));
+        return view('users.edit', compact('mypage', 'all_jobs', 'my_jobs', 'all_tags', 'my_tags'));
     }
 
     // users及びengineersテーブルの更新
@@ -174,6 +183,9 @@ class MypageController extends Controller
 
                 // job_userテーブルを変更
                 $mypage->jobs()->sync($request->job_ids);
+
+                // tag_userテーブルを変更
+                $mypage->tags()->sync($request->tag_ids);
 
                 // 変更を保存
                 $mypage->save();

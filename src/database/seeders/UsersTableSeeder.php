@@ -26,9 +26,9 @@ class UsersTableSeeder extends Seeder
         );
         $array[] = 
         array(
-            'name'=>'ichiro',
+            'name'=>'山田太郎',
             'email'=>'ichiro@gmail.com',
-            'nickname'=>'イチロー'
+            'nickname'=>'山田太郎'
         );
 
         foreach ($array as $value) {
@@ -41,14 +41,5 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => Carbon::now(),
             ]);
         }
-        // DB::table('users')->insert([
-        //     'name' => 'codegym',
-        //     'email' => 'codegym@gmail.com',
-        //     'nickname' => 'codegym',
-        //     'password' => Hash::make('password'),
-        //     'created_at' => Carbon::now(),
-        //     'updated_at' => Carbon::now(),
-        // ]);
-
     }
 }

@@ -8,7 +8,7 @@ use App\Models\Job;
 use App\Models\Tag;
 use App\Models\Engineer;
 use App\Http\Requests\Search;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 function double_explode($word1, $word2, $str) {
     $return = array();

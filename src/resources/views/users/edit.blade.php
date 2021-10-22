@@ -8,7 +8,6 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-
                 <div class="p-6 bg-white border-b border-gray-200">
                     <x-auth-validation-errors class="mb-4" :errors="$errors" />
                     <form method="post" action="{{ route('mypage.update') }}" enctype="multipart/form-data">
@@ -56,8 +55,15 @@
                             <div class="p-2 w-1/2 mx-auto">
                                 <label for="gender" class="leading-7 text-sm text-gray-600">性別</label>
                                 <div class="relative flex justify-around">
-                                    <div><input type="radio" name="gender" value="1" class="mr-2" checked>男性</div>
-                                    <div><input type="radio" name="gender" value="2" class="mr-2">女性</div>
+                                    @if($mypage->engineer->gender == 0)
+                                    <!-- 男性の場合 -->
+                                    <div><input type="radio" name="gender" value="0" class="mr-2" checked>男性</div>
+                                    <div><input type="radio" name="gender" value="1" class="mr-2">女性</div>
+                                    @else
+                                    <!-- 女性の場合 -->
+                                    <div><input type="radio" name="gender" value="0" class="mr-2">男性</div>
+                                    <div><input type="radio" name="gender" value="1" class="mr-2" checked>女性</div>
+                                    @endif
                                 </div>
                             </div>
 
@@ -96,7 +102,7 @@
                             <!-- Qiita -->
                             <div class="p-2 w-1/2 mx-auto">
                                 <div class="relative">
-                                    <label for="qita_url" class="leading-7 text-sm text-gray-600">Qita_URL 　<span
+                                    <label for="qiita_url" class="leading-7 text-sm text-gray-600">Qita_URL 　<span
                                             class="text-red-600">※必須</span></label>
                                     <input type="text" id="qiita_url" name="qiita_url"
                                         value="{{ $mypage->engineer->qiita_url }}" required
@@ -107,12 +113,28 @@
                             <!-- 職業 -->
                             <div class="p-2 w-1/2 mx-auto">
                                 <div class="relative">
-                                    <label for="job" class="leading-7 text-sm text-gray-600">職業　<span
+                                    <label for="jobs" class="leading-7 text-sm text-gray-600">職業　<span
                                             class="text-red-600">※必須</span></label>
-                                    <select name="job" id="job"
-                                        class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                                        <option value="enginer">エンジニア</option>
-                                    </select>
+                                    @foreach($regestered_jobs as $regestered_job)
+                                    <div>
+                                        @if(in_array($regestered_job->name, $my_jobs))
+                                        <input type="checkbox" id="jobs" name="job_ids[]"
+                                            value="{{ $regestered_job->id }}" checked>
+                                        @else
+                                        <input type="checkbox" id="jobs" name="job_ids[]"
+                                            value="{{ $regestered_job->id }}">
+                                        @endif
+                                        <label for="{{ $regestered_job->name }}">{{ $regestered_job->name }}</label>
+                                    </div>
+                                    @endforeach
+                                </div>
+                            </div>
+
+                            <!-- 職業 -->
+                            <div class="p-2 w-1/2 mx-auto">
+                                <label for="job" class="leading-7 text-sm text-gray-600">職業 </label>
+                                <div class="relative flex justify-around">
+
                                 </div>
                             </div>
 
@@ -128,7 +150,7 @@
                                 </div>
                             </div>
 
-							<!-- ボタン -->
+                            <!-- ボタン -->
                             <div class="p-2 w-full flex justify-around mt-4">
                                 <button type="button" onclick="location.href='{{ route('mypage.index') }}'"
                                     class="bg-gray-200 border-0 py-2 px-8 focus:outline-none hover:bg-gray-400 rounded text-lg">戻る</button>

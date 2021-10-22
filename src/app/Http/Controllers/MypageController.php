@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Engineer;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\MypageRequest;
+use App\Models\Job;
 use Illuminate\Support\Facades\Auth;
 use Exception;
 use Illuminate\Support\Facades\Log;
@@ -122,15 +123,26 @@ class MypageController extends Controller
 
     public function edit($id)
     {
-        $mypage = User::with('engineer')->find($id);
-        // Log::debug($mypage->id);
+        // ユーザー情報の取得
+        $mypage = User::with(['engineer', 'jobs'])->find($id);
+
+        // 全職種を取得
+        $regestered_jobs = Job::all();
+
+        // 設定済職業を配列に格納
+        $my_jobs = array();
+        foreach ($mypage->jobs as $job){
+            $my_jobs[] = $job->name;
+        }
+        Log::debug(print_r($my_jobs, true));
         // compact()でviewに変数を渡せる。
-        return view('users.edit', compact('mypage'));
+        return view('users.edit', compact('mypage', 'regestered_jobs', 'my_jobs'));
     }
 
     // users及びengineersテーブルの更新
     public function update(Request $request)
     {
+        // Log::debug(print_r($request->jobs, true));
         try {
             if(!empty($request->icon_image)) {
                 // icon_imageが設定されている場合の処理
@@ -146,7 +158,7 @@ class MypageController extends Controller
             DB::transaction(function () use($request, $fileNameToStore) {
                 // Eager Loading
                 // https://readouble.com/laravel/8.x/ja/eloquent-relationships.html?#eager-loading
-                $mypage = User::with('engineer')->find(Auth::id());
+                $mypage = User::with(['engineer', 'jobs'])->find(Auth::id());
 
                 // usersテーブルを変更(表示名、アイコン画像)
                 $mypage->nickname = $request->nickname;
@@ -159,6 +171,9 @@ class MypageController extends Controller
                 $mypage->engineer->github_url = $request->github_url;
                 $mypage->engineer->facebook_url = $request->facebook_url;
                 $mypage->engineer->qiita_url = $request->qiita_url;
+
+                // job_userテーブルを変更
+                $mypage->jobs()->sync($request->job_ids);
 
                 // 変更を保存
                 $mypage->save();

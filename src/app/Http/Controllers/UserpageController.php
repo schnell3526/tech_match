@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 
-
+// デバッグ用
+use Illuminate\Support\Facades\Log;
 
 class UserpageController extends Controller
 {
@@ -24,10 +25,7 @@ class UserpageController extends Controller
          foreach($products as $product)
          {
              $image = $product->product_images()->first();
-             
              $products_image = array_merge($products_image, array($product->title => $image->image_path));
-             
-            
          }
 
          return view('userpage', [
@@ -37,7 +35,6 @@ class UserpageController extends Controller
              'tags' => $tags,
              'jobs' => $jobs,
              'products_image' => $products_image,
-
          ]);
     }
 }

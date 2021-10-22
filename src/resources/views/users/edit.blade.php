@@ -115,26 +115,18 @@
                                 <div class="relative">
                                     <label for="jobs" class="leading-7 text-sm text-gray-600">職業　<span
                                             class="text-red-600">※必須</span></label>
-                                    @foreach($regestered_jobs as $regestered_job)
+                                    @foreach($all_jobs as $all_job)
                                     <div>
-                                        @if(in_array($regestered_job->name, $my_jobs))
+                                        @if(in_array($all_job->name, $my_jobs))
                                         <input type="checkbox" id="jobs" name="job_ids[]"
-                                            value="{{ $regestered_job->id }}" checked>
+                                            value="{{ $all_job->id }}" checked>
                                         @else
                                         <input type="checkbox" id="jobs" name="job_ids[]"
-                                            value="{{ $regestered_job->id }}">
+                                            value="{{ $all_job->id }}">
                                         @endif
-                                        <label for="{{ $regestered_job->name }}">{{ $regestered_job->name }}</label>
+                                        <label for="{{ $all_job->name }}">{{ $all_job->name }}</label>
                                     </div>
                                     @endforeach
-                                </div>
-                            </div>
-
-                            <!-- 職業 -->
-                            <div class="p-2 w-1/2 mx-auto">
-                                <label for="job" class="leading-7 text-sm text-gray-600">職業 </label>
-                                <div class="relative flex justify-around">
-
                                 </div>
                             </div>
 
@@ -143,10 +135,18 @@
                                 <div class="relative">
                                     <label for="skill" class="leading-7 text-sm text-gray-600">スキル　<span
                                             class="text-red-600">※必須</span></label>
-                                    <select name="skill" id="skill"
-                                        class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                                        <option value="php">PHP</option>
-                                    </select>
+                                    @foreach($all_tags as $all_tag)
+                                    <div>
+                                        @if(in_array($all_tag->name, $my_tags))
+                                        <input type="checkbox" id="tags" name="tag_ids[]"
+                                            value="{{ $all_tag->id }}" checked>
+                                        @else
+                                        <input type="checkbox" id="tags" name="tag_ids[]"
+                                            value="{{ $all_tag->id }}">
+                                        @endif
+                                        <label for="{{ $all_tag->name }}">{{ $all_tag->name }}</label>
+                                    </div>
+                                    @endforeach
                                 </div>
                             </div>
 

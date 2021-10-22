@@ -135,10 +135,6 @@
                                 <div class="relative">
                                     <label for="skill" class="leading-7 text-sm text-gray-600">スキル　<span
                                             class="text-red-600">※必須</span></label>
-                                    <!-- <select name="skill" id="skill"
-                                        class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                                        <option value="php">PHP</option>
-                                    </select> -->
                                     @foreach($all_tags as $all_tag)
                                     <div>
                                         @if(in_array($all_tag->name, $my_tags))

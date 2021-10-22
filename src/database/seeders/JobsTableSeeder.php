@@ -14,11 +14,13 @@ class JobsTableSeeder extends Seeder
      */
     public function run()
     {
-        $jobs_name = ['バックエンドエンジニア', 'フロントエンドエンジニア', 'データサイエンティスト'];
-        foreach($jobs_name as $job_name)
+        $job_names = ['バックエンドエンジニア', 'フロントエンドエンジニア', 'データサイエンティスト', 'インフラエンジニア', 
+                        '機械学習エンジニア', 'セールスエンジニア', 'リサーチエンジニア', 'データエンジ二ア', 'webデザイナー',
+                        'ネットワークエンジニア', 'その他'];
+        foreach($job_names as $job_name)
         {
             DB::table('jobs')->insert([
-            'name' => $job_name,
+                'name' => $job_name,
             ]);
         }
     }

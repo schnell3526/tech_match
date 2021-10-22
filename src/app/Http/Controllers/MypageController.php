@@ -7,7 +7,9 @@ use App\Models\User;
 use App\Models\Engineer;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\MypageRequest;
-use Auth;
+use Illuminate\Support\Facades\Auth;
+use Exception;
+use Illuminate\Support\Facades\Log;
 
 
 
@@ -93,11 +95,6 @@ class MypageController extends Controller
             $fileNameToStore = $fileName.'.'.$extention;
             $request->file('icon_image')->storeAs('public/icon', $fileNameToStore);
             DB::transaction(function () use($request, $fileNameToStore) {
-                // $user = User::update([
-                //     'icon_image' => $request->icon_image,
-                //     'nickname' => $request->nickname,
-                // ]);
-
                 $id = Auth::id();
                 $user = User::find($id);
                 $user->icon_image = $fileNameToStore;
@@ -115,7 +112,7 @@ class MypageController extends Controller
                 ]);
             }, 2);
         
-        }catch(Throwable $e) {
+        }catch(Exception $e) {
             Log::error($e);
             throw $e;
         }
@@ -126,43 +123,53 @@ class MypageController extends Controller
     public function edit($id)
     {
         $mypage = User::with('engineer')->find($id);
+        // Log::debug($mypage->id);
+        // compact()でviewに変数を渡せる。
         return view('users.edit', compact('mypage'));
     }
 
-    public function update(Request $request, $id)
+    // users及びengineersテーブルの更新
+    public function update(Request $request)
     {
         try {
             if(!empty($request->icon_image)) {
+                // icon_imageが設定されている場合の処理
+                // public/iconに$fileNameToStoreという名前で画像を保存
                 $fileName = uniqid(rand().'_');
                 $extention = $request->file('icon_image')->extension();
                 $fileNameToStore = $fileName.'.'.$extention;
                 $request->file('icon_image')->storeAs('public/icon', $fileNameToStore);
-                
-            } 
+            }
 
-            DB::transaction(function () use($request, $fileNameToStore, $id) {
-                $mypage = User::with('engineer')->find($request->id);
+            // DB操作を一まとめにするための処理
+            // https://readouble.com/laravel/8.x/ja/database.html?#database-transactions
+            DB::transaction(function () use($request, $fileNameToStore) {
+                // Eager Loading
+                // https://readouble.com/laravel/8.x/ja/eloquent-relationships.html?#eager-loading
+                $mypage = User::with('engineer')->find(Auth::id());
+
+                // usersテーブルを変更(表示名、アイコン画像)
                 $mypage->nickname = $request->nickname;
                 $mypage->icon_image = $fileNameToStore;
-        
-                $mypage->save();
 
-                Engineer::upsert([
-                    'user_id' => $id,
-                    'age' => $request->age,
-                    'gender' => $request->gender,
-                    'introduction' => $request->introduction,
-                    'github_url' => $request->github_url,
-                    'facebook_url' => $request->facebook_url,
-                    'qiita_url' => $request->qita_url,
-                ]);
+                // engineersテーブルを変更(年齢、性別、自己紹介、github、facebook、qiita)
+                $mypage->engineer->age = $request->age;
+                $mypage->engineer->gender = $request->gender;
+                $mypage->engineer->introduction = $request->introduction;
+                $mypage->engineer->github_url = $request->github_url;
+                $mypage->engineer->facebook_url = $request->facebook_url;
+                $mypage->engineer->qiita_url = $request->qiita_url;
+
+                // 変更を保存
+                $mypage->save();
+                $mypage->engineer->save();
             }, 2);
-        } catch(Throwable $e) {
+        } catch(Exception $e) {
+            // DB更新失敗時の例外処理
             Log::error($e);
             throw $e;
         }
-
-        return redirect('mypage.index');
+        // マイページへリダイレクト
+        return redirect()->route('mypage.index');
     }
-    
 }

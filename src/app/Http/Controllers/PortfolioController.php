@@ -19,7 +19,7 @@ class PortfolioController extends Controller
         {
             return redirect("/login");
         }
-        return view('portfolio.index');
+        return redirect('/mypage');
     }
     public function create()
     {

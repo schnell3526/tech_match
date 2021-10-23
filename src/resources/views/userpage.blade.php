@@ -50,6 +50,13 @@
                         </span>
                     </div>
                 @endif
+                @if(!$mypage)
+                    <div>
+                        <a href="{{ route('chat.index', ['id' => $user->id]) }}" style="color:blue">
+                            メッセージを送信
+                        </a>
+                    </div>
+                @endif
                 <div class="tab-wrap">
                     <input id="TAB-01" type="radio" name="TAB" class="tab-switch" checked="checked" /><label class="tab-label" for="TAB-01">基本情報</label>
                     <div class="tab-content">

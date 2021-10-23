@@ -41,8 +41,8 @@
                       <div class="p-2 w-1/2 mx-auto">
                         <label for="gender" class="leading-7 text-sm text-gray-600">性別</label>
                         <div class="relative flex justify-around">
-                          <div><input type="radio" name="gender" value="1" class="mr-2" checked>男性</div>
-                          <div><input type="radio" name="gender" value="2" class="mr-2" >女性</div>
+                          <div><input type="radio" name="gender" value="0" class="mr-2" checked>男性</div>
+                          <div><input type="radio" name="gender" value="1" class="mr-2" >女性</div>
                         </div>
                       </div>  
                       <div class="p-2 w-1/2 mx-auto">

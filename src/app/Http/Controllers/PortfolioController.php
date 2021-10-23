@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
 use App\Models\Product_image;
 use App\Models\User;
+
 class PortfolioController extends Controller
 {
     public function index()
@@ -69,9 +70,8 @@ class PortfolioController extends Controller
     
     public function edit($id)
     {
-        $mypage = User::findOrFail($id);
-        dd($mypage);
-        return view('mypage.edit', compact('mypage'));
+        $portfolio = product::where('user_id' , $id)->get();
+        return view('portfolio.edit', compact('portfolio'));
     }
 
     public function update(Request $request, $id)

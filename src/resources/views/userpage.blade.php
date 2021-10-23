@@ -45,7 +45,7 @@
                             マイページを編集
                             <div class="balloon-left">
                                 <a href="{{ route('mypage.edit', ['id' => Auth::id()]) }}">基本情報を編集</a>
-                                <a href="portfolio/edit">製作物を編集</a>
+                                <a href="{{ route('portfolio.edit', ['id' => Auth::id()]) }}">製作物を編集</a>
                             </div>
                         </span>
                     </div>
@@ -75,7 +75,7 @@
                             @foreach($products as $product)
                             <a href="{{ route('portfolioview', ['id' => $product->id]) }}">
                                 <li>{{ $product->title }}<br>
-                                    <img src="{{ asset('image' . $products_image["'" . $product->id . "'"]) }}" width="400px" height="225px">
+                                    <img src="{{ asset('storage/portfolio/' . $products_image["'" . $product->id . "'"]) }}" width="400px" height="225px">
                                     <span><br></span>
                                 </li>
                             </a>
@@ -84,7 +84,7 @@
                         @endif
                     </div>
                     @if($mypage)
-                    <input id="TAB-03" type="radio" name="TAB" class="tab-switch" /><label class="tab-label" for="TAB-03">チャット</label>
+                    <input id="TAB-03" type="radio" name="TAB" class="tab-switch" /><label class="tab-label" for="TAB-03">メッセージ</label>
                     <div class="tab-content">
                         @foreach($chat_users as $chat_user)
                             <a href="{{ route('chat.index', ['id' => $chat_user->id]) }}">

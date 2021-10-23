@@ -303,10 +303,7 @@ a.my-navbar-item:hover {
 	border-radius:50%;
 	background-size:cover;
 }
-.talk .talk_right {
-    float:right;
-    margin-top:1em;
-}
+
 .talk .talk_right p:after { /* 右ふきだしの右三角を描画 */
 	content: '';
 	position:absolute;

@@ -5,6 +5,9 @@
       <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">{{ $product->title }}</h1>
       <p class="lg:w-2/3 mx-auto leading-relaxed text-base">{{ $product->description }}</p>
       <div>製作者: <a href="{{ route('userpage.index', ['id' => $user->id]) }}">{{ $user->nickname }}</a></div>
+      @if($product->user_id == Auth::id())
+      <div style="color:blue;"><a href="{{ route('portfolio.edit', ['id' => Auth::id()]) }}">編集</a></div><br>
+      @endif
     </div>
     <div style="text-align:center;">
       <a href="{{ $product->product_url }}" style="color:red;">製作物のページはこちら</a>
@@ -17,7 +20,7 @@
       @foreach($images as $image)
       <div class="lg:w-1/2 sm:w-1/2 p-4">
         
-          <img alt="gallery" src="{{ asset('image' . $image->image_path) }}">
+          <img alt="gallery" src="{{ asset('storage/portfolio/' . $image->image_path) }}">
           
         
       </div>

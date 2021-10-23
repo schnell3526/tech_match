@@ -8,7 +8,7 @@ use App\Models\Engineer;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\MypageRequest;
 use App\Models\Message;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\Job;
 use App\Models\Tag;
@@ -172,12 +172,12 @@ class MypageController extends Controller
                 $user->icon_image = $fileNameToStore;
                 $user->nickname = $request->nickname;
                 $user->save();
-                
-                User::create([
+
+                User::where('id', Auth::id())->update([
                     'nickname' => $request->nickname,
                     'icon_image' => $fileNameToStore,
                 ]);
-
+                
                 Engineer::create([
                     'user_id' => Auth::id(),
                     'age' => $request->age,

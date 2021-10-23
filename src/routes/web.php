@@ -43,7 +43,7 @@ Route::get('/mypage', [MypageController::class, 'index'])->name('mypage.index');
 Route::get('/mypage/create', [MypageController::class, 'create'])->name('mypage.create');
 Route::post('/mypage/store', [MypageController::class, 'store'])->name('mypage.store');
 Route::get('/mypage/edit/{id}', [MypageController::class, 'edit'])->name('mypage.edit');
-Route::post('/mypage/update/{id}', [MypageController::class, 'update'])->name('mypage.update');
+Route::post('/mypage/update/', [MypageController::class, 'update'])->name('mypage.update');
 
 Route::get('/portfolio', [PortfolioController::class, 'index'])->name('portfolio.index');
 Route::get('/portfolio/create', [PortfolioController::class, 'create'])->name('portfolio.index');

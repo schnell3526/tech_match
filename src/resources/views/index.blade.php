@@ -102,7 +102,7 @@
                                             @if($userdata['images'])
                                             @foreach($userdata['images'] as $image)
                                             <div class="portfolio">
-                                                <img src="{{ asset('image' . $image) }}" style="display:inline" width="256px" height="144px">
+                                                <img src="{{ asset('storage/portfolio/' . $image) }}" style="display:inline" width="256px" height="144px">
                                             </div>
                                             @endforeach
                                             @endif

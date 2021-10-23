@@ -37,32 +37,36 @@ class PortfolioController extends Controller
         return view('portfolio.create');
     }
 
-    public function store(PortfolioRequest $request)
+    public function store(Request $request)
     {
+        // dd($request->image);
         $id = Auth::id();
         try{
-            
-            DB::transaction(function () use($request, $id) {
-                $product = Product::create([
-                    'user_id' => $id,
-                    'title' => $request->title,
-                    'description' => $request->description,
-                    'product_url' => $request->url,
-                    'src_url' => $request->src_url,
-                ]);
-                    foreach ($request->file('image') as $file) {
-                        $fileName = uniqid(rand().'_');
-                        $extension = $file->extension();
-                        $fileNameToStore = $fileName.'.'.$extension;
-                        $resizedImage = InterventionImage::make($file)->resize(1920, 1080)->encode();
-                        Storage::put('public/portfolio/'.$fileNameToStore, $resizedImage);
-                        Product_image::create([
-                            'product_id' => $product->id,
-                            'image_path' => $fileNameToStore,
+            foreach($request->item as $item) {
+                    DB::transaction(function () use($item, $request, $id) {
+                        $product = Product::create([
+                            'user_id' => $id,
+                            'title' => $item['title'],
+                            'description' => $item['description'],
+                            'product_url' => $item['url'],
+                            'src_url' => $item['src_url'],
                         ]);
-                    }
-                
-            }, 2);
+                        $i = 0;
+                            foreach ($request->file('image') as $file) {
+                                $fileName = uniqid(rand().'_');
+                                $extension = $file[$i]->extension();
+                                $fileNameToStore = $fileName.'.'.$extension;
+                                $resizedImage = InterventionImage::make($file[$i])->resize(1920, 1080)->encode();
+                                Storage::put('public/portfolio/'.$fileNameToStore, $resizedImage);
+                                Product_image::create([
+                                    'product_id' => $product->id,
+                                    'image_path' => $fileNameToStore,
+                                ]);
+                                $i++;
+                            }
+                    }, 2);
+            }
+
         } catch(Throwable $e) {
             Log::error($e);
             throw $e;
@@ -73,8 +77,10 @@ class PortfolioController extends Controller
     
     public function edit($id)
     {
+
         $mypage = User::findOrFail($id)->engineer;
         // dd($mypage);
+
         return view('mypage.edit', compact('mypage'));
     }
 

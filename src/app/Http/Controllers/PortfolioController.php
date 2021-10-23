@@ -78,9 +78,18 @@ class PortfolioController extends Controller
     
     public function edit($id)
     {
+        //ポートフォリオテーブルがなければcreateにリダイレクト
+        $user = User::find($id);
+        $product = $user->products()->first();
+        if(!$product)
+        {
+            return redirect("/portfolio/create");
+        }
         $portfolio = product::where('user_id' , $id)->get();
         $user_id = Auth::id();
         return view('portfolio.edit', compact('portfolio'), compact('user_id'));
+
+
 
     }
 

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
 use App\Models\Product_image;
 use App\Models\User;
+
 class PortfolioController extends Controller
 {
     public function index()
@@ -25,6 +26,13 @@ class PortfolioController extends Controller
         if(!Auth::check())
         {
             return redirect("/login");
+        }
+        $id = Auth::id();
+        $user = User::find($id);
+        
+        if($user->products()->first())
+        {
+            return redirect(route('portfolio.edit', ['id' => Auth::id()]));
         }
         return view('portfolio.create');
     }
@@ -69,8 +77,10 @@ class PortfolioController extends Controller
     
     public function edit($id)
     {
-        $mypage = User::findOrFail($id);
-        dd($mypage);
+
+        $mypage = User::findOrFail($id)->engineer;
+        // dd($mypage);
+
         return view('mypage.edit', compact('mypage'));
     }
 

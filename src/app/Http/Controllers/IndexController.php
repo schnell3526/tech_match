@@ -8,7 +8,7 @@ use App\Models\Job;
 use App\Models\Tag;
 use App\Models\Engineer;
 use App\Http\Requests\Search;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 function double_explode($word1, $word2, $str) {
     $return = array();
@@ -122,7 +122,7 @@ class IndexController extends Controller
                     $images = array();
                     foreach($products as $product)
                     {
-                        $images = $images + $product->product_images()->first()->image_path;
+                        array_push($images, $product->product_images()->first()->image_path);
                     }
                     
                     array_push($results, array('user_id' => $user_id, 'nickname' => $nickname, 'icon_img' => $icon_img,
@@ -187,7 +187,7 @@ class IndexController extends Controller
                         $images = array();
                         foreach($products as $product)
                         {
-                            $images = $images + $product->product_images()->first()->image_path;
+                            array_push($images, $product->product_images()->first()->image_path);
                         }
                         
                         array_push($results, array('user_id' => $user_id, 'nickname' => $nickname, 'icon_img' => $icon_img,
@@ -248,7 +248,7 @@ class IndexController extends Controller
                         $images = array();
                         foreach($products as $product)
                         {
-                            $images = $images + $product->product_images()->first()->image_path;
+                            array_push($images, $product->product_images()->first()->image_path);
                         }
                         
                         array_push($results, array('user_id' => $user_id, 'nickname' => $nickname, 'icon_img' => $icon_img,

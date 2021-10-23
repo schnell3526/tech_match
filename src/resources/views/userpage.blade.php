@@ -5,7 +5,7 @@
         <div class="flex flex-col sm:flex-row mt-10">
             <div class="sm:w-1/3 text-center sm:pr-8 sm:py-8">
             <div class="inline-flex items-center justify-center bg-gray-200 text-gray-400">
-            <img src="{{ asset('image' . $user->icon_image) }}" width="40px" height="40px">
+            <img src="{{ asset('storage/icon/' . $user->icon_image) }}" width="40px" height="40px">
             </div>
             
             <div class="flex flex-col items-center text-center justify-center">
@@ -39,12 +39,12 @@
             
             
             <div class="sm:w-2/3 sm:pl-8 sm:py-8 sm:border-l border-gray-200 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0 text-center sm:text-left">
-                @if(Auth::id() == $user->id)
+                @if($mypage)
                     <div>
                         <span class="beforeballoon-left">
                             マイページを編集
                             <div class="balloon-left">
-                                <a href="/mypage/edit">基本情報を編集</a>
+                                <a href="{{ route('mypage.edit', ['id' => Auth::id()]) }}">基本情報を編集</a>
                                 <a href="portfolio/edit">製作物を編集</a>
                             </div>
                         </span>
@@ -75,7 +75,7 @@
                             @foreach($products as $product)
                             <a href="{{ route('portfolioview', ['id' => $product->id]) }}">
                                 <li>{{ $product->title }}<br>
-                                    <img src="{{ asset('image' . $products_image[$product->title]) }}" width="400px" height="225px">
+                                    <img src="{{ asset('image' . $products_image["'" . $product->id . "'"]) }}" width="400px" height="225px">
                                     <span><br></span>
                                 </li>
                             </a>
@@ -83,10 +83,17 @@
                             @endforeach
                         @endif
                     </div>
-                    <input id="TAB-03" type="radio" name="TAB" class="tab-switch" /><label class="tab-label" for="TAB-03">ボタン 3</label>
+                    @if($mypage)
+                    <input id="TAB-03" type="radio" name="TAB" class="tab-switch" /><label class="tab-label" for="TAB-03">チャット</label>
                     <div class="tab-content">
-                        コンテンツ 3
+                        @foreach($chat_users as $chat_user)
+                            <a href="{{ route('chat.index', ['id' => $chat_user->id]) }}">
+                                <img src="{{ asset('storage/icon/' . $chat_user->icon_image) }}" width="30px" height="30px" style="display:inline;">
+                                {{ $chat_user->nickname }}
+                            </a>
+                        @endforeach
                     </div>
+                    @endif
                 </div>
             </div>
   

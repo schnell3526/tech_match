@@ -9,6 +9,8 @@ use App\Http\Controllers\MypageController;
 use App\Http\Controllers\PortfolioController;
 
 use App\Http\Controllers\UserpageController;
+use App\Http\Controllers\PortfolioviewController;
+use App\Http\Controllers\ChatController;
 
 
 
@@ -48,5 +50,8 @@ Route::get('/portfolio/create', [PortfolioController::class, 'create'])->name('p
 Route::post('/portfolio/store', [PortfolioController::class, 'store'])->name('portfolio.store');
 Route::get('/portfolio/edit/{id}', [PortfolioController::class, 'edit'])->name('portfolio.edit');
 Route::post('/portfolio/update/{id}', [PortfolioController::class, 'update'])->name('portfolio.update');
+
+Route::get('/chat/{id}', [ChatController::class, 'index'])->name('chat.index');
+Route::post('/chat/send', [ChatController::class, 'store'])->name('chat.send');
 
 require __DIR__.'/auth.php';

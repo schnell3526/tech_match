@@ -27,6 +27,13 @@ class PortfolioController extends Controller
         {
             return redirect("/login");
         }
+        $id = Auth::id();
+        $user = User::find($id);
+        
+        if($user->products()->first())
+        {
+            return redirect(route('portfolio.edit', ['id' => Auth::id()]));
+        }
         return view('portfolio.create');
     }
 

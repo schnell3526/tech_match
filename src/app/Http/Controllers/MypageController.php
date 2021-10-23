@@ -7,11 +7,15 @@ use App\Models\User;
 use App\Models\Engineer;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\MypageRequest;
+use App\Models\Message;
+use Auth;
+
 use App\Models\Job;
 use App\Models\Tag;
-use Illuminate\Support\Facades\Auth;
+
 use Exception;
 use Illuminate\Support\Facades\Log;
+
 
 
 
@@ -51,6 +55,58 @@ class MypageController extends Controller
         $tags = $user->tags()->get();
         $jobs = $user->jobs()->get();
         $products_image = array();
+
+        foreach($products as $product)
+        {
+            $image = $product->product_images()->first();
+            $product_id = "'" . $product->id . "'";
+            $products_image = array_merge($products_image, array($product_id => $image->image_path));
+        }
+
+        $chat_users_id = array();
+        $messages = Message::where('send_user_id', $id)->get();
+        foreach($messages as $message)
+        {
+            $receive_user = $message->receive_user_id;
+            if(!in_array($receive_user, $chat_users_id))
+            {
+                array_push($chat_users_id, $receive_user);
+            }
+        }
+        $messages = Message::where('receive_user_id', $id)->get();
+        foreach($messages as $message)
+        {
+            $send_user = $message->send_user_id;
+            if(!in_array($send_user, $chat_users_id))
+            {
+                array_push($chat_users_id, $send_user);
+            }
+        }
+        $chat_users = array();
+
+        foreach($chat_users_id as $chat_user_id)
+        {
+            $chat_user = User::find($chat_user_id);
+            array_push($chat_users, $chat_user);
+        }
+
+
+
+
+
+        return view('userpage', [
+            'user' => $user,
+            'engineer' => $engineer,
+            'products' => $products,
+            'tags' => $tags,
+            'jobs' => $jobs,
+            'products_image' => $products_image,
+            'mypage' => true,
+            'chat_users' => $chat_users,
+
+        ]);
+        
+
          foreach($products as $product)
          {
              $image = $product->product_images()->first();
@@ -68,6 +124,7 @@ class MypageController extends Controller
              'jobs' => $jobs,
              'products_image' => $products_image,
          ]);
+
     }
 
     // エンジニア情報の新規登録ページを表示
@@ -84,8 +141,9 @@ class MypageController extends Controller
         
         if($user->engineer()->first())
         {
-            // 登録済みなら編集画面へリダイレクト
-            return redirect("/mypage/edit");
+
+            return redirect(route('mypage.edit', ['id' => $id]));
+
         }
 
         // スキルと職種一覧を取得

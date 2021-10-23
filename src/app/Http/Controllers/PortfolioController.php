@@ -27,6 +27,13 @@ class PortfolioController extends Controller
         {
             return redirect("/login");
         }
+        $id = Auth::id();
+        $user = User::find($id);
+        
+        if($user->products()->first())
+        {
+            return redirect(route('portfolio.edit', ['id' => Auth::id()]));
+        }
         return view('portfolio.create');
     }
 
@@ -70,8 +77,10 @@ class PortfolioController extends Controller
     
     public function edit($id)
     {
+
         $portfolio = product::where('user_id' , $id)->get();
         return view('portfolio.edit', compact('portfolio'));
+
     }
 
     public function update(Request $request, $id)

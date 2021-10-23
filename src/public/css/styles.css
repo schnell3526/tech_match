@@ -256,3 +256,11 @@ a.my-navbar-item:hover {
     margin-left: 10px;
     transform: rotateZ(90deg);
 }
+
+/* ・・・・・・・・・・・・・・portfolio・・・・・・・・・・・・・・・・・・・ */
+.hidden {
+    display: hidden;
+}
+/* .selected {
+    background-color: blue;
+} */

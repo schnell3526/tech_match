@@ -257,6 +257,14 @@ a.my-navbar-item:hover {
     transform: rotateZ(90deg);
 }
 
+
+.hidden {
+    display: hidden;
+}
+/* .selected {
+    background-color: blue;
+} */
+
 .talk {
 	background-color:rgb(113,147,193); /* LINEっぽい背景色 */
 	padding:50px;
@@ -347,4 +355,5 @@ a.my-navbar-item:hover {
 .word-break .break-word{
     word-break: break-word;
 }
+
 

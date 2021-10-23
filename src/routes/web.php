@@ -46,7 +46,7 @@ Route::get('/mypage/edit/{id}', [MypageController::class, 'edit'])->name('mypage
 Route::post('/mypage/update/', [MypageController::class, 'update'])->name('mypage.update');
 
 Route::get('/portfolio', [PortfolioController::class, 'index'])->name('portfolio.index');
-Route::get('/portfolio/create', [PortfolioController::class, 'create'])->name('portfolio.index');
+Route::get('/portfolio/create', [PortfolioController::class, 'create'])->name('portfolio.create');
 Route::post('/portfolio/store', [PortfolioController::class, 'store'])->name('portfolio.store');
 Route::get('/portfolio/edit/{id}', [PortfolioController::class, 'edit'])->name('portfolio.edit');
 Route::post('/portfolio/update/{id}', [PortfolioController::class, 'update'])->name('portfolio.update');

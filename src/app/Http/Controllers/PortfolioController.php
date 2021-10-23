@@ -77,6 +77,13 @@ class PortfolioController extends Controller
     
     public function edit($id)
     {
+        //ポートフォリオテーブルがなければcreateにリダイレクト
+        $user = User::find($id);
+        $product = $user->products()->first();
+        if(!$product)
+        {
+            return redirect("/portfolio/create");
+        }
 
         $mypage = User::findOrFail($id)->engineer;
         // dd($mypage);

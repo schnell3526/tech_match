@@ -18,9 +18,8 @@
             
               <div class="p-6 bg-white border-b border-gray-200">
                 <x-auth-validation-errors class="mb-4" :errors="$errors" /> 
-                <form method="post" action="{{ route('portfolio.store')}}" enctype="multipart/form-data" >
+                <form method="post" action="{{ route('portfolio.update', $user_id)}}" enctype="multipart/form-data" >
                     @csrf
-
                     {{--・・・・・・・・・・・・・ ポートフォリオ１のボタンクリック時に表示するフォーム・・・・・・・・・・・・・ --}}
                     <div class="nohidden" id="1">
                       <h1>portfolio1</h1>
@@ -28,7 +27,7 @@
                         <div class="p-2 w-1/2 mx-auto">
                           <div class="relative">
                             <label for="title" class="leading-7 text-sm text-gray-600">タイトル　<span class="text-red-600">※必須</span></label>
-                            <input type="text" id="title" name="item[0][title]" value="{{ old('title') }}" required class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                            <input type="text" id="title" name="item[0][title]" value="{{$portfolio[0]->title}}" required class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                           </div>
                         </div>
                         <div class="p-2 w-1/2 mx-auto">
@@ -45,19 +44,19 @@
                         <div class="p-2 w-1/2 mx-auto">
                           <div class="relative">
                             <label for="description" class="leading-7 text-sm text-gray-600">説明　<span class="text-red-600">※必須</span></label>
-                            <textarea id="description" name="item[0][description]" rows="10"  required class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">{{ old('description') }}</textarea>
+                            <textarea id="description" name="item[0][description]" rows="10"  required class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">value="{{$portfolio[0]->description}}"</textarea>
                           </div>
                         </div>
                         <div class="p-2 w-1/2 mx-auto">
                           <div class="relative">
                             <label for="url" class="leading-7 text-sm text-gray-600">URL 　<span class="text-red-600">※必須</span></label>
-                            <input type="text" id="url" name="item[0][url]" value="{{ old('url') }}" required class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                            <input type="text" id="url" name="item[0][url]" value="{{$portfolio[0]->product_url}}" required class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                           </div>
                         </div>
                         <div class="p-2 w-1/2 mx-auto">
                           <div class="relative">
                             <label for="src_url" class="leading-7 text-sm text-gray-600">src_url 　<span class="text-red-600">※必須</span></label>
-                            <input type="text" id="src_url" name="item[0][src_url]" value="{{ old('src_url') }}" required class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                            <input type="text" id="src_url" name="item[0][src_url]" value="{{$portfolio[0]->src_url}}" required class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                           </div>
                         </div>
 
@@ -110,7 +109,7 @@
                         <div class="p-2 w-1/2 mx-auto">
                           <div class="relative">
                             <label for="title" class="leading-7 text-sm text-gray-600">タイトル　<span class="text-red-600">※必須</span></label>
-                            <input type="text" id="title" name="item[1][title]" value="{{ old('title') }}" required class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                            <input type="text" id="title" name="item[1][title]" value="{{$portfolio[1]->title}}" required class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                           </div>
                         </div>
                         <div class="p-2 w-1/2 mx-auto">
@@ -127,19 +126,19 @@
                         <div class="p-2 w-1/2 mx-auto">
                           <div class="relative">
                             <label for="description" class="leading-7 text-sm text-gray-600">説明</label>
-                            <textarea id="description" name="item[1][description]" rows="10"   class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">{{ old('description') }}</textarea>
+                            <textarea id="description" name="item[1][description]" rows="10"   class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">{{$portfolio[1]->description}}"</textarea>
                           </div>
                         </div>
                         <div class="p-2 w-1/2 mx-auto">
                           <div class="relative">
                             <label for="url" class="leading-7 text-sm text-gray-600">URL </label>
-                            <input type="text" id="url" name="item[1][url]" value="{{ old('url') }}" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                            <input type="text" id="url" name="item[1][url]" value="{{$portfolio[0]->product_url}}"class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                           </div>
                         </div>
                         <div class="p-2 w-1/2 mx-auto">
                           <div class="relative">
                             <label for="src_url" class="leading-7 text-sm text-gray-600">src_url </label>
-                            <input type="text" id="src_url" name="item[1][src_url]" value="{{ old('src_url') }}" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                            <input type="text" id="src_url" name="item[1][src_url]" value="{{$portfolio[0]->src_url}}"" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                           </div>
                         </div>
 
@@ -191,7 +190,7 @@
                         <div class="p-2 w-1/2 mx-auto">
                           <div class="relative">
                             <label for="title" class="leading-7 text-sm text-gray-600">タイトル</label>
-                            <input type="text" id="title" name="item[2][title]" value="{{ old('title') }}" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                            <input type="text" id="title" name="item[2][title]" value="{{$portfolio[2]->title}}" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                           </div>
                         </div>
                         <div class="p-2 w-1/2 mx-auto">
@@ -208,19 +207,19 @@
                         <div class="p-2 w-1/2 mx-auto">
                           <div class="relative">
                             <label for="description" class="leading-7 text-sm text-gray-600">説明</label>
-                            <textarea id="description" name="item[2][description]" rows="10" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">{{ old('description') }}</textarea>
+                            <textarea id="description" name="item[2][description]" rows="10" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">{{$portfolio[0]->title}}"</textarea>
                           </div>
                         </div>
                         <div class="p-2 w-1/2 mx-auto">
                           <div class="relative">
                             <label for="url" class="leading-7 text-sm text-gray-600">URL </span></label>
-                            <input type="text" id="url" name="item[2][url]" value="{{ old('url') }}" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                            <input type="text" id="url" name="item[2][url]" value="{{$portfolio[2]->product_url}}" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                           </div>
                         </div>
                         <div class="p-2 w-1/2 mx-auto">
                           <div class="relative">
                             <label for="src_url" class="leading-7 text-sm text-gray-600">src_url </label>
-                            <input type="text" id="src_url" name="item[2][src_url]" value="{{ old('src_url') }}" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                            <input type="text" id="src_url" name="item[2][src_url]" value="{{$portfolio[2]->src_url}}" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                           </div>
                         </div>
 

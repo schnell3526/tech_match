@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Engineer;
+use App\Models\Product;
+
 
 class User extends Authenticatable
 {
@@ -21,6 +24,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'nickname',
+        'icon_image',
     ];
 
     /**
@@ -42,13 +47,30 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function users_jobs()
+
+    public function tags()
     {
-        return $this->hasMany('App\Models\Job');
+        return $this->belongsToMany('App\Models\Tag');
     }
 
-    public function users_tags()
+    public function jobs()
     {
-        return $this->hasMany('App\Models\Tag');
+        return $this->belongsToMany('App\Models\Job');
     }
+
+
+    public function engineer()
+    {
+        return $this->hasOne('App\Models\Engineer');
+    }
+
+    public function products()
+    {
+        return $this->hasMany('App\Models\Product');
+    }
+
+    
+    
+
+
 }

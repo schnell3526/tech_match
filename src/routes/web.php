@@ -4,8 +4,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IndexController;
 
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\MypageController;
 
-use App\Http\Controllers\IndexController;
+use App\Http\Controllers\PortfolioController;
+
+use App\Http\Controllers\UserpageController;
+use App\Http\Controllers\PortfolioviewController;
+use App\Http\Controllers\ChatController;
+
 
 
 /*
@@ -19,16 +25,33 @@ use App\Http\Controllers\IndexController;
 |
 */
 
+Route::redirect('/', '/index');
+
 Route::get('/index', [IndexController::class, 'index'])->name('index');
 
-Route::get('/wordsearch', [IndexController::class, 'wordsearch'])->name('wordsearch');
+Route::get('/search', [IndexController::class, 'search'])->name('search');
 
-Route::get('/jobsearch', [IndexController::class, 'jobsearch'])->name('jobsearch');
+Route::get('/{id}/view', [UserpageController::class, 'index'])->name('userpage.index');
+Route::get('/{id}/portfolio', [PortfolioviewController::class, 'index'])->name('portfolioview');
 
-Route::get('/tagsearch', [IndexController::class, 'tagsearch'])->name('tagsearch');
 
-Route::get('/logout', [Indexcontroller::class, 'logout']);
+Route::get('/logout', [IndexController::class, 'logout']);
 
-Route::get('/nav', [UsersController::class, 'index'])->name('users.index');
+
+
+Route::get('/mypage', [MypageController::class, 'index'])->name('mypage.index');
+Route::get('/mypage/create', [MypageController::class, 'create'])->name('mypage.create');
+Route::post('/mypage/store', [MypageController::class, 'store'])->name('mypage.store');
+Route::get('/mypage/edit/{id}', [MypageController::class, 'edit'])->name('mypage.edit');
+Route::post('/mypage/update/', [MypageController::class, 'update'])->name('mypage.update');
+
+Route::get('/portfolio', [PortfolioController::class, 'index'])->name('portfolio.index');
+Route::get('/portfolio/create', [PortfolioController::class, 'create'])->name('portfolio.index');
+Route::post('/portfolio/store', [PortfolioController::class, 'store'])->name('portfolio.store');
+Route::get('/portfolio/edit/{id}', [PortfolioController::class, 'edit'])->name('portfolio.edit');
+Route::post('/portfolio/update/{id}', [PortfolioController::class, 'update'])->name('portfolio.update');
+
+Route::get('/chat/{id}', [ChatController::class, 'index'])->name('chat.index');
+Route::post('/chat/send', [ChatController::class, 'store'])->name('chat.send');
 
 require __DIR__.'/auth.php';

@@ -16,10 +16,12 @@ class CreateEngineersTable extends Migration
         Schema::create('engineers', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->integer('age');
+            $table->integer('gender');
             $table->text('introduction');
             $table->string('github_url');
             $table->string('facebook_url');
-            $table->string('qita_url');
+            $table->string('qiita_url');
             $table->timestamps();
             $table->softDeletes();
         });

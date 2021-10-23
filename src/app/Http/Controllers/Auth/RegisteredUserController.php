@@ -18,9 +18,9 @@ class RegisteredUserController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function create()
+    public function create_user()
     {
-        return view('auth.register');
+        return view('auth.user.register');
     }
 
     /**
@@ -31,7 +31,7 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request)
+    public function store_user(Request $request)
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],

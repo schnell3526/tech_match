@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Engineer;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\MypageRequest;
+use App\Models\Message;
 use Auth;
 
 
@@ -16,6 +17,17 @@ class MypageController extends Controller
     
     public function __construct()
     {
+        $this->middleware(function($request, $next) {
+            $id= $request->route()->parameter('id');
+            if(!is_null($id)) {
+                $UserId = User::findOrFail($id)->id;
+                $userId = (int)$UserId;
+                if($userId !== Auth::id()) {
+                    abort(404);
+                }
+            }
+            return $next($request);
+        });
 
     }
 
@@ -36,24 +48,55 @@ class MypageController extends Controller
         $tags = $user->tags()->get();
         $jobs = $user->jobs()->get();
         $products_image = array();
-         foreach($products as $product)
-         {
-             $image = $product->product_images()->first();
-             
-             $products_image = array_merge($products_image, array($product->title => $image->image_path));
-             
-            
-         }
+        foreach($products as $product)
+        {
+            $image = $product->product_images()->first();
+            $product_id = "'" . $product->id . "'";
+            $products_image = array_merge($products_image, array($product_id => $image->image_path));
+        }
 
-         return view('userpage', [
-             'user' => $user,
-             'engineer' => $engineer,
-             'products' => $products,
-             'tags' => $tags,
-             'jobs' => $jobs,
-             'products_image' => $products_image,
+        $chat_users_id = array();
+        $messages = Message::where('send_user_id', $id)->get();
+        foreach($messages as $message)
+        {
+            $receive_user = $message->receive_user_id;
+            if(!in_array($receive_user, $chat_users_id))
+            {
+                array_push($chat_users_id, $receive_user);
+            }
+        }
+        $messages = Message::where('receive_user_id', $id)->get();
+        foreach($messages as $message)
+        {
+            $send_user = $message->send_user_id;
+            if(!in_array($send_user, $chat_users_id))
+            {
+                array_push($chat_users_id, $send_user);
+            }
+        }
+        $chat_users = array();
 
-         ]);
+        foreach($chat_users_id as $chat_user_id)
+        {
+            $chat_user = User::find($chat_user_id);
+            array_push($chat_users, $chat_user);
+        }
+
+
+
+
+
+        return view('userpage', [
+            'user' => $user,
+            'engineer' => $engineer,
+            'products' => $products,
+            'tags' => $tags,
+            'jobs' => $jobs,
+            'products_image' => $products_image,
+            'mypage' => true,
+            'chat_users' => $chat_users,
+
+        ]);
         
     }
 
@@ -81,7 +124,7 @@ class MypageController extends Controller
             $extention = $request->file('icon_image')->extension();
             $fileNameToStore = $fileName.'.'.$extention;
             $request->file('icon_image')->storeAs('public/icon', $fileNameToStore);
-            DB::transaction(function () use($request) {
+            DB::transaction(function () use($request, $fileNameToStore) {
                 // $user = User::update([
                 //     'icon_image' => $request->icon_image,
                 //     'nickname' => $request->nickname,
@@ -89,7 +132,7 @@ class MypageController extends Controller
 
                 $id = Auth::id();
                 $user = User::find($id);
-                $user->icon_image = $request->icon_image;
+                $user->icon_image = $fileNameToStore;
                 $user->nickname = $request->nickname;
                 $user->save();
                 
@@ -120,10 +163,37 @@ class MypageController extends Controller
 
     public function update(Request $request, $id)
     {
-        $mypage = User::find($request->id);
-        $mypage->title = $request->title;
+        try {
+            if(!empty($request->icon_image)) {
+                $fileName = uniqid(rand().'_');
+                $extention = $request->file('icon_image')->extension();
+                $fileNameToStore = $fileName.'.'.$extention;
+                $request->file('icon_image')->storeAs('public/icon', $fileNameToStore);
+                
+            } 
 
-        $mypage->save();
+            DB::transaction(function () use($request, $fileNameToStore, $id) {
+                $mypage = User::with('engineer')->find($request->id);
+                $mypage->nickname = $request->nickname;
+                $mypage->icon_image = $fileNameToStore;
+        
+                $mypage->save();
+
+                Engineer::upsert([
+                    'user_id' => $id,
+                    'age' => $request->age,
+                    'gender' => $request->gender,
+                    'introduction' => $request->introduction,
+                    'github_url' => $request->github_url,
+                    'facebook_url' => $request->facebook_url,
+                    'qiita_url' => $request->qita_url,
+                ]);
+            }, 2);
+        } catch(Throwable $e) {
+            Log::error($e);
+            throw $e;
+        }
+
         return redirect('mypage.index');
     }
     

@@ -28,5 +28,10 @@ class Product_imagesTableSeeder extends Seeder
             'product_id' => 2,
             'image_path' => '/portfolio/3.png',
         ]);
+
+        DB::table('product_images')->insert([
+            'product_id' => 1,
+            'image_path' => '/portfolio/4.png',
+        ]);
     }
 }

@@ -16,34 +16,21 @@
                     <div class="-m-2">
                       <div class="p-2 w-1/2 mx-auto">
                         <div class="relative">
-                          <label for="name" class="leading-7 text-sm text-gray-600">名前　<span class="text-red-600">※必須</span></label>
-                          <input type="text" id="name" name="name" value="{{ $mypage->name  }}" required class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                        </div>
-                      </div>
-                      <div class="p-2 w-1/2 mx-auto">
-                        <div class="relative">
                           <label for="nickname" class="leading-7 text-sm text-gray-600">ニックネーム　<span class="text-red-600">※必須</span></label>
                           <input type="text" id="nickname" name="nickname" value="{{ $mypage->nickname }}" required class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                         </div>
                       </div>
                       <div class="p-2 w-1/2 mx-auto">
                         <div class="relative">
-                          <label for="email" class="leading-7 text-sm text-gray-600">メールアドレス　<span class="text-red-600">※必須</span></label>
-                          <input type="email" id="email" name="email" value="{{ $mypage->email }}" required class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                        </div>
-                      </div>
-                      <div class="p-2 w-1/2 mx-auto">
-                        <div class="relative">
                           <label for="icon_image" class="leading-7 text-sm text-gray-600">アイコン画像<span class="text-red-600">※必須</span></label>
-                          <input type="file" id="icon_image" name="icon_image" value="{{ old('icon_image') }}" required class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                          <input type="file" id="icon_image" name="icon_image" value="{{ $mypage->icon_image }}" required class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                         </div>
                       </div>
-                      <div class="p-2 w-1/2 mx-auto">
-                        <div class="relative">
-                          <label for="password" class="leading-7 text-sm text-gray-600">パスワード　<span class="text-red-600">※必須</span></label>
-                          <input type="password" id="password" name="password" value="{{ $mypage->password }}" required class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                        </div>
-                      </div>
+
+                      <div class="w-1/2 mx-auto rounded">
+                        <img class="img_round object-cover" src="{{ asset('storage/icon/'.$mypage->icon_image)}}" alt=""></div>
+
+
                       <div class="p-2 w-1/2 mx-auto">
                         <div class="relative">
                           <label for="age" class="leading-7 text-sm text-gray-600">年齢　<span class="text-red-600">※必須</span></label>
@@ -67,7 +54,7 @@
                       <div class="p-2 w-1/2 mx-auto">
                         <div class="relative">
                           <label for="github_url" class="leading-7 text-sm text-gray-600">Github_URL 　<span class="text-red-600">※必須</span></label>
-                          <input type="text" id="github_url" name="github_url" value="{{ $mypage->engineer->git_url }}" required class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                          <input type="text" id="github_url" name="github_url" value="{{ $mypage->engineer->github_url }}" required class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                         </div>
                       </div>
                       <div class="p-2 w-1/2 mx-auto">
@@ -79,7 +66,7 @@
                       <div class="p-2 w-1/2 mx-auto">
                         <div class="relative">
                           <label for="qita_url" class="leading-7 text-sm text-gray-600">Qita_URL 　<span class="text-red-600">※必須</span></label>
-                          <input type="text" id="qita_url" name="qita_url" value="{{ $mypage->engineer->qita_url }}" required class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                          <input type="text" id="qita_url" name="qita_url" value="{{ $mypage->engineer->qiita_url }}" required class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                         </div>
                       </div>
                       <div class="p-2 w-1/2 mx-auto">

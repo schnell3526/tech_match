@@ -22,7 +22,7 @@ class Product extends Model
 
     public function users()
     {
-        return $this->belongsTo(User::class);
+        return $this->hasOne('App\Models\User');
     }
 
     public function product_images()

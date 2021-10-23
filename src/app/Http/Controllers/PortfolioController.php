@@ -30,7 +30,7 @@ class PortfolioController extends Controller
         
         if($user->products()->first())
         {
-            return redirect("/portfolio/edit");
+            return redirect(route('portfolio.edit', ['id' => Auth::id()]));
         }
         return view('portfolio.create');
     }

@@ -50,6 +50,13 @@
                         </span>
                     </div>
                 @endif
+                @if(!$mypage and $user->id != Auth::id())
+                    <div>
+                        <a href="{{ route('chat.index', ['id' => $user->id]) }}" style="color:blue">
+                            メッセージを送信
+                        </a>
+                    </div>
+                @endif
                 <div class="tab-wrap">
                     <input id="TAB-01" type="radio" name="TAB" class="tab-switch" checked="checked" /><label class="tab-label" for="TAB-01">基本情報</label>
                     <div class="tab-content">
@@ -87,10 +94,12 @@
                     <input id="TAB-03" type="radio" name="TAB" class="tab-switch" /><label class="tab-label" for="TAB-03">メッセージ</label>
                     <div class="tab-content">
                         @foreach($chat_users as $chat_user)
-                            <a href="{{ route('chat.index', ['id' => $chat_user->id]) }}">
+                            <div style="margin:10px 0px;">
+                            <a href="{{ route('chat.index', ['id' => $chat_user->id]) }}" style="margin:10px 0">
                                 <img src="{{ asset('storage/icon/' . $chat_user->icon_image) }}" width="30px" height="30px" style="display:inline;">
                                 {{ $chat_user->nickname }}
                             </a>
+                            </div>
                         @endforeach
                     </div>
                     @endif

@@ -4,22 +4,28 @@
 <!-- 非ログインユーザ・ログインユーザ共通レイアウト -->
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  <!-- タブに表示される名前 -->
-  <title>Tech Match</title>
+    <!-- タブに表示される名前 -->
+    <title>Tech Match</title>
 
-  <!-- Fonts -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
-  <!-- Styles -->
-  <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-  <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
-   
-  <!-- Scripts -->
-  <script src="{{ asset('js/app.js') }}" defer></script>
+    <!-- Styles -->
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+
+    <!-- Scripts -->
+    
+
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/0.0.11/push.min.js"></script>
+    {{-- <script src="{{ asset('js/portfolio.js')}}" defer></script> --}}
+    
 </head>
 
 <body class="font-sans antialiased">

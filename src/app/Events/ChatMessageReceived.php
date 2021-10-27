@@ -33,15 +33,16 @@ class ChatMessageReceived implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('chat');
+        return new Channel('tech_match');
     }
-
     public function broadcastWith()
     {
         return [
             'message' => $this->request['message'],
-            'send_user' => $this->request['send_user'],
-            'receive_user' => $this->request['receive_user'],
+            'send' => $this->request['send'],
+            'receive' => $this->request['receive'],
+            'time' => $this->request['time'],
+            'icon' => $this->request['icon'],
         ];
     }
 

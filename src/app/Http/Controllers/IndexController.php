@@ -45,9 +45,6 @@ class IndexController extends Controller
             $jobs = $user->jobs()->get();
             $tags = $user->tags()->get();
             
-            $age = $engineer->age;
-            $gender = $engineer->gender;
-
             $products = $user->products()->get();
             $images = array();
             foreach($products as $product)
@@ -55,19 +52,15 @@ class IndexController extends Controller
                 array_push($images, $product->product_images()->first()->image_path);
             }
             array_push($usersdata, array('user_id' => $user_id, 'nickname' => $nickname, 'icon_img' => $icon_img,
-                                            'jobs' => $jobs, 'tags' => $tags, 'age' => $age, 'gender' => $gender,
-                                         'images' => $images));
+                                            'jobs' => $jobs, 'tags' => $tags, 'images' => $images, 'introduction' => $engineer->introduction, "facebook_url" => $engineer->facebook_url, "github_url"=>$engineer->github_url, "qiita_url"=>$engineer->qiita_url));
 
         }
         $auth = Auth::user();
-
         return view('index', [
             'error2' => "",
             'usersdata' => $usersdata,
             'words' => "",
             'andor' => "",
-            
-            
         ]);
 
     }
@@ -84,7 +77,6 @@ class IndexController extends Controller
         $auth = Auth::user();
         if($andor == '1つで検索')
         {
-            
             if(count($words) != 1)
             {
                 return view('index', [
@@ -95,7 +87,6 @@ class IndexController extends Controller
                 ]);
             }
             $words[0] = mb_strtolower($words[0]);
-
             foreach($engineers as $engineer)
             {
                 $user = User::find($engineer->user_id);
@@ -118,6 +109,10 @@ class IndexController extends Controller
                     $icon_img = $user->icon_image;
                     $age = $engineer->age;
                     $gender = $engineer->gender;
+                    $introduction = $engineer->introduction;
+                    $facebook_url = $engineer->facebook_url;
+                    $github_url = $engineer->github_url;
+                    $qiita_url = $engineer->qiita_url;
                     $products = $user->products()->get();
                     $images = array();
                     foreach($products as $product)
@@ -127,11 +122,12 @@ class IndexController extends Controller
                     
                     array_push($results, array('user_id' => $user_id, 'nickname' => $nickname, 'icon_img' => $icon_img,
                                             'jobs' => $jobs, 'tags' => $tags, 'age' => $age, 'gender' => $gender,
-                                            'images' => $images));
+                                            'images' => $images, "introduction" => $introduction,
+                                            'facebook_url' => $facebook_url, 'github_url' => $github_url,
+                                            'qiita_url' => $qiita_url));
                 }
             }
             $words = $tmp;
-
             return view('index', [
                 'error2' => "",
                 'usersdata' => $results,
@@ -139,8 +135,7 @@ class IndexController extends Controller
                 'andor' => $andor,
             ]);
         }
-
-        elseif($andor == 'and')
+        elseif($andor == '全件一致')
         {
             if(count($words) <= 1)
             {
@@ -151,7 +146,6 @@ class IndexController extends Controller
                     'andor' => $andor,
                 ]);
             }
-            
             foreach($engineers as $engineer)
             {
                 $user = User::find($engineer->user_id);
@@ -183,6 +177,10 @@ class IndexController extends Controller
                         $icon_img = $user->icon_image;
                         $age = $engineer->age;
                         $gender = $engineer->gender;
+                        $introduction = $engineer->introduction;
+                        $facebook_url = $engineer->facebook_url;
+                        $github_url = $engineer->github_url;
+                        $qiita_url = $engineer->qiita_url;
                         $products = $user->products()->get();
                         $images = array();
                         foreach($products as $product)
@@ -192,7 +190,9 @@ class IndexController extends Controller
                         
                         array_push($results, array('user_id' => $user_id, 'nickname' => $nickname, 'icon_img' => $icon_img,
                                                 'jobs' => $jobs, 'tags' => $tags, 'age' => $age, 'gender' => $gender,
-                                                'images' => $images));
+                                                'images' => $images,"introduction" => $introduction,
+                                                'facebook_url' => $facebook_url, 'github_url' => $github_url,
+                                                'qiita_url' => $qiita_url));
                     }
                 }
             }
@@ -244,6 +244,10 @@ class IndexController extends Controller
                         $icon_img = $user->icon_image;
                         $age = $engineer->age;
                         $gender = $engineer->gender;
+                        $introduction = $engineer->introduction;
+                        $facebook_url = $engineer->facebook_url;
+                        $github_url = $engineer->github_url;
+                        $qiita_url = $engineer->qiita_url;
                         $products = $user->products()->get();
                         $images = array();
                         foreach($products as $product)
@@ -253,7 +257,9 @@ class IndexController extends Controller
                         
                         array_push($results, array('user_id' => $user_id, 'nickname' => $nickname, 'icon_img' => $icon_img,
                                                 'jobs' => $jobs, 'tags' => $tags, 'age' => $age, 'gender' => $gender,
-                                                'images' => $images));
+                                                'images' => $images,"introduction" => $introduction,
+                                                'facebook_url' => $facebook_url, 'github_url' => $github_url,
+                                                'qiita_url' => $qiita_url));
                         break;
                     }
                     

@@ -29,19 +29,20 @@
 </head>
 
 <body class="font-sans antialiased">
-    <div class="min-h-screen bg-gray-100">
-        <!-- ヘッダー -->
-        <header class="bg-white shadow">
-            <div class="max-w-7xl mx-auto py-0 px-0 sm:px-6 lg:px-8">
-                @include('user-navigation')
-            </div>
-        </header>
-        <!-- Page Content -->
-        <main>
-            {{ $slot }}
-        </main>
-    </div>
+  <div class="min-h-screen bg-gray-100">
+    <!-- ヘッダー -->
+    <header class="bg-white shadow">
+      <div class="max-w-7xl mx-auto py-0 px-0 sm:px-6 lg:px-8">
+        @include('user-navigation')
+      </div>
+    </header>
+    <!-- Page Content -->
+    <main>
+      {{ $slot }}
+    </main>
+  </div>
+
+
 </body>
 
 </html>
-

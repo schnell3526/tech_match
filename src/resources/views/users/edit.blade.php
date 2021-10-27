@@ -51,6 +51,7 @@
                                 </div>
                             </div>
 
+
                             <!-- 性別入力欄 -->
                             <div class="p-2 w-1/2 mx-auto">
                                 <label for="gender" class="leading-7 text-sm text-gray-600">性別</label>
@@ -66,7 +67,6 @@
                                     @endif
                                 </div>
                             </div>
-
                             <!-- 自己紹介入力欄 -->
                             <div class="p-2 w-1/2 mx-auto">
                                 <div class="relative">

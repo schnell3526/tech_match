@@ -43,6 +43,62 @@ class PortfolioController extends Controller
         $id = Auth::id();
         try{
             foreach($request->item as $item) {
+                    DB::transaction(function () use($item, $id) {
+                        $product = Product::create([
+                            'user_id' => $id,
+                            'title' => $item['title'],
+                            'description' => $item['description'],
+                            'product_url' => $item['url'],
+                            'src_url' => $item['src_url'],
+                        ]);
+                        // $i = 0;dd
+                        // dd($item['image']);
+                            foreach ($item['image'] as $file) {
+                                // dd($file);
+                                $fileName = uniqid(rand().'_');
+                                $extension = $file->extension();
+                                $fileNameToStore = $fileName.'.'.$extension;
+                                $resizedImage = InterventionImage::make($file)->resize(1920, 1080)->encode();
+                                Storage::put('public/portfolio/'.$fileNameToStore, $resizedImage);
+                                Product_image::create([
+                                    'product_id' => $product->id,
+                                    'image_path' => $fileNameToStore,
+                                ]);
+                            } 
+                    }, 2);
+            }
+
+        } catch(Throwable $e) {
+            Log::error($e);
+            throw $e;
+        }
+        return redirect()->route('portfolio.index');
+    }
+
+    
+    public function edit($id)
+    {
+        //ポートフォリオテーブルがなければcreateにリダイレクト
+        $user = User::find($id);
+        $product = $user->products()->first();
+        if(!$product)
+        {
+            return redirect("/portfolio/create");
+        }
+        $portfolio = product::where('user_id' , $id)->get();
+        $user_id = Auth::id();
+        return view('portfolio.edit', compact('portfolio'), compact('user_id'));
+
+
+
+    }
+
+    public function update(Request $request, $id)
+    {
+          // dd($request->image);
+        $id = Auth::id();
+        try{
+            foreach($request->item as $item) {
                     DB::transaction(function () use($item, $request, $id) {
                         $product = Product::create([
                             'user_id' => $id,
@@ -71,32 +127,10 @@ class PortfolioController extends Controller
             Log::error($e);
             throw $e;
         }
-        return redirect()->route('portfolio.index');
-    }
-
-    
-    public function edit($id)
-    {
-        //ポートフォリオテーブルがなければcreateにリダイレクト
-        $user = User::find($id);
-        $product = $user->products()->first();
-        if(!$product)
-        {
-            return redirect("/portfolio/create");
-        }
-
-        $mypage = User::findOrFail($id)->engineer;
-        // dd($mypage);
-
-        return view('mypage.edit', compact('mypage'));
-    }
-
-    public function update(Request $request, $id)
-    {
         $mypage = User::find($request->id);
         $mypage->title = $request->title;
 
         $mypage->save();
-        return redirect('mypage.index');
+        return redirect('portfolio.index');
     }
 }

@@ -22,7 +22,10 @@
     
 
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/0.0.11/push.min.js"></script>
     {{-- <script src="{{ asset('js/portfolio.js')}}" defer></script> --}}
+    
 </head>
 
 <body class="font-sans antialiased">

@@ -361,17 +361,17 @@ a.my-navbar-item:hover {
 }
 
 
-.line__container {
+.line_container {
     padding:0;
     background: #7494c0;
     overflow: hidden;
-    max-width: 400px;
+    max-width: 1000px;
     margin: 20px auto;
     font-size: 80%;
   }
   
   /* タイトル部分 */
-  .line__container .line__title {
+  .line_container .line_title {
     background: #273246;
     padding: 10px;
     text-align: center;
@@ -380,34 +380,34 @@ a.my-navbar-item:hover {
   }
   
   /* 会話部分 */
-  .line__container .line__contents {
+  .line_container .line_contents {
     padding: 10px;
     overflow: hidden;
     line-height: 135%;
   }
   
-  .line__container .scroll {
+  .line_container .scroll {
     height: 500px;
     overflow-y: scroll;
   }
   
   /* スタンプ画像最大幅 */
-  .line__container .stamp img {
+  .line_container .stamp img {
     max-width:150px;
   }
   
   /* 相手の会話 */
-  .line__container .line__left {
-      width: 100%;
+  .line_container .line_left {
+      width: 40%;
       position: relative;
       display: block;
-      margin-bottom: 5px;
-      max-width: 80%;
+      margin-bottom: 20px;
+      max-width: 60%;
       clear: both;
   }
   
   /* アイコン画像 */
-  .line__container .line__left figure {
+  .line_container .line_left figure {
       width: 50px;
       position: absolute;
       top: 15px;
@@ -418,32 +418,34 @@ a.my-navbar-item:hover {
   }
   
   /* 正方形を用意 */
-  .line__container .line__left figure img{
+  .line_container .line_left figure img{
       border-radius: 50%;
       width: 50px;
       height: 50px;
   }
   
-  .line__container .line__left .line__left-text {
+  .line_container .line_left .line_left-text {
     margin-left: 70px;
   }
   
-  .line__container .line__left .line__left-text .name {
+  .line_container .line_left .line_left-text .name {
     font-size: 80%;
     color: #ffffff;
   }
   
   /* コメントエリア */
-  .line__container .line__left .text {
+  .line_container .line_left .text {
     margin: 0;
     position: relative;
     padding: 10px;
     border-radius: 20px;
     background-color: #ffffff;
+    top:15px;
+    bottom:15px;
   }
   
   /* 吹き出し */
-  .line__container .line__left .text::after {
+  .line_container .line_left .text::after {
     content: '';
     position: absolute;
     display: block;
@@ -457,27 +459,29 @@ a.my-navbar-item:hover {
   }
   
   /* 自分の会話 */
-  .line__container .line__right {
+  .line_container .line_right {
       position: relative;
       display: block;
-      margin: 5px 0;
-      max-width: 75%;
+      margin: 10px 0;
+      max-width: 40%;
       float: right;
       margin-right: 15px;
       clear: both;
   }
   
   /* コメントエリア */
-  .line__container .line__right .text {
+  .line_container .line_right .text {
     padding: 10px;
     border-radius: 20px;
     background-color: #8de055;
     margin: 0;
     margin-left: 80px;
+    top: 20px;
+    bottom:20px;
   }
   
   /* 吹き出し */
-  .line__container .line__right .text::after {
+  .line_container .line_right .text::after {
     content: '';
     position: absolute;
     display: block;
@@ -491,13 +495,13 @@ a.my-navbar-item:hover {
   }
   
   /* 自分がスタンプを送る時 */
-  .line__container .line__right .stamp {
+  .line_container .line_right .stamp {
     position: relative;
     margin-left: 80px;
   }
   
   /* 既読エリア */
-  .line__container .line__right .date {
+  .line_container .line_right .date {
     content: '';
     position: absolute;
     display: block;
@@ -505,6 +509,17 @@ a.my-navbar-item:hover {
     text-align: right;
     left: -30px;
     bottom: 0px;
+    font-size: 80%;
+    color: #ffffff;
+  }
+  .line_container .line_left .date {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 100px;
+    text-align: right;
+    left: 350px;
+    bottom: -10px;
     font-size: 80%;
     color: #ffffff;
   }

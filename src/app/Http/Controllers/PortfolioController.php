@@ -43,7 +43,8 @@ class PortfolioController extends Controller
         $id = Auth::id();
         try{
             foreach($request->item as $item) {
-                    DB::transaction(function () use($item, $id) {
+                if(!empty($item['title'])) {
+                      DB::transaction(function () use($item, $id) {
                         $product = Product::create([
                             'user_id' => $id,
                             'title' => $item['title'],
@@ -66,6 +67,7 @@ class PortfolioController extends Controller
                                 ]);
                             } 
                     }, 2);
+                }
             }
 
         } catch(Throwable $e) {
@@ -86,9 +88,12 @@ class PortfolioController extends Controller
             return redirect("/portfolio/create");
         }
         $portfolio = Product::with('product_images')->where('user_id' , $id)->get();
+
+        $num = Product::with('product_images')->where('user_id' , $id)->count();
         // dd($portfolio);
         $user_id = Auth::id();
-        return view('portfolio.edit', compact('portfolio'), compact('user_id'));
+        return view('portfolio.edit', ['portfolio' =>$portfolio, 'user_id' => $user_id, 'num' => $num]);
+
     }
 
     public function update(Request $request, $id)

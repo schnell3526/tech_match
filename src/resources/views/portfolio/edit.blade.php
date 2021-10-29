@@ -8,9 +8,10 @@
   <div class="py-12">
     <div class="max-w-7xl mx-auto sm:p-6 lg:p-8">
           <div class="flex p-2">
-            <button class="portfolio flex-auto m-1 py-2 bg-blue-400 text-white font-semibold rounded bg-blue-500" data-num=1>ポートフォリオ１</button>
-            <button class="portfolio flex-auto m-1 py-2 bg-blue-400 text-white font-semibold rounded" data-num=2>ポートフォリオ2</button>
-            <button class="portfolio flex-auto m-1 py-2 bg-blue-400 text-white font-semibold rounded" data-num=3>ポートフォリオ3</button>
+            @for($i = 0; $i < $num; $i++) 
+            <button class="portfolio flex-auto m-1 py-2 bg-blue-400 text-white font-semibold rounded bg-blue-500" data-num={{$i+1}}>ポートフォリオ<?php echo $i+1;?></button>
+            @endfor
+
           </div>
     </div>
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -21,28 +22,38 @@
                 <form method="post" action="{{ route('portfolio.update', $user_id)}}" enctype="multipart/form-data" >
                     @csrf
                     {{--・・・・・・・・・・・・・ ポートフォリオ１のボタンクリック時に表示するフォーム・・・・・・・・・・・・・ --}}
-                    <div class="nohidden" id="1">
-                      <h1>portfolio1</h1>
+
+
+                    {{--・・・・・・・・・・・・・ ポートフォリオ2のボタンクリック時に表示するフォーム・・・・・・・・・・・・・ --}}
+                    @for($i = 0; $i < $num; $i++) 
+                                          <div class="nohidden" id="{{$i}}">
+                      <h1>portfolio<?php echo $i+1;?></h1>
                       <div class="-m-2">
                         <div class="p-2 w-1/2 mx-auto">
                           <div class="relative">
+
                             <label for="title" class="leading-7 text-sm text-gray-600">タイトル　<span class="text-red-600">※必須</span></label>
-                            <input type="text" id="title" name="item[0][title]" value="{{$portfolio[0]->title}}" required class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                            <input type="text" id="title" name="item[{{$i}}][title]" value="{{$portfolio[0]->title}}" required class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+
                           </div>
                         </div>
                         <div class="p-2 w-1/2 mx-auto">
                           <div class="relative">
                             <label for="image" class="leading-7 text-sm text-gray-600">ポートフォリオ画像　<span class="text-red-600">※画像は最大３枚までにしてください</span></label>
-                            <input type="file" id="image" name="item[0][image][]" value="{{ old('image') }}" multiple class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+
+                            <input type="file" id="image" name="item[{{$i}}][image][]" value="{{ old('image') }}" multiple class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                           </div>
                         </div> 
-                        @foreach ($portfolio[0]->product_images as $product_images)
+                        @foreach ($portfolio[$i]->product_images as $product_images)
+
                           <div class="p-2 w-1/2 mx-auto">
                             <div class="relative">
                               <img class=" object-cover"
                               src="{{ asset('storage/portfolio/'.$product_images->image_path)}}" alt="">
+
                             </div>
                           </div>
+
                         @endforeach
                         <div class="p-2 w-1/2 mx-auto">
                           <div class="relative">
@@ -51,20 +62,22 @@
                         </div> 
                         <div class="p-2 w-1/2 mx-auto">
                           <div class="relative">
+
                             <label for="description" class="leading-7 text-sm text-gray-600">説明　<span class="text-red-600">※必須</span></label>
-                            <textarea id="description" name="item[0][description]" rows="10"  required class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">{{$portfolio[0]->description}}</textarea>
+                            <textarea id="description" name="item[{{$i}}][description]" rows="10"  required class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">{{$portfolio[0]->description}}</textarea>
+
                           </div>
                         </div>
                         <div class="p-2 w-1/2 mx-auto">
                           <div class="relative">
                             <label for="url" class="leading-7 text-sm text-gray-600">URL 　<span class="text-red-600">※必須</span></label>
-                            <input type="text" id="url" name="item[0][url]" value="{{$portfolio[0]->product_url}}" required class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                            <input type="text" id="url" name="item[{{$i}}][url]" value="{{$portfolio[0]->product_url}}" required class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                           </div>
                         </div>
                         <div class="p-2 w-1/2 mx-auto">
                           <div class="relative">
                             <label for="src_url" class="leading-7 text-sm text-gray-600">src_url 　<span class="text-red-600">※必須</span></label>
-                            <input type="text" id="src_url" name="item[0][src_url]" value="{{$portfolio[0]->src_url}}" required class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                            <input type="text" id="src_url" name="item[{{$i}}][src_url]" value="{{$portfolio[0]->src_url}}" required class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                           </div>
                         </div>
 
@@ -109,180 +122,8 @@
                         {{-- </div> --}}
                       </div>
                     </div>
+                    @endfor
 
-                    {{--・・・・・・・・・・・・・ ポートフォリオ2のボタンクリック時に表示するフォーム・・・・・・・・・・・・・ --}}
-                    <div class="hidden" id="2">
-                      <h1>portfolio2</h1>
-                      <div class="-m-2">
-                        <div class="p-2 w-1/2 mx-auto">
-                          <div class="relative">
-                            <label for="title" class="leading-7 text-sm text-gray-600">タイトル</label>
-                            <input type="text" id="title" name="item[1][title]" value="{{$portfolio[1]->title}}" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                          </div>
-                        </div>
-                        <div class="p-2 w-1/2 mx-auto">
-                          <div class="relative">
-                            <label for="image" class="leading-7 text-sm text-gray-600">ポートフォリオ画像　<span class="text-red-600">※画像は最大３枚までにしてください</span></label>
-                            <input type="file" id="image" name="item[1][image][]" value="{{ old('image') }}" multiple class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                          </div>
-                        </div> 
-                        @foreach ($portfolio[1]->product_images as $product_images)
-                          <div class="p-2 w-1/2 mx-auto">
-                            <div class="relative">
-                              <img class=" object-cover"
-                              src="{{ asset('storage/portfolio/'.$product_images->image_path)}}" alt="">
-                            </div>
-                          </div>
-                        @endforeach
-                        <div class="p-2 w-1/2 mx-auto">
-                          <div class="relative">
-                            <label for="description" class="leading-7 text-sm text-gray-600">説明</label>
-                            <textarea id="description" name="item[1][description]" rows="10"  class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">{{$portfolio[1]->description}}</textarea>
-                          </div>
-                        </div>
-                        <div class="p-2 w-1/2 mx-auto">
-                          <div class="relative">
-                            <label for="url" class="leading-7 text-sm text-gray-600">URL </label>
-                            <input type="text" id="url" name="item[1][url]" value="{{$portfolio[0]->product_url}}"class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                          </div>
-                        </div>
-                        <div class="p-2 w-1/2 mx-auto">
-                          <div class="relative">
-                            <label for="src_url" class="leading-7 text-sm text-gray-600">src_url </label>
-                            <input type="text" id="src_url" name="item[1][src_url]" value="{{$portfolio[0]->src_url}}"" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                          </div>
-                        </div>
-
-                        {{-- <div class="p-2 w-1/2 mx-auto">
-                          <div class="relative">
-                            <label for="category" class="leading-7 text-sm text-gray-600">カテゴリー</label> --}}
-                            {{-- <select name="category" id="category" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                              @foreach($categories as $category)
-                                <optgroup label="{{ $category->name }}">
-                                @foreach($category->secondary as $secondary)
-                                  <option value="{{ $secondary->id}}" >
-                                    {{ $secondary->name }}
-                                  </option>
-                                @endforeach
-                              @endforeach
-                            </select> --}}
-                            
-                          {{-- </div>
-                        </div> --}}
-
-                        {{-- <div class="p-2 w-1/2 mx-auto">
-                          <div class="relative">
-                            <label for="category" class="leading-7 text-sm text-gray-600">商品画像</label> --}}
-                            {{-- <x-select-image :images="$images" name="image1" />
-                            <x-select-image :images="$images" name="image2" />
-                            <x-select-image :images="$images" name="image3" />
-                            <x-select-image :images="$images" name="image4" />
-                            <x-select-image :images="$images" name="image5" /> --}}
-
-                            {{-- <div class="p-2 w-1/2 mx-auto">
-                              <div class="relative flex justify-around">
-                                <div><input type="radio" name="is_selling" value="1" class="mr-2" checked>販売中</div>
-                                <div><input type="radio" name="is_selling" value="0" class="mr-2" >停止中</div>
-                              </div>
-                            </div> --}}
-                            
-                            <div class="p-2 w-full flex justify-around mt-4">
-                              <button type="button" onclick="location.href='{{ route('mypage.index')}}'" class="bg-gray-200 border-0 py-2 px-8 focus:outline-none hover:bg-gray-400 rounded text-lg">戻る</button>
-                              <button type="submit" class="text-white bg-green-500 border-0 py-2 px-8 focus:outline-none hover:bg-green-600 rounded text-lg">更新する</button>                        
-                            </div>
-                          {{-- </div> --}}
-                        {{-- </div> --}}
-                      </div>
-                    </div>
-                    {{--・・・・・・・・・・・・・ ポートフォリオ3のボタンクリック時に表示するフォーム・・・・・・・・・・・・・ --}}
-                    <div class="hidden" id="3">
-                      <h1>portfolio3</h1>
-                      <div class="-m-2 ">
-                        <div class="p-2 w-1/2 mx-auto">
-                          <div class="relative">
-                            <label for="title" class="leading-7 text-sm text-gray-600">タイトル</label>
-                            <input type="text" id="title" name="item[2][title]" value="{{$portfolio[2]->title}}" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                          </div>
-                        </div>
-                        <div class="p-2 w-1/2 mx-auto">
-                          <div class="relative">
-                            <label for="image" class="leading-7 text-sm text-gray-600">ポートフォリオ画像　<span class="text-red-600">※画像は最大３枚までにしてください</span></label>
-                            <input type="file" id="image" name="item[2][image][]" value="{{ old('image') }}" multiple class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                          </div>
-                        </div> 
-                        @foreach ($portfolio[2]->product_images as $product_images)
-                          <div class="p-2 w-1/2 mx-auto">
-                            <div class="relative">
-                              <img class=" object-cover"
-                              src="{{ asset('storage/portfolio/'.$product_images->image_path)}}" alt="">
-                            </div>
-                          </div>
-                        @endforeach
-                        <div class="p-2 w-1/2 mx-auto">
-                          <div class="relative">
-                            {{-- <x-image  type="portfolio"/> --}}
-                          </div>
-                        </div> 
-                        <div class="p-2 w-1/2 mx-auto">
-                          <div class="relative">
-                            <label for="description" class="leading-7 text-sm text-gray-600">説明</label>
-                            <textarea id="description" name="item[2][description]" rows="10" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">{{$portfolio[0]->title}}</textarea>
-                          </div>
-                        </div>
-                        <div class="p-2 w-1/2 mx-auto">
-                          <div class="relative">
-                            <label for="url" class="leading-7 text-sm text-gray-600">URL </span></label>
-                            <input type="text" id="url" name="item[2][url]" value="{{$portfolio[2]->product_url}}" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                          </div>
-                        </div>
-                        <div class="p-2 w-1/2 mx-auto">
-                          <div class="relative">
-                            <label for="src_url" class="leading-7 text-sm text-gray-600">src_url </label>
-                            <input type="text" id="src_url" name="item[2][src_url]" value="{{$portfolio[2]->src_url}}" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                          </div>
-                        </div>
-
-                        {{-- <div class="p-2 w-1/2 mx-auto">
-                          <div class="relative">
-                            <label for="category" class="leading-7 text-sm text-gray-600">カテゴリー</label> --}}
-                            {{-- <select name="category" id="category" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                              @foreach($categories as $category)
-                                <optgroup label="{{ $category->name }}">
-                                @foreach($category->secondary as $secondary)
-                                  <option value="{{ $secondary->id}}" >
-                                    {{ $secondary->name }}
-                                  </option>
-                                @endforeach
-                              @endforeach
-                            </select> --}}
-                            
-                          {{-- </div>
-                        </div> --}}
-
-                        {{-- <div class="p-2 w-1/2 mx-auto">
-                          <div class="relative">
-                            <label for="category" class="leading-7 text-sm text-gray-600">商品画像</label> --}}
-                            {{-- <x-select-image :images="$images" name="image1" />
-                            <x-select-image :images="$images" name="image2" />
-                            <x-select-image :images="$images" name="image3" />
-                            <x-select-image :images="$images" name="image4" />
-                            <x-select-image :images="$images" name="image5" /> --}}
-
-                            {{-- <div class="p-2 w-1/2 mx-auto">
-                              <div class="relative flex justify-around">
-                                <div><input type="radio" name="is_selling" value="1" class="mr-2" checked>販売中</div>
-                                <div><input type="radio" name="is_selling" value="0" class="mr-2" >停止中</div>
-                              </div>
-                            </div> --}}
-                            
-                            <div class="p-2 w-full flex justify-around mt-4">
-                              <button type="button" onclick="location.href='{{ route('mypage.index')}}'" class="bg-gray-200 border-0 py-2 px-8 focus:outline-none hover:bg-gray-400 rounded text-lg">戻る</button>
-                              <button type="submit" class="text-white bg-green-500 border-0 py-2 px-8 focus:outline-none hover:bg-green-600 rounded text-lg">更新する</button>                        
-                            </div>
-                          {{-- </div> --}}
-                        {{-- </div> --}}
-                      </div>
-                    </div>
                   </form> 
               </div>
           </div>

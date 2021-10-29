@@ -64,23 +64,39 @@ class MypageController extends Controller
         }
 
         $chat_users_id = array();
+        $new_message_users_id = array();
+        $messages = Message::where('receive_user_id', $id)->where('checked', 0)->get();
+        foreach($messages as $message)
+        {
+            $send_user = $message->send_user_id;
+            if(!in_array($send_user, $new_message_users_id))
+            {
+                array_push($new_message_users_id, $send_user);
+            }
+        }
+        $messages = Message::where('receive_user_id', $id)->where('checked', 1)->get();
+        foreach($messages as $message)
+        {
+            $send_user = $message->send_user_id;
+            if((!in_array($send_user, $chat_users_id)) and (!in_array($send_user, $new_message_users_id)))
+            {
+                array_push($chat_users_id, $send_user);
+            }
+        }
         $messages = Message::where('send_user_id', $id)->get();
         foreach($messages as $message)
         {
             $receive_user = $message->receive_user_id;
-            if(!in_array($receive_user, $chat_users_id))
+            if((!in_array($receive_user, $chat_users_id)) and (!in_array($receive_user, $new_message_users_id)))
             {
                 array_push($chat_users_id, $receive_user);
             }
         }
-        $messages = Message::where('receive_user_id', $id)->get();
-        foreach($messages as $message)
+        $new_message_users = array();
+        foreach($new_message_users_id as $new_message_user_id)
         {
-            $send_user = $message->send_user_id;
-            if(!in_array($send_user, $chat_users_id))
-            {
-                array_push($chat_users_id, $send_user);
-            }
+            $new_message_user = User::find($new_message_user_id);
+            array_push($new_message_users, $new_message_user);
         }
         $chat_users = array();
 
@@ -88,6 +104,15 @@ class MypageController extends Controller
         {
             $chat_user = User::find($chat_user_id);
             array_push($chat_users, $chat_user);
+        }
+
+        if($new_message_users_id)
+        {
+            $new_message = true;
+        }
+        else
+        {
+            $new_message = false;
         }
 
 
@@ -102,28 +127,11 @@ class MypageController extends Controller
             'jobs' => $jobs,
             'products_image' => $products_image,
             'mypage' => true,
+            'new_message_users' => $new_message_users,
             'chat_users' => $chat_users,
+            'new_message' => $new_message,
 
         ]);
-        
-
-         foreach($products as $product)
-         {
-             $image = $product->product_images()->first();
-             
-             $products_image = array_merge($products_image, array($product->title => $image->image_path));
-             
-            
-         }
-
-         return view('userpage', [
-             'user' => $user,
-             'engineer' => $engineer,
-             'products' => $products,
-             'tags' => $tags,
-             'jobs' => $jobs,
-             'products_image' => $products_image,
-         ]);
 
     }
 

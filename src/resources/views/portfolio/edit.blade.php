@@ -11,7 +11,7 @@
             @for($i = 0; $i < $num; $i++) 
             <button class="portfolio flex-auto m-1 py-2 bg-blue-400 text-white font-semibold rounded bg-blue-500" data-num={{$i+1}}>ポートフォリオ<?php echo $i+1;?></button>
             @endfor
- 
+
           </div>
     </div>
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -31,23 +31,29 @@
                       <div class="-m-2">
                         <div class="p-2 w-1/2 mx-auto">
                           <div class="relative">
+
                             <label for="title" class="leading-7 text-sm text-gray-600">タイトル　<span class="text-red-600">※必須</span></label>
                             <input type="text" id="title" name="item[{{$i}}][title]" value="{{$portfolio[0]->title}}" required class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+
                           </div>
                         </div>
                         <div class="p-2 w-1/2 mx-auto">
                           <div class="relative">
                             <label for="image" class="leading-7 text-sm text-gray-600">ポートフォリオ画像　<span class="text-red-600">※画像は最大３枚までにしてください</span></label>
+
                             <input type="file" id="image" name="item[{{$i}}][image][]" value="{{ old('image') }}" multiple class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                           </div>
                         </div> 
                         @foreach ($portfolio[$i]->product_images as $product_images)
+
                           <div class="p-2 w-1/2 mx-auto">
                             <div class="relative">
                               <img class=" object-cover"
                               src="{{ asset('storage/portfolio/'.$product_images->image_path)}}" alt="">
+
                             </div>
                           </div>
+
                         @endforeach
                         <div class="p-2 w-1/2 mx-auto">
                           <div class="relative">
@@ -56,8 +62,10 @@
                         </div> 
                         <div class="p-2 w-1/2 mx-auto">
                           <div class="relative">
+
                             <label for="description" class="leading-7 text-sm text-gray-600">説明　<span class="text-red-600">※必須</span></label>
                             <textarea id="description" name="item[{{$i}}][description]" rows="10"  required class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">{{$portfolio[0]->description}}</textarea>
+
                           </div>
                         </div>
                         <div class="p-2 w-1/2 mx-auto">

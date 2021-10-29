@@ -35393,7 +35393,8 @@ var _require = __webpack_require__(/*! autoprefixer */ "./node_modules/autoprefi
     data = _require.data;
 
 var _require2 = __webpack_require__(/*! postcss */ "./node_modules/postcss/lib/postcss.js"),
-    LazyResult = _require2.LazyResult;
+    LazyResult = _require2.LazyResult,
+    root = _require2.root;
 
 Pusher.logToConsole = true;
 var pusher = new Pusher('b06be0013eb5f0c6991d', {
@@ -35408,23 +35409,21 @@ pusherChannel.bind('chat_event', function (data) {
   if (data.send == login) {
     appendText = '<div class="line_right"><div class="text">' + data.message + '</div>' + '<span class="date">' + data.time + '</span></div>';
   } else if (data.receive == login) {
+    // var mysql = require('mysql');
+    // var connection = mysql.createConnection({
+    //     host: 'db',
+    //     user: 'root',
+    //     password: 'root',
+    //     database: 'tech_match'
+    // });
+    // connection.connect();
+    // connection.query('update messages set checked=1 where id=?', data.id);
     appendText = '<div class="line_left"><figure><img src="' + data.icon + '"></figure><div class="line_left-text"><div class="text">' + data.message + '</div><span class="date">' + data.time + '</span></div></div>';
   } else {
     return false;
   }
 
   $("#chat").append(appendText);
-
-  if (data.receive === login) {
-    Push.create("新着メッセージ", {
-      body: data.message,
-      timeout: 8000,
-      onClick: function onClick() {
-        window.focus();
-        this.close();
-      }
-    });
-  }
 });
 $('#button_send').on('click', function () {
   $.ajaxSetup({

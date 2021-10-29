@@ -1,5 +1,5 @@
 const { data } = require("autoprefixer");
-const { LazyResult } = require("postcss");
+const { LazyResult, root } = require("postcss");
 
 Pusher.logToConsole = true;
 
@@ -23,6 +23,7 @@ pusherChannel.bind('chat_event', function(data) {
         appendText = '<div class="line_left"><figure><img src="' + data.icon
                     + '"></figure><div class="line_left-text"><div class="text">' + data.message
                     + '</div><span class="date">' + data.time + '</span></div></div>';
+        
     }
     else
     {
@@ -32,18 +33,7 @@ pusherChannel.bind('chat_event', function(data) {
 
     $("#chat").append(appendText);
 
-    if(data.receive === login)
-    {
-        Push.create("新着メッセージ",
-        {
-            body: data.message,
-            timeout: 8000,
-            onClick: function(){
-                window.focus();
-                this.close();
-            }
-        })
-    }
+    
 });
 
 

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Message;
+use Auth;
 
 // デバッグ用
 use Illuminate\Support\Facades\Log;
@@ -25,12 +27,8 @@ class UserpageController extends Controller
          foreach($products as $product)
          {
              $image = $product->product_images()->first();
-
              $product_id = "'" . $product->id . "'";
              $products_image = array_merge($products_image, array($product_id => $image->image_path));
-             
-            
-
          }
 
          return view('userpage', [

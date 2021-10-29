@@ -51,6 +51,7 @@
                                 </div>
                             </div>
 
+
                             <!-- 性別入力欄 -->
                             <div class="p-2 w-1/2 mx-auto">
                                 <label for="gender" class="leading-7 text-sm text-gray-600">性別</label>
@@ -66,7 +67,6 @@
                                     @endif
                                 </div>
                             </div>
-
                             <!-- 自己紹介入力欄 -->
                             <div class="p-2 w-1/2 mx-auto">
                                 <div class="relative">
@@ -155,7 +155,7 @@
                                 <button type="button" onclick="location.href='{{ route('mypage.index') }}'"
                                     class="bg-gray-200 border-0 py-2 px-8 focus:outline-none hover:bg-gray-400 rounded text-lg">戻る</button>
                                 <button type="submit"
-                                    class="text-white bg-green-500 border-0 py-2 px-8 focus:outline-none hover:bg-green-600 rounded text-lg">登録する</button>
+                                    class="text-white bg-green-500 border-0 py-2 px-8 focus:outline-none hover:bg-green-600 rounded text-lg">更新する</button>
                             </div>
                         </div>
                     </form>

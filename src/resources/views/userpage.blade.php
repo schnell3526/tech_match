@@ -91,8 +91,24 @@
                         @endif
                     </div>
                     @if($mypage)
-                    <input id="TAB-03" type="radio" name="TAB" class="tab-switch" /><label class="tab-label" for="TAB-03">メッセージ</label>
+                    <input id="TAB-03" type="radio" name="TAB" class="tab-switch" />
+                        <label class="tab-label" for="TAB-03">
+                            メッセージ
+                            @if($new_message)
+                            <img src="{{ asset('image/icon/mark.png') }}" style="display:inline;" height="10px" width="10px">
+                            @endif
+                        </label>
                     <div class="tab-content">
+                        @foreach($new_message_users as $chat_user)
+                            <div style="margin:10px 0px;">
+                            <a href="{{ route('chat.index', ['id' => $chat_user->id]) }}" style="margin:10px 0">
+                                <img src="{{ asset('storage/icon/' . $chat_user->icon_image) }}" width="30px" height="30px" style="display:inline;">
+                                {{ $chat_user->nickname }}
+                            </a>
+                            <div style="display:inline;color:red;">新着メッセージがあります．</div>
+                            </div>
+                        @endforeach
+
                         @foreach($chat_users as $chat_user)
                             <div style="margin:10px 0px;">
                             <a href="{{ route('chat.index', ['id' => $chat_user->id]) }}" style="margin:10px 0">

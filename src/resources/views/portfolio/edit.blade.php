@@ -26,7 +26,7 @@
 
                     {{--・・・・・・・・・・・・・ ポートフォリオ2のボタンクリック時に表示するフォーム・・・・・・・・・・・・・ --}}
                     @for($i = 0; $i < $num; $i++) 
-                                          <div class="nohidden" id="{{$i}}">
+                    <div class="nohidden" id="{{$i+1}}">
                       <h1>portfolio<?php echo $i+1;?></h1>
                       <div class="-m-2">
                         <div class="p-2 w-1/2 mx-auto">

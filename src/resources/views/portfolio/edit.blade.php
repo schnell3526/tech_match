@@ -33,9 +33,17 @@
                         <div class="p-2 w-1/2 mx-auto">
                           <div class="relative">
                             <label for="image" class="leading-7 text-sm text-gray-600">ポートフォリオ画像　<span class="text-red-600">※画像は最大３枚までにしてください</span></label>
-                            <input type="file" id="image" name="image[0][]" value="{{ old('image') }}" multiple required class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                            <input type="file" id="image" name="item[0][image][]" value="{{ old('image') }}" multiple class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                           </div>
                         </div> 
+                        @foreach ($portfolio[0]->product_images as $product_images)
+                          <div class="p-2 w-1/2 mx-auto">
+                            <div class="relative">
+                              <img class=" object-cover"
+                              src="{{ asset('storage/portfolio/'.$product_images->image_path)}}" alt="">
+                            </div>
+                          </div>
+                        @endforeach
                         <div class="p-2 w-1/2 mx-auto">
                           <div class="relative">
                             {{-- <x-image  type="portfolio"/> --}}
@@ -44,7 +52,7 @@
                         <div class="p-2 w-1/2 mx-auto">
                           <div class="relative">
                             <label for="description" class="leading-7 text-sm text-gray-600">説明　<span class="text-red-600">※必須</span></label>
-                            <textarea id="description" name="item[0][description]" rows="10"  required class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">value="{{$portfolio[0]->description}}"</textarea>
+                            <textarea id="description" name="item[0][description]" rows="10"  required class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">{{$portfolio[0]->description}}</textarea>
                           </div>
                         </div>
                         <div class="p-2 w-1/2 mx-auto">
@@ -95,7 +103,7 @@
                             
                             <div class="p-2 w-full flex justify-around mt-4">
                               <button type="button" onclick="location.href='{{ route('mypage.index')}}'" class="bg-gray-200 border-0 py-2 px-8 focus:outline-none hover:bg-gray-400 rounded text-lg">戻る</button>
-                              <button type="submit" class="text-white bg-green-500 border-0 py-2 px-8 focus:outline-none hover:bg-green-600 rounded text-lg">登録する</button>                        
+                              <button type="submit" class="text-white bg-green-500 border-0 py-2 px-8 focus:outline-none hover:bg-green-600 rounded text-lg">更新する</button>                        
                             </div>
                           {{-- </div> --}}
                         {{-- </div> --}}
@@ -108,25 +116,28 @@
                       <div class="-m-2">
                         <div class="p-2 w-1/2 mx-auto">
                           <div class="relative">
-                            <label for="title" class="leading-7 text-sm text-gray-600">タイトル　<span class="text-red-600">※必須</span></label>
-                            <input type="text" id="title" name="item[1][title]" value="{{$portfolio[1]->title}}" required class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                            <label for="title" class="leading-7 text-sm text-gray-600">タイトル</label>
+                            <input type="text" id="title" name="item[1][title]" value="{{$portfolio[1]->title}}" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                           </div>
                         </div>
                         <div class="p-2 w-1/2 mx-auto">
                           <div class="relative">
                             <label for="image" class="leading-7 text-sm text-gray-600">ポートフォリオ画像　<span class="text-red-600">※画像は最大３枚までにしてください</span></label>
-                            <input type="file" id="image" name="image[1][]" value="{{ old('image') }}" multiple required class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                            <input type="file" id="image" name="item[1][image][]" value="{{ old('image') }}" multiple class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                           </div>
                         </div> 
-                        <div class="p-2 w-1/2 mx-auto">
-                          <div class="relative">
-                            {{-- <x-image  type="portfolio"/> --}}
+                        @foreach ($portfolio[1]->product_images as $product_images)
+                          <div class="p-2 w-1/2 mx-auto">
+                            <div class="relative">
+                              <img class=" object-cover"
+                              src="{{ asset('storage/portfolio/'.$product_images->image_path)}}" alt="">
+                            </div>
                           </div>
-                        </div> 
+                        @endforeach
                         <div class="p-2 w-1/2 mx-auto">
                           <div class="relative">
                             <label for="description" class="leading-7 text-sm text-gray-600">説明</label>
-                            <textarea id="description" name="item[1][description]" rows="10"   class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">{{$portfolio[1]->description}}"</textarea>
+                            <textarea id="description" name="item[1][description]" rows="10"  class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">{{$portfolio[1]->description}}</textarea>
                           </div>
                         </div>
                         <div class="p-2 w-1/2 mx-auto">
@@ -177,7 +188,7 @@
                             
                             <div class="p-2 w-full flex justify-around mt-4">
                               <button type="button" onclick="location.href='{{ route('mypage.index')}}'" class="bg-gray-200 border-0 py-2 px-8 focus:outline-none hover:bg-gray-400 rounded text-lg">戻る</button>
-                              <button type="submit" class="text-white bg-green-500 border-0 py-2 px-8 focus:outline-none hover:bg-green-600 rounded text-lg">登録する</button>                        
+                              <button type="submit" class="text-white bg-green-500 border-0 py-2 px-8 focus:outline-none hover:bg-green-600 rounded text-lg">更新する</button>                        
                             </div>
                           {{-- </div> --}}
                         {{-- </div> --}}
@@ -196,9 +207,17 @@
                         <div class="p-2 w-1/2 mx-auto">
                           <div class="relative">
                             <label for="image" class="leading-7 text-sm text-gray-600">ポートフォリオ画像　<span class="text-red-600">※画像は最大３枚までにしてください</span></label>
-                            <input type="file" id="image" name="image[2][]" value="{{ old('image') }}" multiple class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                            <input type="file" id="image" name="item[2][image][]" value="{{ old('image') }}" multiple class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                           </div>
                         </div> 
+                        @foreach ($portfolio[2]->product_images as $product_images)
+                          <div class="p-2 w-1/2 mx-auto">
+                            <div class="relative">
+                              <img class=" object-cover"
+                              src="{{ asset('storage/portfolio/'.$product_images->image_path)}}" alt="">
+                            </div>
+                          </div>
+                        @endforeach
                         <div class="p-2 w-1/2 mx-auto">
                           <div class="relative">
                             {{-- <x-image  type="portfolio"/> --}}
@@ -207,7 +226,7 @@
                         <div class="p-2 w-1/2 mx-auto">
                           <div class="relative">
                             <label for="description" class="leading-7 text-sm text-gray-600">説明</label>
-                            <textarea id="description" name="item[2][description]" rows="10" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">{{$portfolio[0]->title}}"</textarea>
+                            <textarea id="description" name="item[2][description]" rows="10" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">{{$portfolio[0]->title}}</textarea>
                           </div>
                         </div>
                         <div class="p-2 w-1/2 mx-auto">
@@ -258,7 +277,7 @@
                             
                             <div class="p-2 w-full flex justify-around mt-4">
                               <button type="button" onclick="location.href='{{ route('mypage.index')}}'" class="bg-gray-200 border-0 py-2 px-8 focus:outline-none hover:bg-gray-400 rounded text-lg">戻る</button>
-                              <button type="submit" class="text-white bg-green-500 border-0 py-2 px-8 focus:outline-none hover:bg-green-600 rounded text-lg">登録する</button>                        
+                              <button type="submit" class="text-white bg-green-500 border-0 py-2 px-8 focus:outline-none hover:bg-green-600 rounded text-lg">更新する</button>                        
                             </div>
                           {{-- </div> --}}
                         {{-- </div> --}}
